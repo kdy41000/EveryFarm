@@ -1,2 +1,0 @@
-# EveryFarm
-Semi Project
