@@ -6,6 +6,7 @@
 
 <typeAliases>
 	<typeAlias type="com.everyfarm.product.dto.ProductDto" alias="productDto"/>
+	<typeAlias type="com.everyfarm.product.dto.PagingDto" alias="pagingDto"/>
 </typeAliases>
 	
   <environments default="development">
