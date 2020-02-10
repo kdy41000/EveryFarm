@@ -23,7 +23,7 @@ commit;
    VALUES('GUEST','1234','회원','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',1,sysdate,'y',0);
     
    INSERT INTO MEMBER
-   VALUES('FARMER','1234','농부','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',2,sysdate,'y',0);
+   VALUES('FARMERKANG','1234','농부','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',2,sysdate,'y',0);
 	 
     INSERT INTO MEMBER
    VALUES('ADMIN','1234','관리자','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',3,sysdate,'y',0);
