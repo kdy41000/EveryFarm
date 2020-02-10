@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="product">
- 	<select id="auctionlist" resultType="productDto">
+ 	<select id="auctionlist" resultType="productDto" parameterType="pagingDto">
  		SELECT B.* 
 		FROM (SELECT A.*, ROWNUM AS RNUM
 		FROM (SELECT * FROM AUCTION FULL OUTER JOIN STOCK
         ON AUCTION.stock_no = STOCK.stock_no ORDER BY auc_regDate DESC) A) B
-		WHERE RNUM BETWEEN #{startseq} AND #{endseq}
+		WHERE RNUM BETWEEN #{startseq } AND #{endseq }
  	</select>
  	<select id="bestauctionlist" resultType="productDto">
  		SELECT * FROM

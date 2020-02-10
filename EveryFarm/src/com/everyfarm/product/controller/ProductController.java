@@ -37,11 +37,12 @@ public class ProductController extends HttpServlet {
 		
 		if(command.equals("auction")){    //경매페이지로 이동
 			int currentpage = Integer.parseInt(request.getParameter("currentpage"));
+			System.out.println(currentpage+"커랜트 페이지");
 			PagingDto pagingdto = new PagingDto();
-			pagingdto.setCurrentpage(currentpage);
+			pagingdto.setCurrentpage(currentpage);   //현재페이지 (초기값 1)
 			pagingdto.setColumn(16);   //게시글은 16개씩
 			pagingdto.setUnderpagescale(5);    //아래 페이지 수의 크기는 5개씩
-			pagingdto.setTotalpage(biz.totalPage(pagingdto.getColumn()));  //마지막 페이지 번호
+			pagingdto.setTotalpage(biz.totalPage(pagingdto.getColumn()));  //마지막 페이지 번호     (1)
 			
 			List<ProductDto>productlist = new ArrayList<ProductDto>(); //일반 경매상품 리스트
 			List<ProductDto>bestlist = new ArrayList<ProductDto>(); //best경매상품(4개)
@@ -55,6 +56,22 @@ public class ProductController extends HttpServlet {
 			session.setAttribute("bestlist", bestlist);
 			response.sendRedirect("auction/auctionlist.jsp");
 			
+		}else if(command.equals("searchArea")) {         //지역별로 Search
+			String zoneval = request.getParameter("zoneval");
+			System.out.println(zoneval+"::입력된 지역명");
+			
+			int currentpage = Integer.parseInt(request.getParameter("currentpage"));
+			System.out.println(currentpage+"커랜트 페이지");
+			PagingDto pagingdto = new PagingDto();
+			pagingdto.setCurrentpage(currentpage);   //현재페이지 (초기값 1)
+			pagingdto.setColumn(16);   //게시글은 16개씩
+			pagingdto.setUnderpagescale(5);    //아래 페이지 수의 크기는 5개씩
+			pagingdto.setTotalpage(biz.totalPage(pagingdto.getColumn()));  //마지막 페이지 번호     (1)
+			
+			List<ProductDto>searchlist = new ArrayList<ProductDto>(); //일반 경매상품 리스트
+			List<ProductDto>bestlist = new ArrayList<ProductDto>(); //best경매상품(4개)
+			
+		
 		}
 	}
 

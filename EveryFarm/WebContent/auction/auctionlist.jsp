@@ -24,7 +24,7 @@
 	  type="text/css" />  	   
 </head>
 <%
-	PagingDto currentpage = (PagingDto)request.getAttribute("pagingdto");
+	PagingDto currentpage = (PagingDto)session.getAttribute("pagingdto");
 	int pagegroup = (int)Math.ceil((double)currentpage.getCurrentpage()/currentpage.getUnderpagescale());
 	int startseq = currentpage.getUnderpagescale() * (pagegroup - 1) + 1;
 	int endseq = currentpage.getUnderpagescale() * pagegroup;
@@ -46,11 +46,25 @@
 				$("#zoneone").hide();
 			}
 		});
+		
+		$("#btnOne").click(function(){
+			var zone = document.getElementById("zone").value;
+			if(zone=="서울"){
+				var zoneoneval = $("#zoneone option:selected").val();
+				location.href="../product.do?command=searchArea&currentpage=1&zoneval="+zoneoneval;
+			
+			}else if(zone=="경기도"){
+				var zonetwoval = $("#zonetwo option:selected").val();
+				location.href="../product.do?command=searchArea&currentpage=1&zoneval="+zonetwoval;
+			}
+			
+		});
 	});
+	
 </script>
 <%@ include file="../home/header.jsp" %>
 <main>
-    <section class="shop" style="height: 100%;">
+    <section class="shop">
     	<img alt="img" src="../resources/images/auction/introduce.png" style="width:2000px;"/>
 	<a id="titleone">지역별:</a><select id="zone">
 		<option>서울</option>
@@ -120,7 +134,7 @@
 		<option>인천광역시</option>
 		
 	</select>
-    <input type="button" class="btn" value="검색"/>
+    <input type="button" class="btn" id="btnOne" value="검색"/>
       <a id="titletwo">품목별:</a><select id="searchtype">
 		<option>과일</option>
 		<option>채소</option>
@@ -130,12 +144,14 @@
 		<option>버섯류</option>
 	</select>
 	
-	 <input type="button" class="btn" value="검색"/>
+	 <input type="button" class="btn" id="btnTwo" value="검색"/>
        <br/><br/><br/>
        <!-- best경매상품 -->      
        <h1 class="bestproduct"><a style="color:darkorange;">Best</a>경매상품</h1>
         <div class="fixed-container"> 	
             <div class="shop-list">
+            
+         
 <%
 	for(int i = 0; i < bestlist.size(); i++){
 %>            
@@ -177,7 +193,16 @@
       <h1 class="bestproduct">경매상품</h1>
  		 <div class="fixed-container">
             <div class="shop-list">
+            
+<%
+	if(productlist.size()==0){
+%>     
+		
+				<a>- - - - - - - - - - 게시글이 존재하지 않습니다 - - - - - - - - - -</a>
+			    
+            
 <%            
+	}else{
 	for(int i = 0; i < productlist.size(); i++){
 %>
                <article class="shop-list__item currently-dont-selling">
@@ -206,12 +231,37 @@
 
                 </article>
 <%
+		}
 	}
 %>                
                 </div>
                 <!-- 일반경매상품 끝-->
+                 <div class="overlay"></div>
+ 
     </section>
-    <div class="overlay"></div>
+       <!-- 페이징 시작 -->            
+    <div class="pagination">
+<%
+	if(pagegroup > 1){
+%>	
+	<a href="../product.do?command=auction&currentpage=<%=startseq-1 %>" class="prev str">Prev</a>
+<%
+	}
+	for(int pagenum = startseq; pagenum <= ((endseq < totalpage)?endseq:totalpage); pagenum++){
+%>
+	<a href="../product.do?command=auction&currentpage=<%=pagenum %>" class="pager"><%=pagenum %></a>	
+<%
+	}
+	if(endseq < currentpage.getTotalpage()){
+%>
+	<a href="../product.do?command=auction&currentpage=<%=endseq+1 %>" class="next str">Next</a>
+<%		
+	}
+
+%>
+</div>	
+  <!-- 페이징 끝 -->   
+
 </main>
 <%@ include file="../home/footer.jsp" %>
 </body>
