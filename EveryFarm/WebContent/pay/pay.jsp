@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="css/order.css" rel="stylesheet" type="text/css"/>
+<link href="../resources/css/pay/order.css" rel="stylesheet" type="text/css"/>
 
 <!-- i'mport 결제기능 -->
  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -90,7 +90,7 @@
 				<tbody>
 					<tr>
 						<td><input id="" name="" value="" type="checkbox"></td>
-						<td><a href=""><img src="" alt=""></a></td>
+						<td><a href=""><img src="../resources/images/productstorage/cherry.png" alt="" width="100px" height="100px"></a></td>
 						<td><a href="">밀턴 백트임 티셔츠</a>
 						<td>
 							<div class="">
@@ -113,7 +113,7 @@
 		<div class="title">
 			주문정보
 			<span class="required">
-				<img src="img/req_check.png" alt="필수"> 필수입력사항
+				<img src="../resources/images/pay/req_check.png" alt="필수"> 필수입력사항
 			</span>
 		</div>
 		<div>
@@ -125,11 +125,11 @@
 				<!-- 국내 쇼핑몰 -->
 				<tbody class="address_form">					
 					<tr>
-						<th class="basetable">주문하시는 분 <img src="img/req_check.png" alt="필수"></th>
+						<th class="basetable">주문하시는 분 <img src="../resources/images/pay/req_check.png" alt="필수"></th>
 						<td><input id="" name="" class="" size="15" value="" type="text"></td>
 					</tr>
 					<tr>
-						<th class="basetable">주소 <img src="img/req_check.png" alt="필수"></th>
+						<th class="basetable">주소 <img src="../resources/images/pay/req_check.png" alt="필수"></th>
 						<td>
 							<input id="" name="" class="" size="6" maxlength="6" readonly="" value="" type="text"> 
 							<a href="" class="zipcode" alt="우편번호">우편번호</a><br>
@@ -148,7 +148,7 @@
 					</tr>
 					<tr>
 						<th class="basetable">휴대전화 <span class=""><img
-							src="img/req_check.png" alt="필수"></span>
+							src="../resources/images/pay/req_check.png" alt="필수"></span>
 						</th>
 						<td>
 							<input id="" name="" maxlength="12" size="20"
@@ -156,7 +156,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th class="basetable">이메일 <img src="img/req_check.png" alt="필수"></th>
+						<th class="basetable">이메일 <img src="../resources/images/pay/req_check.png" alt="필수"></th>
 						<td>
 							<input id="" name="" class="" value="" type="text">
 							@<input id="" name="" class="" readonly="readonly" value="" type="text">
@@ -188,7 +188,7 @@
 		<div class="title">
 			배송 정보
 			<span class="required">
-				<img src="img/req_check.png" alt="필수"> 필수입력사항
+				<img src="../resources/images/pay/req_check.png" alt="필수"> 필수입력사항
 			</span>
 		</div>
 		<div>
@@ -201,12 +201,12 @@
 				<!--배송지 정보 -->
 				<tbody>
 					<tr>
-						<th class="basetable">받으시는 분 <img src="img/req_check.png" alt="필수"></th>
+						<th class="basetable">받으시는 분 <img src="../resources/images/pay/req_check.png" alt="필수"></th>
 						<td><input id="" name="" class=""
 							size="15" value="" type="text"></td>
 					</tr>
 					<tr>
-						<th class="basetable">주소 <img src="img/req_check.png" alt="필수"></th>
+						<th class="basetable">주소 <img src="../resources/images/pay/req_check.png" alt="필수"></th>
 						<td>
 							<input id="" name="" class="" size="6" maxlength="6" value="" type="text"> 
 							<a href="" class="zipcode" alt="우편번호">우편번호</a><br>
@@ -226,7 +226,7 @@
 					</tr>
 					<tr>
 						<th class="basetable">휴대전화
-							<img src="img/req_check.png" alt="필수">
+							<img src="../resources/images/pay/req_check.png" alt="필수">
 						</th>
 						<td>
 							<input id="" name="" maxlength="20" size="20" value="" type="text">
@@ -247,7 +247,6 @@
 		</div>
 	</div>
 
-
 	<!-- 총 주문금액 상세내역 레이어 -->
 	<div id="" class="totalPay">
 		<div class="total">
@@ -265,12 +264,6 @@
 		<a class="" id="payCancle" onclick="">취소</a>
 		<a class=""	id="payConfirm" onclick="requestPay()">결제하기</a>
 	</div>
-
-
-	
-	
-
-
 
 	</section>	
 
