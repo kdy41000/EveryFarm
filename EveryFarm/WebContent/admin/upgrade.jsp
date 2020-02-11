@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="../resources/css/home/style.css">
 
     <link rel="stylesheet" href="../resources/css/admin/sidebar.css">
-    <link rel="stylesheet" href="../resources/css/admin/bootstrap.css">    
+    <link rel="stylesheet" href="../resources/css/admin/bootstrap.css">
 </head>
 <body>
 <%@ include file="../home/header.jsp" %>
@@ -53,17 +53,27 @@
 		
 		<!-- 바디 -->
 		<div class="section_content">
+			<h2 style="margin: 40px;">등업신청</h2>
 			
-			<!-- 좌측바디 -->
-			<div class="section_body_left">
-				좌측 내용
+			<div style="margin: 40px;">
+				<table class="table table-striped table-bordered">
+					<tr>
+						<th style="width:33%">이름</th>
+						<td>홍길동</td>
+					</tr>
+					<tr>
+						<th>아이디</th>
+						<td>hongs</td>
+					</tr>
+					<tr>
+						<th>등급</th>
+						<td>회원</td>
+					</tr>
+				</table>
+				<button type="button" class="btn btn-primary" style="margin: 10px;"
+					onclick="location.href='admin.do?command=#'">등업신청</button>
 			</div>
-			
-			<!-- 우측바디 -->
-			<div class="section_body_left">
-				우측내용
-			</div> 
-		
+				
 		</div>
 	</div>
 <%-- 	<%@ include file="../home/footer.jsp" %> --%>

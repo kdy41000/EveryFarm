@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="../resources/css/home/style.css">
 
     <link rel="stylesheet" href="../resources/css/admin/sidebar.css">
-    <link rel="stylesheet" href="../resources/css/admin/bootstrap.css">    
+    <link rel="stylesheet" href="../resources/css/admin/bootstrap.css">
 </head>
 <body>
 <%@ include file="../home/header.jsp" %>
