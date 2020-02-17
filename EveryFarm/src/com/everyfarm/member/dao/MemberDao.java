@@ -26,4 +26,6 @@ public interface MemberDao {
 	public int signup(MemberDto dto);
 	//api회원가입 체크
     public int signupapi(MemberDto dto);
+    
+    
 }
