@@ -111,7 +111,7 @@
 			        <!-- 로그아웃 -->
 			        <a href="#"><img src="../resources/images/home/header/logout.png" onclick="location.href='../login.do?command=logout';"></a>
 				    <!-- 로그아웃 -->
-				    <li class="nav-item active"><a href="" class="nav-link">마이페이지</a></li>
+				    <li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../memberMyPage.do?command=mypage';">마이페이지</a></li>
 				    <img src="../resources/images/home/header/member.png" alt="" style="border-radius:50px; width:40px; height:40px; margin: 1% 0% 0% 0%;"/>      	
 				</ul>
 		      </div>

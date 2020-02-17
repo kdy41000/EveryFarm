@@ -1,6 +1,9 @@
 package com.everyfarm.member.dto;
 
+import java.util.Date;
+
 public class MemberDto {
+	//일반회원
 	private String mem_id;
 	private String mem_pw;
 	private String mem_name;
@@ -12,16 +15,16 @@ public class MemberDto {
 	private int mem_grade;
 	private String mem_regdate;
 	private String mem_drop;
-	private String mem_comm;
+	//농부
+	private int farmer_status;
+	private Date farmer_regdate;
 	
 	public MemberDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public MemberDto(String mem_id, String mem_pw, String mem_name, String mem_phone, String mem_zonecode,
-			String mem_addr, String mem_addretc, String mem_email, int mem_grade, String mem_regdate, String mem_drop,
-			String mem_comm) {
+			String mem_addr, String mem_addretc, String mem_email, int mem_grade, String mem_regdate, String mem_drop) {
 		super();
 		this.mem_id = mem_id;
 		this.mem_pw = mem_pw;
@@ -34,7 +37,6 @@ public class MemberDto {
 		this.mem_grade = mem_grade;
 		this.mem_regdate = mem_regdate;
 		this.mem_drop = mem_drop;
-		this.mem_comm = mem_comm;
 	}
 
 	public String getMem_id() {
@@ -125,14 +127,22 @@ public class MemberDto {
 		this.mem_drop = mem_drop;
 	}
 
-	public String getMem_comm() {
-		return mem_comm;
+	public int getFarmer_status() {
+		return farmer_status;
 	}
 
-	public void setMem_comm(String mem_comm) {
-		this.mem_comm = mem_comm;
+	public void setFarmer_status(int farmer_status) {
+		this.farmer_status = farmer_status;
 	}
-	
+
+	public Date getFarmer_regdate() {
+		return farmer_regdate;
+	}
+
+	public void setFarmer_regdate(Date farmer_regdate) {
+		this.farmer_regdate = farmer_regdate;
+	}
+
 	
 	
 }
