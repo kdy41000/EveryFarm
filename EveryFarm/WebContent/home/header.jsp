@@ -58,7 +58,7 @@
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../home.do?command=siteintroduce';">사이트소개</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link">펀드상품</a></li>
+		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../fund.do?command=fundlist&page=1'">펀드상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction';">경매상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link">주말농장</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link">현장학습</a></li>
@@ -86,7 +86,7 @@
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../home.do?command=siteintroduce';">사이트소개</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link">펀드상품</a></li>
+		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../fund.do?command=fundlist&page=1'">펀드상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction';">경매상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link">주말농장</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link">현장학습</a></li>
@@ -117,7 +117,7 @@
 		   		 <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../home.do?command=siteintroduce';">사이트소개</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link">펀드상품</a></li>
+		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../fund.do?command=fundlist&page=1'">펀드상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction';">경매상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link">주말농장</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link">현장학습</a></li>
@@ -153,7 +153,7 @@
 		   		<div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../home.do?command=siteintroduce';">사이트소개</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link">펀드상품</a></li>
+		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../fund.do?command=fundlist&page=1'">펀드상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction';">경매상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link">주말농장</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link">현장학습</a></li>
