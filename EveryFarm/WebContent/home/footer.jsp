@@ -17,7 +17,7 @@
  <!-- Site footer -->
     <footer class="site-footer" style="background: black;
     color: cornsilk; z-index: 5;
-  position: absolute;
+  	position: absolute;
     width: 100%;">
   
 <br/>

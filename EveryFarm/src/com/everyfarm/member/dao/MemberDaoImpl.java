@@ -203,7 +203,7 @@ public class MemberDaoImpl extends SqlMapConfig implements MemberDao{
 				int res = 0;  
 				
 				try {
-					session = getSqlSessionFactory().openSession(false);	
+					session = getSqlSessionFactory().openSession(false);
 					res =session.insert(namespace+"signupapi",dto);
 					if(res > 0) {
 						session.commit();
@@ -215,5 +215,7 @@ public class MemberDaoImpl extends SqlMapConfig implements MemberDao{
 				}
 				return res;
 	}
+	
+
 
 }

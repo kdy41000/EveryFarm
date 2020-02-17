@@ -43,4 +43,6 @@
 		FROM MEMBER 
 		WHERE mem_id=#{mem_id}
 	</select>
+
+	
 </mapper>

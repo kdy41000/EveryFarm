@@ -37,7 +37,6 @@ commit;
    
    SELECT MEM_ID FROM MEMBER
 		WHERE MEM_NAME='김동영' AND MEM_EMAIL='kdy41000@naver.com' AND MEM_PHONE = '01050543568';
-	
 		
 		SELECT *
 		FROM MEMBER 
@@ -47,3 +46,4 @@ commit;
 		SELECT *
 		FROM MEMBER 
 		WHERE mem_email='kdy41000@naver.com';
+		
