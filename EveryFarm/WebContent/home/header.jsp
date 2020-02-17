@@ -199,7 +199,7 @@
 			        <!-- 로그아웃 -->
 			         <a href="#"><img src="../resources/images/home/header/logout.png" onclick="location.href='../login.do?command=logout';"></a>
 				    <!-- 로그아웃 -->
-				       <li class="nav-item active"><a href="" class="nav-link">관리자 페이지</a></li>  
+				       <li class="nav-item active"><a href="../admin.do?command=adminmain" class="nav-link">관리자 페이지</a></li>  
 				       <img src="../resources/images/home/header/admin.png" alt="" style="border-radius:50px; width:40px; height:40px; margin: 1% 0% 0% 0%;"/>      	
 				</ul>
 		      </div>
