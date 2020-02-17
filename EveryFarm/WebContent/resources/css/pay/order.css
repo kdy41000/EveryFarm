@@ -7,7 +7,6 @@ html{
 }
 
 #orderBody{
-    width: 60%;
     height: 60%;
     padding-left: 20%;
     padding-right: 20%;
@@ -45,6 +44,7 @@ html{
     vertical-align: middle;
     font-weight: normal;
     font-size: 11px;
+    text-align: center;
 }
 .orderListArea td, select{
     border-color: #eee;
