@@ -11,22 +11,20 @@ CREATE TABLE MEMBER(
 	mem_grade NUMBER(2) NOT NULL, --1(회원),2(농부),3(관리자)
 	mem_regdate DATE DEFAULT SYSDATE NOT NULL,  
 	mem_drop VARCHAR2(2) NOT NULL,   --탈퇴여부: y(가입),n(탈퇴)
-	mem_comm NUMBER(15),
 	CONSTRAINT MEMBER_PK_mem_id PRIMARY KEY(mem_id)
-	
 );
-	
+
 	DELETE FROM MEMBER;
     SELECT * FROM MEMBER;
 commit;
    INSERT INTO MEMBER
-   VALUES('GUEST','1234','회원','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',1,sysdate,'y',0);
+   VALUES('GUEST','1234','회원','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',1,sysdate,'y');
     
    INSERT INTO MEMBER
-   VALUES('FARMERKANG','1234','농부','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',2,sysdate,'y',0);
+   VALUES('FARMERKANG','1234','농부','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',2,sysdate,'y');
 	 
     INSERT INTO MEMBER
-   VALUES('ADMIN','1234','관리자','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',3,sysdate,'y',0);
+   VALUES('ADMIN','1234','관리자','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',3,sysdate,'y');
 	     
    
    

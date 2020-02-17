@@ -20,7 +20,7 @@ select *from stock;
 DELETE FROM STOCK;
 
 INSERT INTO STOCK
-VALUES(STOCKSEQ.NEXTVAL,'FARMER','사과','내농장 오렌쥐./이과일은 정말 맛있습니다./새빨간 알록달록이 바나나/여러분께 제공합니다.',
+VALUES(STOCKSEQ.NEXTVAL,'FARMERKANG','사과','내농장 오렌쥐./이과일은 정말 맛있습니다./새빨간 알록달록이 바나나/여러분께 제공합니다.',
 		50,20000,'resources\images\productstorage\apple.png/
 					resources\images\productstorage\apple.png/
 					resources\images\productstorage\apple.png/
