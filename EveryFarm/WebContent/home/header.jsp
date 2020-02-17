@@ -57,19 +57,14 @@
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../home.do?command=siteintroduce';">사이트소개</a></li>
-<<<<<<< HEAD
-		        	<li class="nav-item active"><a href="#" class="nav-link">펀드상품</a></li>
+
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction&currentpage=1';">경매상품</a></li>
-<<<<<<< HEAD
-=======
+
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../fund.do?command=fundlist&page=1'">펀드상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction';">경매상품</a></li>
->>>>>>> 32982bf7316e594f4a96913c0cd5663bc1519fd0
-		        	<li class="nav-item active"><a href="#" class="nav-link">주말농장</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link">현장학습</a></li>
-=======
+
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farm.do?command=farmmain';">주말농장</a></li>        
->>>>>>> 27f0cc756e38972b7b100e2d7df4b3961c9ecc6e
+
 		        	<li class="nav-item active" id="menu-hover"><a href="" class="nav-link">게시판</a>
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>
@@ -94,16 +89,12 @@
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../home.do?command=siteintroduce';">사이트소개</a></li>
-<<<<<<< HEAD
+
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../fund.do?command=fundlist&page=1'">펀드상품</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction';">경매상품</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link">주말농장</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link">현장학습</a></li>
-=======
-		        	<li class="nav-item active"><a href="#" class="nav-link">펀드상품</a></li>
+
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction&currentpage=1';">경매상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farm.do?command=farmmain';">주말농장</a></li>
->>>>>>> 27f0cc756e38972b7b100e2d7df4b3961c9ecc6e
+
 		        	<li class="nav-item active" id="menu-hover"><a href="" class="nav-link">게시판</a>
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>
@@ -131,16 +122,12 @@
 		   		 <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../home.do?command=siteintroduce';">사이트소개</a></li>
-<<<<<<< HEAD
+
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../fund.do?command=fundlist&page=1'">펀드상품</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction';">경매상품</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link">주말농장</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link">현장학습</a></li>
-=======
-		        	<li class="nav-item active"><a href="#" class="nav-link">펀드상품</a></li>
+
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction&currentpage=1';">경매상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farm.do?command=farmmain';">주말농장</a></li>
->>>>>>> 27f0cc756e38972b7b100e2d7df4b3961c9ecc6e
+
 		        	<li class="nav-item active" id="menu-hover"><a href="" class="nav-link">게시판</a>
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>
@@ -157,9 +144,9 @@
 			        <!-- 로그아웃 -->
 			       <a href="#"><img src="../resources/images/home/header/logout.png" onclick="location.href='../login.do?command=logout';"></a>
 					<!-- 로그아웃 -->
-					<li class="nav-item active"><a href="" class="nav-link">마이페이지</a></li>
+					<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../memberMyPage.do?command=mypage';">마이페이지</a></li>
 					<img src="../resources/images/home/header/farmer.png" alt="" style="border-radius:50px; width:40px; height:40px; margin: 1% 0% 0% 0%;"/>
-				   		<li class="nav-item active"><a href="" class="nav-link" style="margin: -1% 0% 0% 0%;">농부관리 페이지</a></li>
+				   		<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farmerdetail.do?command=goFarmerMyPage';" style="margin: -1% 0% 0% 0%;">농부관리 페이지</a></li>
 				     		
 				     	   
 				 
@@ -173,16 +160,12 @@
 		   		<div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto">
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../home.do?command=siteintroduce';">사이트소개</a></li>
-<<<<<<< HEAD
+
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../fund.do?command=fundlist&page=1'">펀드상품</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction';">경매상품</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link">주말농장</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link">현장학습</a></li>
-=======
-		        	<li class="nav-item active"><a href="#" class="nav-link">펀드상품</a></li>
+
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction&currentpage=1';">경매상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farm.do?command=farmmain';">주말농장</a></li>
->>>>>>> 27f0cc756e38972b7b100e2d7df4b3961c9ecc6e
+
 		        	<li class="nav-item active" id="menu-hover"><a href="" class="nav-link">게시판</a>
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>

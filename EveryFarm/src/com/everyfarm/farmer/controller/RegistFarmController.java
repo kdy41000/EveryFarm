@@ -23,7 +23,7 @@ import com.oreilly.servlet.multipart.FileRenamePolicy;
 public class RegistFarmController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	String savePath = "C:\\Git_chaewon\\EveryFarm\\EveryFarm\\WebContent\\resources\\images\\farmimage";
+	String savePath = "C:\\git_everyfarm\\EveryFarm\\WebContent\\resources\\images\\farmimage";
 	
     
     public RegistFarmController() {

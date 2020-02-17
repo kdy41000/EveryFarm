@@ -50,7 +50,7 @@
 		</div>
 	</div>
 <%-- 	<%@ include file="../home/footer.jsp" %> --%>
-<div class="temp_footer">footer</div>
+<%@ include file="../home/footer.jsp" %>
 	
 
   <!-- loader -->

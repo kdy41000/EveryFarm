@@ -25,6 +25,11 @@ public class DetailController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
+		String command = request.getParameter("command");
+		
+		if(command.equals("goFarmerMyPage")) {
+			response.sendRedirect("farmerpage/farmermain.jsp");
+		}
 		doPost(request, response);
 	}
 

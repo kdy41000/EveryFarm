@@ -71,7 +71,7 @@
   });
   /*******************************************/
         var textarea = document.getElementById("messageWindow");
-        var webSocket = new WebSocket('ws://192.168.110.6:8787/WebSocketTest/broadcasting');  //localhost를 상대방ip주소로 변경
+        var webSocket = new WebSocket('ws://192.168.1.249:8787/WebSocketTest/broadcasting');  //localhost를 상대방ip주소로 변경
         var inputMessage = document.getElementById('inputMessage');
        
     webSocket.onerror = function(event) {
@@ -92,7 +92,7 @@
     }
 
     function onOpen(event) {
-    	yourid =${sessionScope.dto.mem_id};
+    	
         textarea.value += "${sessionScope.dto.mem_id}님이 접속하셨습니다.\n";
       
     }

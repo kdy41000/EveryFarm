@@ -15,18 +15,15 @@ public class MemberDto {
 	private int mem_grade;
 	private String mem_regdate;
 	private String mem_drop;
-<<<<<<< HEAD
+
 	//농부
 	private int farmer_status;
 	private Date farmer_regdate;
 	
-	public MemberDto() {
-		super();
-=======
+	
 	
 	public MemberDto() {
 	
->>>>>>> 27f0cc756e38972b7b100e2d7df4b3961c9ecc6e
 	}
 	public MemberDto(String mem_id, String mem_pw, String mem_name, String mem_phone, String mem_zonecode,
 			String mem_addr, String mem_addretc, String mem_email, int mem_grade, String mem_regdate, String mem_drop) {
@@ -109,7 +106,7 @@ public class MemberDto {
 	public void setMem_drop(String mem_drop) {
 		this.mem_drop = mem_drop;
 	}
-<<<<<<< HEAD
+
 
 	public int getFarmer_status() {
 		return farmer_status;
@@ -127,10 +124,6 @@ public class MemberDto {
 		this.farmer_regdate = farmer_regdate;
 	}
 
-=======
-	
-	
->>>>>>> 27f0cc756e38972b7b100e2d7df4b3961c9ecc6e
 	
 	
 }

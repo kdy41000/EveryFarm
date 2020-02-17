@@ -22,7 +22,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @WebServlet("/registfund.do")
 public class RegistFundController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    String savePath = "C:\\Git_chaewon\\EveryFarm\\EveryFarm\\WebContent\\resources\\images\\productstorage";
+    String savePath = "C:\\git_everyfarm\\EveryFarm\\WebContent\\resources\\images\\productstorage";
     
     public RegistFundController() {
         super();
