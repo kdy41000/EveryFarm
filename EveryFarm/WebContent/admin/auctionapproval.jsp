@@ -5,6 +5,7 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <% response.setContentType("text/html; charset=UTF-8"); %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,15 +30,11 @@
 
     <link rel="stylesheet" href="../resources/css/admin/sidebar.css">
     <link rel="stylesheet" href="../resources/css/admin/bootstrap.css">
-   	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
 </head>
 <%
-	PagingDto paging = (PagingDto)session.getAttribute("upgradelist_paging");
+	PagingDto paging = (PagingDto)session.getAttribute("approvallist_paging");
 	int pagegroup = (int)Math.ceil((double)paging.getCurrentpage()/paging.getPagescale()); 
-	//블록번호 = 현재 페이지 / 블록크기 = 올림 (1/5=0.2=1) 1번째 블록
 	int startpage = paging.getPagescale()*(pagegroup-1)+1;
-	// 블록의 시작 페이지 번호 = (블록크기 * (블록번호-1)) +1 / 5*(1-1)+1= 블록의 시작은 1
 	int endpage = paging.getPagescale()*pagegroup;
 	int totalpage = paging.getTotalpage();
 	int currentpage = paging.getCurrentpage();
@@ -53,69 +50,57 @@
 		
 		<!-- 바디 -->
 		<div class="section_content">
-			<h2 style="margin: 40px;">등업신청</h2>
+			<h2 style="margin: 40px;">경매승인</h2>
 			
 			<div style="margin: 40px;">
 				<table class="table table-striped table-bordered">
-				<col width="30%">
-				<col width="30%">
+				<col width="15%">
+				<col width="35%">
 				<col width="10%">
-				<col width="20%">
+				<col width="15%">
+				<col width="15%">
 				<col width="10%">
 					<tr>
 						<th>아이디</th>
-						<th>이름</th>
-						<th>등급</th>
-						<th>신청상태</th>
-						<th>등업</th>
+						<th>상품명</th>
+						<th>시작가</th>
+						<th>등록일</th>
+						<th>종료일</th>
+						<th>승인</th>
 					</tr>
 					
 					<c:choose>
-						<c:when test="${empty upgradelist }">
+						<c:when test="${empty approvallist }">
 							<tr>
-								<td colspan="5">등업할 목록이 없습니다.</td>
+								<td colspan="6">경매 목록이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${upgradelist }" var="dto">
+							<c:forEach items="${approvallist }" var="dto">
 								<tr>
 									<td>${dto.mem_id }</td>
-									<td>${dto.mem_name }</td>
+									<td>${dto.stock_name }</td>
+									<td>${dto.auc_startPrice }</td>
+									<td>${dto.auc_regDate }</td>
+									<td>${dto.auc_endDate }</td>
 									<td>
 										<c:choose>
-											<c:when test="${dto.mem_grade eq 2}">
-												<c:out value="농부"></c:out>
-											</c:when>
-											<c:when test="${dto.mem_grade eq 3}">
-												<c:out value="관리자"></c:out>
-											</c:when>
-											<c:otherwise>
-												<c:out value="회원"></c:out>
-											</c:otherwise>											
-										</c:choose>
-									</td>
-									<td>
-										<c:choose>
-											<c:when test="${dto.farmer_status eq 2}">
-												<c:out value="승인완료"></c:out>
-											</c:when>
-											<c:otherwise>
-												<c:out value="승인대기"></c:out>
-											</c:otherwise>											
-										</c:choose>
-									</td>
-									<td>
-										<c:choose>
-											<c:when test="${dto.farmer_status eq 1}">
+											<c:when test="${dto.auc_status eq 1}">
 												<button type="button" class="btn btn-primary"
-												onclick="location.href='../admin.do?command=upgraderes&id=${dto.mem_id}&pageNumber=<%=currentpage %>'"
-												>등업</button>
+												onclick="location.href='../admin.do?command=approvalres&no=${dto.auc_no}'"
+												>미등록</button>
 											</c:when>
-											<c:otherwise>
+											<c:when test="${dto.auc_status eq 2}">
+												<button type="button" class="btn btn-success"
+												style="cursor: default;" disabled="disabled"
+												onclick="location.href='#'"
+												>진행중</button>
+											</c:when>
+											<c:when test="${dto.auc_status eq 3}">
 												<button type="button" class="btn btn-primary" 
 												style="background-color: gray; border-color: gray; cursor: default;"
-												disabled="disabled">완료</button>
-											</c:otherwise>											
+												disabled="disabled">낙찰</button>
+											</c:when>										
 										</c:choose>
 									</td>
 								</tr>								
@@ -130,24 +115,24 @@
 				<%
 					if(pagegroup>1){
 				%>							
-						<li><a href="../admin.do?command=upgradelist&pageNumber=<%=startpage-1%>">
+						<li><a href="../admin.do?command=auctionapproval&pageNumber=<%=startpage-1%>">
 						<span class="glyphicon glyphicon-chevron-left"></span></a></li>
 				<%
 					}
 					for(int pagenum = startpage; pagenum <= ((endpage<totalpage)?endpage:totalpage); pagenum++){
 						if(paging.getCurrentpage()==pagenum){					
 				%>					
-						<li class="active"><a href="../admin.do?command=upgradelist&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
+						<li class="active"><a href="../admin.do?command=auctionapproval&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
 				<%
 							} else {
 				%>
-						<li><a href="../admin.do?command=upgradelist&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
+						<li><a href="../admin.do?command=auctionapproval&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
 				<%
 							}
 						}
 					if(endpage < paging.getTotalpage()){						
 				%>
-						<li><a href="../admin.do?command=upgradelist&pageNumber=<%=endpage+1%>">
+						<li><a href="../admin.do?command=auctionapproval&pageNumber=<%=endpage+1%>">
 						<span class="glyphicon glyphicon-chevron-right"></span></a></li>
 				<%
 					}

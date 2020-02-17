@@ -31,24 +31,7 @@
 	<div class="section_total">
 		<!-- 사이드바 -->
 		<div class="section_sidebar">
-			<div class="section_sidebar_menu">
-				<a href="">회원관리</a>
-			</div>
-			<div class="section_sidebar_menu">
-				<a href="">등업관리</a>
-			</div>
-			<div class="section_sidebar_menu">
-				<a href="">경매관리</a>
-			</div>
-			<div class="section_sidebar_menu">
-				<a href="">실시간경매</a>
-			</div>
-			<div class="section_sidebar_menu">
-				<a href="">펀드관리</a>
-			</div>
-			<div class="section_sidebar_menu">
-				<a href="">주문관리</a>
-			</div>
+			<%@ include file="admin_sidebar.jsp" %>
 		</div>
 		
 		<!-- 바디 -->

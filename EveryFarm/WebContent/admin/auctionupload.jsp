@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% request.setCharacterEncoding("UTF-8"); %>
+<% response.setContentType("text/html; charset=UTF-8"); %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +28,44 @@
     <link rel="stylesheet" href="../resources/css/home/style.css">
 
     <link rel="stylesheet" href="../resources/css/admin/sidebar.css">
-    <link rel="stylesheet" href="../resources/css/admin/bootstrap.css">    
+    <link rel="stylesheet" href="../resources/css/admin/bootstrap.css">
 </head>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="js/bootstrap.js"></script>
+	<script type="text/javascript">
+	function submitFunction() {
+		var auc_id = $('#auc_id').val();
+		var auc_name = $('#auc_name').val();
+		var auc_init = $('#auc_init').val();
+		var auc_curr = $('#auc_curr').val();
+		var auc_reg = $('#auc_reg').val();
+		var auc_end = $('#auc_end').val();
+		var auc_cnt = $('#auc_cnt').val();
+		
+		$.ajax({
+			type: "POST",
+			url: "./RealtimeServlet",
+			data: {
+				auc_id: encodeURIComponent(auc_id),
+				auc_name: encodeURIComponent(auc_name),
+				auc_init: encodeURIComponent(auc_init),
+				auc_curr: encodeURIComponent(auc_curr),
+				auc_reg: encodeURIComponent(auc_reg),
+				auc_end: encodeURIComponent(auc_end),
+				auc_cnt: encodeURIComponent(auc_cnt)
+			},
+			success: function(result){
+				if(result ==1){
+					alert('전송에 성공했습니다.');
+				} else if(result ==0){
+					alert('이름과 내용을 정확히 입력하세요.'); 
+				} else {
+					alert('데이터베이스 오류가 발생했습니다.');
+				}
+			}
+		});
+		$('#auc_name').val('');
+	</script>
 <body>
 <%@ include file="../home/header.jsp" %>
 	<!-- 섹션 -->
@@ -36,17 +77,25 @@
 		
 		<!-- 바디 -->
 		<div class="section_content">
+			<h2 style="margin: 40px;">경매등록(테스트용 페이지)</h2>
 			
-			<!-- 좌측바디 -->
-			<div class="section_body_left">
-				좌측 내용
+			<div style="margin: 40px;">
+				<div style="margin: 1%; color:black;">
+					<form action="admin.do" method="post">
+						<ul>
+							<li>아이디: <input type="text" id="auc_id"></li>			
+							<li>상품명: <input type="text" id="auc_name"></li>			
+							<li>시작가: <input type="text" id="auc_init"></li>			
+							<li>현재가: <input type="text" id="auc_curr"></li>			
+							<li>등록일: <input type="text" id="auc_reg"></li>			
+							<li>종료일: <input type="text" id="auc_end"></li>			
+							<li>참가인원: <input type="text" id="auc_cnt"></li>			
+						</ul>
+					</form>
+					<button type="button" class="btn btn-default pull-right" onclick="submitFunction();">전송</button>
+				</div>
 			</div>
-			
-			<!-- 우측바디 -->
-			<div class="section_body_left">
-				우측내용
-			</div> 
-		
+				
 		</div>
 	</div>
 <%-- 	<%@ include file="../home/footer.jsp" %> --%>
