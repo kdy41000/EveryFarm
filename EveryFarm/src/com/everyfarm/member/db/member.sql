@@ -18,10 +18,17 @@ CREATE TABLE MEMBER(
     SELECT * FROM MEMBER;
 commit;
    INSERT INTO MEMBER
+<<<<<<< HEAD
    VALUES('GUEST','1234','회원','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',1,sysdate,'y');
     
    INSERT INTO MEMBER
    VALUES('FARMERKANG','1234','농부','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',2,sysdate,'y');
+=======
+   VALUES('GUESTKANG','1234','김또깡','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',1,sysdate,'y');
+    
+   INSERT INTO MEMBER
+   VALUES('FARMERKIM','1234','김농부','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',2,sysdate,'y');
+>>>>>>> 27f0cc756e38972b7b100e2d7df4b3961c9ecc6e
 	 
     INSERT INTO MEMBER
    VALUES('ADMIN','1234','관리자','01012341234','01111','서울시 강남구 도곡동','롯데캐슬201동','kdy41000@naver.com',3,sysdate,'y');

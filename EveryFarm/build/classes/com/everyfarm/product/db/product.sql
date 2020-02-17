@@ -15,17 +15,26 @@ CREATE TABLE STOCK(    --상품테이블
 	CONSTRAINT STOCK_FK_mem_id FOREIGN KEY(mem_id) REFERENCES MEMBER(mem_id)
 );
 
-select *from stock;
+select *from stock order by stock_no desc;
 
 DELETE FROM STOCK;
 
 INSERT INTO STOCK
+<<<<<<< HEAD
 VALUES(STOCKSEQ.NEXTVAL,'FARMERKANG','사과','내농장 오렌쥐./이과일은 정말 맛있습니다./새빨간 알록달록이 바나나/여러분께 제공합니다.',
 		50,20000,'resources\images\productstorage\apple.png/
 					resources\images\productstorage\apple.png/
 					resources\images\productstorage\apple.png/
 					resources\images\productstorage\apple.png',
 		'강남구',1);
+=======
+VALUES(STOCKSEQ.NEXTVAL,'FARMER','경매에이작스 테스트','바나나./바나나 정말 맛있습니다./귀요미 오렌지/여러분께 제공합니다.',
+		50,0,'resources\images\productstorage\banana.png/
+					resources\images\productstorage\banana.png/
+					resources\images\productstorage\banana.png/
+					resources\images\productstorage\banana.png',
+		'오산시',1);
+>>>>>>> 27f0cc756e38972b7b100e2d7df4b3961c9ecc6e
 		
 		
 		
@@ -33,9 +42,37 @@ VALUES(STOCKSEQ.NEXTVAL,'FARMERKANG','사과','내농장 오렌쥐./이과일은
 		SELECT COUNT(*) AS TOTALPAGE FROM AUCTION FULL OUTER JOIN STOCK
         ON AUCTION.stock_no = STOCK.stock_no;
         
-        
+        --경매 전체출력
         SELECT B.* 
 		FROM (SELECT A.*, ROWNUM AS RNUM
+		FROM (SELECT * FROM AUCTION INNER JOIN STOCK
+        ON AUCTION.stock_no = STOCK.stock_no ORDER BY auc_regDate DESC) A) B;
+		
+		 T1 INNER JOIN T2 ON T1.A=T2.A
+		DELETE FROM STOCK WHERE STOCK_NO = 18;
+		
+		--경매 지역별 출력
+		SELECT B.* 
+		FROM (SELECT A.*, ROWNUM AS RNUM
 		FROM (SELECT * FROM AUCTION FULL OUTER JOIN STOCK
-        ON AUCTION.stock_no = STOCK.stock_no ORDER BY auc_regDate DESC) A) B
+        ON AUCTION.stock_no = STOCK.stock_no WHERE stock_location = '양주시' ORDER BY auc_regDate DESC) A) B
 		WHERE RNUM BETWEEN 1 AND 16;
+		
+		SELECT COUNT(*) AS TOTALPAGE FROM AUCTION FULL OUTER JOIN STOCK
+        ON AUCTION.stock_no = STOCK.stock_no WHERE stock_location = '성동구';
+        
+        --경매detail출력
+        SELECT * FROM
+        (SELECT * FROM AUCTION FULL OUTER JOIN STOCK
+        ON AUCTION.stock_no = STOCK.stock_no WHERE auc_no = 12);
+        
+        
+ --쪽지 테이블---------------------------------------------------------
+ SELECT * FROM LETTERS;
+ select * from lettersseq;
+ 
+INSERT INTO LETTERS
+		VALUES(LETTERSSEQ.NEXTVAL,'GUESTKIM','FARMER','안녕','안녕',sysdate);
+ 
+ ------------------------------------------------------------------       
+      

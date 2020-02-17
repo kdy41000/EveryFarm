@@ -27,7 +27,7 @@
             <h6>Contact</h6>
             <ul class="footer-links">
               <li><a>Company : 에브리팜</a></li>
-              <li><a>Address : 서울시 강남구 역삼동</a></li>
+              <li><a>Address : 서울특별시 강남구 테헤란로14길 6</a></li>
               <li><a>TEL : 02.759.5458</a></li>
             </ul>
           </div>

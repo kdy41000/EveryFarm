@@ -20,7 +20,7 @@
 	</select>
 	<insert id="signup" parameterType="memberDto">
 	     INSERT INTO MEMBER
-	     VALUES(#{mem_id},#{mem_pw},#{mem_name},#{mem_phone},#{mem_zonecode},#{mem_addr},#{mem_addretc},#{mem_email},1,sysdate,'y',0)
+	     VALUES(#{mem_id},#{mem_pw},#{mem_name},#{mem_phone},#{mem_zonecode},#{mem_addr},#{mem_addretc},#{mem_email},1,sysdate,'y')
 	</insert>
 	<select id="searchId" resultType="memberDto" parameterType="memberDto">
 		SELECT mem_id FROM MEMBER
@@ -36,7 +36,7 @@
 	</update>
 	<insert id="signupapi" parameterType="memberDto">
 	     INSERT INTO MEMBER
-	     VALUES(#{mem_id},#{mem_pw},#{mem_name},#{mem_phone},#{mem_zonecode},#{mem_addr},#{mem_addretc},#{mem_email},#{mem_grade},sysdate,'y',0)
+	     VALUES(#{mem_id},#{mem_pw},#{mem_name},#{mem_phone},#{mem_zonecode},#{mem_addr},#{mem_addretc},#{mem_email},#{mem_grade},sysdate,'y')
 	</insert>
 	<select id="selectAll" resultType="memberDto" parameterType="String">
 		SELECT *

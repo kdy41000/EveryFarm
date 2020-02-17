@@ -36,9 +36,10 @@
   <body>
  
 	<%@ include file="header.jsp" %>
+	<%@ include file="sectiontwo.jsp" %>
     
-     <img alt="img" src="../resources/images/home/section/section.png">
-
+     <img alt="img" style="width: 100%;" src="../resources/images/home/section/section.png">
+ 
     <section class="ftco-section ftco-no-pt ftco-no-pb">
     	<div class="container-fluid">
     		<div class="row">
@@ -75,6 +76,13 @@
     			</div>
     		</div>
     	</div>
+  <!-- 채팅 구역 -->  	
+ <img alt="img" src="../resources/images/home/section/chattingicon.png" style="width: 7%;
+    position: fixed;
+    z-index:2;
+    margin: -31% 0% 0% 92%;
+    cursor:pointer;" onclick="chatting();"/>
+ <!-- 채팅 구역 -->
     </section>
 
 
@@ -84,21 +92,23 @@
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
   
-    
-
   <script src="../resources/js/home/jquery-migrate-3.0.1.min.js"></script>
   <script src="../resources/js/home/popper.min.js"></script>
-
-
   <script src="../resources/js/home/jquery.waypoints.min.js"></script>
   <script src="../resources/js/home/jquery.stellar.min.js"></script>
   <script src="../resources/js/home/owl.carousel.min.js"></script>
   <script src="../resources/js/home/jquery.magnific-popup.min.js"></script>
   <script src="../resources/js/home/aos.js"></script>
- 
   <script src="../resources/js/home/scrollax.min.js"></script>
-  
- 
   <script src="../resources/js/home/main.js"></script>
   </body>
+  <script type="text/javascript">
+  	function chatting(){
+  		if(${empty sessionScope.dto.mem_grade}){
+  			alert("로그인이 필요합니다.");
+  		}else{
+  			window.open("../chatting/gochat.jsp","","width=410,height=450,left=500,top=100");
+  		}
+  	}
+  </script>
 </html>
