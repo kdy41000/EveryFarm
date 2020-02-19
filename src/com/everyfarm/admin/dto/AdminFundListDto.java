@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class AdminFundListDto {
 	
+	//펀드
 	private int fund_no;
 	private int stock_no;
 	private int fund_currentprice;
