@@ -68,4 +68,26 @@ public class UpgradeListDao {
 		return res_far;
 	}
 	
+	public int totalPage(int totalrows) {
+		int totalpage = 0;
+		int res = 0;
+		SqlSession session = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			totalpage = session.selectOne(namespace+"totalpage_upgradelist");
+			res = (int)Math.ceil((double)totalpage/totalrows);
+			
+			if(totalpage>0) {
+				session.commit();
+			}
+		} catch (Exception e) {
+			System.out.println("ERROR : upgradelist totalPage()");
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return res; 
+	}
+	
 }

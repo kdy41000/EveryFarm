@@ -12,20 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.everyfarm.admin.dao.AdminFundListDao;
 import com.everyfarm.admin.dao.AuctionApprovalDao;
-import com.everyfarm.admin.dao.PagingDao;
 import com.everyfarm.admin.dao.UpgradeListDao;
+import com.everyfarm.admin.dao.UserListDao;
+import com.everyfarm.admin.dto.AdminFundListDto;
 import com.everyfarm.admin.dto.AuctionApprovalDto;
 import com.everyfarm.admin.dto.PagingDto;
 import com.everyfarm.admin.dto.UpgradeListDto;
+import com.everyfarm.admin.dto.UserListDto;
 
 @WebServlet("/admin.do")
 public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public AdminServlet() {
-        super();
-    }
+      
+	private static int TOTAL_PAGE_ROW = 10;		// 한 페이지에 보여줄 글 수
+	private static int PAGE_BLOCK_SIZE = 10; 	// 한 블록에 표시할 페이지 수
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -37,16 +39,22 @@ public class AdminServlet extends HttpServlet {
 		
 		String command = request.getParameter("command");
 		System.out.println("<"+command+">");
+		
 		UpgradeListDao upgradeListDao = new UpgradeListDao();
 		AuctionApprovalDao approvalDao = new AuctionApprovalDao();
+		UserListDao userListDao = new UserListDao();
+		AdminFundListDao fundListDao = new AdminFundListDao();
 		
+		//------------- 메인화면 (admin main) -------------------
 		if(command.equals("adminmain")) {
 			response.sendRedirect("admin/adminmain.jsp");
 		}
+		//------------- 등급관리 (upgradelist) -------------------
 		else if(command.equals("upgradelist")) {
 			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
 			PagingDto paging = null;
-			paging = pagingMethod(currentpage);
+			int totalpage = upgradeListDao.totalPage(TOTAL_PAGE_ROW);
+			paging = pagingMethod(currentpage, totalpage);
 			List<UpgradeListDto> list = upgradeListDao.selectList(paging.getFrom(), paging.getTo());
 			
 			HttpSession session =request.getSession();
@@ -57,14 +65,13 @@ public class AdminServlet extends HttpServlet {
 		else if(command.equals("upgraderes")) {
 			String id = request.getParameter("id");
 			int res = upgradeListDao.upgradeRes(id);
-			if(res>0) {
-				jsResponse("등업성공", response);
-			} else {
-				jsResponse("등업실패", response);
-			}
+			if(res==0) {
+				jsResponse("경매 등록 실패", response);
+			} 
 			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
 			PagingDto paging = null;
-			paging = pagingMethod(currentpage);
+			int totalpage = upgradeListDao.totalPage(TOTAL_PAGE_ROW);
+			paging = pagingMethod(currentpage, totalpage);
 			List<UpgradeListDto> list = upgradeListDao.selectList(paging.getFrom(), paging.getTo());
 			
 			HttpSession session =request.getSession();
@@ -72,10 +79,12 @@ public class AdminServlet extends HttpServlet {
 			session.setAttribute("upgradelist", list);
 			response.sendRedirect("admin/upgradelist.jsp");
 		}
+		//------------- 경매관리 (auction approval) -------------------
 		else if(command.equals("auctionapproval")) {
 			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
 			PagingDto paging = null;
-			paging = pagingMethod(currentpage);
+			int totalpage = approvalDao.totalPage(TOTAL_PAGE_ROW);
+			paging = pagingMethod(currentpage, totalpage);
 			List<AuctionApprovalDto> list = approvalDao.selectList(paging.getFrom(), paging.getTo());
 			
 			HttpSession session =request.getSession();
@@ -87,14 +96,13 @@ public class AdminServlet extends HttpServlet {
 			int no = Integer.parseInt(request.getParameter("no"));
 			System.out.println(no);
 			int res = approvalDao.approvalRes(no);
-			if(res>0) {
-				jsResponse("경매 등록 성공", response);
-			} else {
+			if(res==0) {
 				jsResponse("경매 등록 실패", response);
-			}
+			} 
 			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
 			PagingDto paging = null;
-			paging = pagingMethod(currentpage);
+			int totalpage = approvalDao.totalPage(TOTAL_PAGE_ROW);
+			paging = pagingMethod(currentpage, totalpage);
 			List<AuctionApprovalDto> list = approvalDao.selectList(paging.getFrom(), paging.getTo());
 			
 			HttpSession session =request.getSession();
@@ -103,19 +111,44 @@ public class AdminServlet extends HttpServlet {
 			response.sendRedirect("admin/auctionapproval.jsp");
 
 		}
+		//------------- 실시간 현황  (**수정 예정) -------------------
 		else if(command.equals("realtimeauction")) {
 			response.sendRedirect("admin/realtimeauction.jsp");
 		}
-		
+		//------------- 회원관리 (userlist) -------------------
+		else if(command.equals("userlist")) {
+			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
+			PagingDto paging = null;
+			int totalpage = userListDao.totalPage(TOTAL_PAGE_ROW);
+			paging = pagingMethod(currentpage, totalpage);
+			List<UserListDto> list = userListDao.selectList(paging.getFrom(), paging.getTo());
+			
+			HttpSession session =request.getSession();
+			session.setAttribute("userlist_paging", paging);
+			session.setAttribute("userlist_admin", list);
+			response.sendRedirect("admin/userlist.jsp");
+		}
+		//------------- 펀드관리 (admin fund list) -------------------
+		else if(command.equals("adminfundlist")) {
+			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
+			PagingDto paging = null;
+			int totalpage = fundListDao.totalPage(TOTAL_PAGE_ROW);
+			paging = pagingMethod(currentpage, totalpage);
+			List<AdminFundListDto> list = fundListDao.selectList(paging.getFrom(), paging.getTo());
+			
+			HttpSession session =request.getSession();
+			session.setAttribute("adminfundlist_paging", paging);
+			session.setAttribute("adminfundlist", list);
+			response.sendRedirect("admin/adminfundlist.jsp");
+		}
 	}
 	
-	private PagingDto pagingMethod(int currentpage) {
+	private PagingDto pagingMethod(int currentpage, int totalpage) {
 		PagingDto paging = new PagingDto();
-		PagingDao pagingdao = new PagingDao();
 		paging.setCurrentpage(currentpage);
-		paging.setTotalrows(10);	// 한 페이지에 보여줄 글 수
-		paging.setPagescale(10);	// 한 블록에 표시할 페이지 수
-		paging.setTotalpage(pagingdao.totalPage(paging.getTotalrows()));
+		paging.setTotalrows(TOTAL_PAGE_ROW);
+		paging.setPagescale(PAGE_BLOCK_SIZE);	
+		paging.setTotalpage(totalpage);
 		paging.setFrom(paging.getTotalrows() * (currentpage-1) +1);
 		paging.setTo(paging.getTotalrows() * currentpage);
 		return paging;

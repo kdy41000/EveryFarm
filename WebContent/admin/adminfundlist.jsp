@@ -18,7 +18,7 @@
 	<script src="../resources/js/admin/bootstrap.js"></script>
 
 <%
-	PagingDto paging = (PagingDto)session.getAttribute("approvallist_paging");
+	PagingDto paging = (PagingDto)session.getAttribute("adminfundlist_paging");
 	int pagegroup = (int)Math.ceil((double)paging.getCurrentpage()/paging.getPagescale()); 
 	int startpage = paging.getPagescale()*(pagegroup-1)+1;
 	int endpage = paging.getPagescale()*pagegroup;
@@ -35,59 +35,56 @@
 			
 		<!-- 바디 -->
 		<div class="section_content">
-			<h2 style="margin: 40px;">경매승인</h2>
+			<h2 style="margin: 40px;">펀드관리</h2>
 			
 			<div style="margin: 40px;">
 				<table id="admin_table" class="table table-striped table-bordered">
-				<col width="15%">
-				<col width="35%">
-				<col width="10%">
-				<col width="15%">
-				<col width="15%">
-				<col width="10%">
 					<tr>
-						<th>아이디</th>
-						<th>상품명</th>
-						<th>시작가</th>
+						<th>펀드번호</th>
+						<th>상품번호</th>
+						<th>현재액</th>
+						<th>목표액</th>
+						<th>펀드상태</th>
 						<th>등록일</th>
 						<th>종료일</th>
-						<th>승인</th>
+						<th>참여인원</th>
 					</tr>
-					
 					<c:choose>
-						<c:when test="${empty approvallist }">
+						<c:when test="${empty adminfundlist }">
 							<tr>
-								<td colspan="6">경매 목록이 없습니다.</td>
+								<td colspan="8">펀드 목록이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${approvallist }" var="dto">
+							<c:forEach items="${adminfundlist }" var="dto">
 								<tr>
-									<td>${dto.mem_id }</td>
-									<td>${dto.stock_name }</td>
-									<td>${dto.auc_startPrice }</td>
-									<td>${dto.auc_regDate }</td>
-									<td>${dto.auc_endDate }</td>
+									<td>${dto.fund_no }</td>
+									<td>${dto.stock_no }</td>
+									<td>${dto.fund_currentprice }</td>
+									<td>${dto.fund_price }</td>
 									<td>
 										<c:choose>
-											<c:when test="${dto.auc_status eq 1}">
-												<button type="button" class="btn btn-primary"
-												onclick="location.href='../admin.do?command=approvalres&no=${dto.auc_no}&pageNumber=<%=currentpage %>'"
-												>미등록</button>
+											<c:when test="${dto.fund_status eq 1}">
+												<c:out value="미등록"></c:out>
 											</c:when>
-											<c:when test="${dto.auc_status eq 2}">
-												<button type="button" class="btn btn-success"
-												style="cursor: default;" disabled="disabled"
-												onclick="location.href='#'"
-												>진행중</button>
+											<c:when test="${dto.fund_status eq 2}">
+												<c:out value="진행중"></c:out>
 											</c:when>
-											<c:when test="${dto.auc_status eq 3}">
-												<button type="button" class="btn btn-primary" 
-												style="background-color: gray; border-color: gray; cursor: default;"
-												disabled="disabled">낙찰</button>
-											</c:when>										
+											<c:when test="${dto.fund_status eq 3}">
+												<c:out value="완료"></c:out>
+											</c:when>
+											<c:when test="${dto.fund_status eq 4}">
+												<c:out value="배송"></c:out>
+											</c:when>
+											<c:otherwise>
+												<c:out value="오류"></c:out>
+											</c:otherwise>											
 										</c:choose>
 									</td>
+									<td>${dto.fund_regDate }</td>
+									<td>${dto.fund_endDate }</td>
+									<td>${dto.fund_join }</td>
+
 								</tr>								
 							</c:forEach>
 						</c:otherwise>
@@ -100,7 +97,7 @@
 				<%
 					if(pagegroup!=1){
 				%>							
-						<li><a href="../admin.do?command=auctionapproval&pageNumber=<%=startpage-1%>">
+						<li><a href="../admin.do?command=adminfundlist&pageNumber=<%=startpage-1%>">
 						<span class="glyphicon glyphicon-chevron-left">&lt;</span></a></li>
 				<%
 					} else if(pagegroup==1){
@@ -111,17 +108,17 @@
 					for(int pagenum = startpage; pagenum <= ((endpage<totalpage)?endpage:totalpage); pagenum++){
 						if(paging.getCurrentpage()==pagenum){					
 				%>					
-						<li class="active"><a href="../admin.do?command=auctionapproval&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
+						<li class="active"><a href="../admin.do?command=adminfundlist&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
 				<%
 							} else {
 				%>
-						<li><a href="../admin.do?command=auctionapproval&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
+						<li><a href="../admin.do?command=adminfundlist&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
 				<%
 							}
 						}
-					if(endpage < paging.getTotalpage()){						
+					if(endpage < paging.getTotalpage()){				
 				%>
-						<li><a href="../admin.do?command=auctionapproval&pageNumber=<%=endpage+1%>">
+						<li><a href="../admin.do?command=adminfundlist&pageNumber=<%=endpage+1%>">
 						<span class="glyphicon glyphicon-chevron-right">&gt;</span></a></li>
 				<%
 					} else {

@@ -27,24 +27,6 @@ INSERT INTO BIGSEMI04."MEMBER" (MEM_ID,MEM_PW,MEM_NAME,MEM_PHONE,MEM_ZONECODE,ME
 --GRADE: 1 회원 / 2 농부 / 3 관리자
 SELECT * FROM MEMBER;
 
-INSERT INTO MEMBER VALUES(
-'user', '1234', '홍길동', 'hong@hong.com', 
-'11176', '서울시 강남구 역삼동', 'KH정보교육원',
-'010-1111-1111', 1,SYSDATE, 'N'
-);
-
-INSERT INTO MEMBER VALUES(
-'user2', '1234', '이순신', 'lee@lee.com', 
-'11100', '서울시 강남구 역삼동', 'KH정보교육원',
-'010-2222-2222', 2,SYSDATE, 'N'
-);
-
-INSERT INTO MEMBER VALUES(
-'user3', '1234', '장영실', 'jang@g.com', 
-'12222', '서울시 강남구 역삼동', 'KH정보교육원',
-'010-3333-3333', 1,SYSDATE, 'N'
-);
-
 ALTER TABLE FARMER
 ADD CONSTRAINT "FARMER_FK_MEM_ID"
 FOREIGN KEY("MEM_ID")
