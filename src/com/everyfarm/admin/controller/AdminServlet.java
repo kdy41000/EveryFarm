@@ -12,11 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.everyfarm.admin.dao.AdminBillListDao;
 import com.everyfarm.admin.dao.AdminFundListDao;
+import com.everyfarm.admin.dao.AdminWFDao;
 import com.everyfarm.admin.dao.AuctionApprovalDao;
 import com.everyfarm.admin.dao.UpgradeListDao;
 import com.everyfarm.admin.dao.UserListDao;
+import com.everyfarm.admin.dto.AdminBillListDto;
 import com.everyfarm.admin.dto.AdminFundListDto;
+import com.everyfarm.admin.dto.AdminWFDto;
 import com.everyfarm.admin.dto.AuctionApprovalDto;
 import com.everyfarm.admin.dto.PagingDto;
 import com.everyfarm.admin.dto.UpgradeListDto;
@@ -44,6 +48,8 @@ public class AdminServlet extends HttpServlet {
 		AuctionApprovalDao approvalDao = new AuctionApprovalDao();
 		UserListDao userListDao = new UserListDao();
 		AdminFundListDao fundListDao = new AdminFundListDao();
+		AdminBillListDao billListDao = new AdminBillListDao(); 
+		AdminWFDao wfDao = new AdminWFDao();
 		
 		//------------- 메인화면 (admin main) -------------------
 		if(command.equals("adminmain")) {
@@ -140,6 +146,32 @@ public class AdminServlet extends HttpServlet {
 			session.setAttribute("adminfundlist_paging", paging);
 			session.setAttribute("adminfundlist", list);
 			response.sendRedirect("admin/adminfundlist.jsp");
+		}
+		//------------- 주문관리 (admin bill list) -------------------
+		else if(command.equals("adminbilllist")) {
+			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
+			PagingDto paging = null;
+			int totalpage = billListDao.totalPage(TOTAL_PAGE_ROW);
+			paging = pagingMethod(currentpage, totalpage);
+			List<AdminBillListDto> list = billListDao.selectList(paging.getFrom(), paging.getTo());
+			
+			HttpSession session =request.getSession();
+			session.setAttribute("adminbilllist_paging", paging);
+			session.setAttribute("adminbilllist", list);
+			response.sendRedirect("admin/adminbilllist.jsp");
+		}
+		//------------- 농장관리 (admin wf) -------------------
+		else if(command.equals("adminwf")) {
+			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
+			PagingDto paging = null;
+			int totalpage = wfDao.totalPage(TOTAL_PAGE_ROW);
+			paging = pagingMethod(currentpage, totalpage);
+			List<AdminWFDto> list = wfDao.selectList(paging.getFrom(), paging.getTo());
+			
+			HttpSession session =request.getSession();
+			session.setAttribute("adminwf_paging", paging);
+			session.setAttribute("adminwf", list);
+			response.sendRedirect("admin/adminwf.jsp");
 		}
 	}
 	

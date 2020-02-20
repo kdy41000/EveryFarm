@@ -33,8 +33,8 @@
    <li class="list-group-item"><a href="#" onclick="location.href='../admin.do?command=upgradelist&pageNumber=1';">등업관리</a></li>
    <li class="list-group-item"><a href="#" onclick="location.href='../admin.do?command=auctionapproval&pageNumber=1';">경매관리</a></li>
    <li class="list-group-item"><a href="#" onclick="location.href='../admin.do?command=adminfundlist&pageNumber=1';">펀드관리</a></li>
-   <li class="list-group-item"><a href="#" onclick="location.href='#';">주문관리</a></li>
-   <li class="list-group-item"><a href="#" onclick="location.href='#';">농장관리</a></li>
+   <li class="list-group-item"><a href="#" onclick="location.href='../admin.do?command=adminbilllist&pageNumber=1';">주문관리</a></li>
+   <li class="list-group-item"><a href="#" onclick="location.href='../admin.do?command=adminwf&pageNumber=1';">농장관리</a></li>
    <li class="list-group-item"><a href="#" onclick="location.href='#';">정산</a></li>
    <li class="list-group-item"><a href="#" onclick="location.href='../admin.do?command=realtimeauction';">실시간 현황</a></li>
   </ul>

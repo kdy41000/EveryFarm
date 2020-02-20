@@ -10,6 +10,8 @@
 	<typeAlias type="com.everyfarm.admin.dto.AuctionApprovalDto" alias="AuctionApprovalDto"/>
 	<typeAlias type="com.everyfarm.admin.dto.UserListDto" alias="UserListDto"/>
 	<typeAlias type="com.everyfarm.admin.dto.AdminFundListDto" alias="AdminFundListDto"/>
+	<typeAlias type="com.everyfarm.admin.dto.AdminBillListDto" alias="AdminBillListDto"/>
+	<typeAlias type="com.everyfarm.admin.dto.AdminWFDto" alias="AdminWFDto"/>
 </typeAliases>
 	
   <environments default="development">
