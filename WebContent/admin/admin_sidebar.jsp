@@ -35,7 +35,7 @@
    <li class="list-group-item"><a href="#" onclick="location.href='../admin.do?command=adminfundlist&pageNumber=1';">펀드관리</a></li>
    <li class="list-group-item"><a href="#" onclick="location.href='../admin.do?command=adminbilllist&pageNumber=1';">주문관리</a></li>
    <li class="list-group-item"><a href="#" onclick="location.href='../admin.do?command=adminwf&pageNumber=1';">농장관리</a></li>
-   <li class="list-group-item"><a href="#" onclick="location.href='#';">정산</a></li>
+   <li class="list-group-item"><a href="#" onclick="location.href='../admin.do?command=adminaccount';">정산</a></li>
    <li class="list-group-item"><a href="#" onclick="location.href='../admin.do?command=realtimeauction';">실시간 현황</a></li>
   </ul>
 </div>

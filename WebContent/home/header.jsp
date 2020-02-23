@@ -40,7 +40,6 @@
     <link rel="stylesheet" href="../resources/css/home/style.css">
     
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-   <script type="text/javascript" src="../resources/js/home/header.js"></script>
 </head>
 <body>
 

@@ -14,7 +14,7 @@
 </head>
     <link rel="stylesheet" href="../resources/css/admin/admin.css">   
 	<link rel="stylesheet" href="../resources/css/membermypage/buttonstyle.css">
-	<script src="https://code.jquery.com/jquery-3.4.1.amin.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="../resources/js/admin/bootstrap.js"></script>
 
 <%

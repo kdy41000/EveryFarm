@@ -173,6 +173,10 @@ public class AdminServlet extends HttpServlet {
 			session.setAttribute("adminwf", list);
 			response.sendRedirect("admin/adminwf.jsp");
 		}
+		//------------- 정산 (admin account) -------------------
+		else if(command.equals("adminaccount")) {
+			response.sendRedirect("admin/adminaccount.jsp");
+		}
 	}
 	
 	private PagingDto pagingMethod(int currentpage, int totalpage) {

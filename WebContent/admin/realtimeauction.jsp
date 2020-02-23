@@ -62,60 +62,63 @@
         	$("td").eq(3).addClass('blink');
         	setInterval("$('.blink').fadeOut().fadeIn();", 1000);
 		});
-		var lastID = 0;
+    	
     	// 새로고침 간격
-		function getInfiniteChat() {
+		function getInfiniteInterval() { 
 			setInterval(function() {
-				chatListFunction(lastID);
-			}, 1000);
+				realtimeFunction();
+			}, 30000); // 새로고침 30초
 		}
-    	// 게시글 출력 기준 ten == 10
-		$(document).ready(function(){
-			chatListFunction('ten');
-			getInfiniteChat();
-		});
-		function chatListFunction(type) {
-			$.ajax({
-				type: "POST",
-				url: "./RealtimeServlet",
-				data: {
-					listType: type,
-				},
-				success: function(data){
-					if(data=="") return; 
-					var parsed = JSON.parse(data);
-					var result = parsed.result;
-					for(var i=0; i<result.length; i++){
-						addChat(result[i][0].value, result[i][1].value, result[i][2].value);
+
+		// ajax
+		function realtimeFunction(){
+			$.getJSON("resources/json/bike.json",function(data){ 
+				// url에서 json받아서 callback 함수 실행
+				$.each(data, function(key, val){
+					// (collections, callback 함수)
+					if(key=="DESCRIPTION"){
+						$("table").attr("border","1");
+						$("thead").append(
+								"<tr>"+
+									"<th>"+val.ADDR_GU+"</th>"+
+									"<th>"+val.CONTENT_ID+"</th>"+
+									"<th>"+val.CONTENT_NM+"</th>"+
+									"<th>"+val.NEW_ADDR+"</th>"+
+									"<th>"+val.CRADLE_COUNT+"</th>"+
+									"<th>"+val.LONGITUDE+"</th>"+
+									"<th>"+val.LATITUDE+"</th>"+
+								"</tr>"	
+						);
+					} else if(key=="DATA"){
+						var list = val;
+						for(var i = 0; i < list.length; i++){
+							var str = list[i];
+							$("tbody").append(
+									"<tr>"+
+										"<td>"+str.addr_gu+"</td>"+
+										"<td>"+str.content_id+"</td>"+
+										"<td>"+str.content_nm+"</td>"+
+										"<td>"+str.new_addr+"</td>"+
+										"<td>"+str.cradle_count+"</td>"+
+										"<td>"+str.longitude+"</td>"+
+										"<td>"+str.latitude+"</td>"+
+										"<input type='hidden' name='bike' value='"+
+											str.addr_gu+"/"+
+											str.content_id+"/"+
+											str.content_nm+"/"+
+											str.new_addr+"/"+
+											str.cradle_count+"/"+
+											str.longitude+"/"+
+											str.latitude+"'>"+
+									"</tr>";	
+							$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
+							);
+						}
 					}
-					lastID = Number(parsed.last);
-				}
-			});
+				});
+			})
 		}
-		function addChat(chatName, chatContent, chatTime) {
-			$('#chatList').append('<div class="row">'+
-							'<div class="col-lg-12">'+
-							'<div class="media">'+
-							'<a class="pull-left" href="#">'+
-							'<img class="media-object img-circle" src="images/icon.png" style="width: 50px;">'+
-							'</a>'+
-							'<div class="media-body">'+
-							'<h4 class="media-heading">'+
-							chatName +
-							'<span class="small pull-right">' +
-							chatTime +
-							'</span>'+
-							'</h4>'+
-							'<p>'+
-							chatContent +
-							'</p>'+
-							'</div>'+
-							'</div>'+
-							'</div>'+
-							'</div>'+
-							'<hr>');
-			$('#chatList').scrollTop($('#chatList')[0].scrollHeight);
-		}
+
     </script>
     
 </head>
@@ -175,6 +178,13 @@
 	</div>
 <%-- 	<%@ include file="../home/footer.jsp" %> --%>
 <div class="temp_footer">footer</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		realtimeFunction();
+		getInfiniteInterval();
+	});
+</script>
 	
 
   <!-- loader -->
