@@ -70,6 +70,16 @@
 			ORDER BY A.AUC_REGDATE DESC) R 
 		WHERE R.RNUM BETWEEN #{from} AND #{to}
  	</select>
+ 	
+ 	<select id="realtime_approvallist" resultType="AuctionApprovalDto" parameterType="pagingDto">
+		SELECT ROWNUM AS RNUM, R.*
+		FROM	(
+				SELECT *
+				FROM STOCK S INNER JOIN AUCTION A ON S.STOCK_NO = A.STOCK_NO
+				WHERE A.AUC_STATUS = 2
+				ORDER BY A.AUC_REGDATE DESC
+				)R
+ 	</select>
  
  	<select id="auctionapproval">
 		UPDATE AUCTION SET AUC_STATUS=2 WHERE AUC_NO=#{no}
@@ -124,6 +134,29 @@
  	</select>
  	
  	
+ 	
+ 	
+ 	<select id="stockKindCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM STOCK 
+		WHERE STOCK_KIND = #{kindnumber}
+ 	</select>
+ 	
+ 	<select id="fundSumCurrentPrice" resultType="int">
+		SELECT SUM(FUND_CURRENTPRICE) FROM FUND WHERE FUND_STATUS = 2
+ 	</select>
+ 	
+ 	<select id="auctionSumCurrentPrice" resultType="int">
+		SELECT SUM(AUC_NOWPRICE) FROM AUCTION WHERE AUC_STATUS = 2
+ 	</select>
+ 	
+ 	<select id="fundCurrentMember" resultType="int">
+		SELECT SUM(FUND_JOIN) FROM FUND WHERE FUND_STATUS = 2
+ 	</select>
+ 	
+ 	<select id="auctionCurrentMember" resultType="int">
+		SELECT SUM(AUC_JOIN) FROM AUCTION WHERE AUC_STATUS = 2
+ 	</select>
  	
  	
 

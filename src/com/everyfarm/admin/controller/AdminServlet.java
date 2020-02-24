@@ -12,12 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.everyfarm.admin.dao.AdminAccountDao;
 import com.everyfarm.admin.dao.AdminBillListDao;
 import com.everyfarm.admin.dao.AdminFundListDao;
 import com.everyfarm.admin.dao.AdminWFDao;
 import com.everyfarm.admin.dao.AuctionApprovalDao;
 import com.everyfarm.admin.dao.UpgradeListDao;
 import com.everyfarm.admin.dao.UserListDao;
+import com.everyfarm.admin.dto.AdminAccountDto;
 import com.everyfarm.admin.dto.AdminBillListDto;
 import com.everyfarm.admin.dto.AdminFundListDto;
 import com.everyfarm.admin.dto.AdminWFDto;
@@ -50,6 +52,7 @@ public class AdminServlet extends HttpServlet {
 		AdminFundListDao fundListDao = new AdminFundListDao();
 		AdminBillListDao billListDao = new AdminBillListDao(); 
 		AdminWFDao wfDao = new AdminWFDao();
+		AdminAccountDao accountDao = new AdminAccountDao();
 		
 		//------------- 메인화면 (admin main) -------------------
 		if(command.equals("adminmain")) {
@@ -117,8 +120,12 @@ public class AdminServlet extends HttpServlet {
 			response.sendRedirect("admin/auctionapproval.jsp");
 
 		}
-		//------------- 실시간 현황  (**수정 예정) -------------------
+		//------------- 실시간 현황 (realtimelist)-------------------
 		else if(command.equals("realtimeauction")) {
+			List<AuctionApprovalDto> list = approvalDao.selectList();
+			
+			HttpSession session =request.getSession();
+			session.setAttribute("adminrealtime", list);
 			response.sendRedirect("admin/realtimeauction.jsp");
 		}
 		//------------- 회원관리 (userlist) -------------------
@@ -175,8 +182,25 @@ public class AdminServlet extends HttpServlet {
 		}
 		//------------- 정산 (admin account) -------------------
 		else if(command.equals("adminaccount")) {
+			AdminAccountDto accountDto = new AdminAccountDto();
+			accountDto.setStock1_count(accountDao.stockKindCount(1));
+			accountDto.setStock2_count(accountDao.stockKindCount(2));
+			accountDto.setStock3_count(accountDao.stockKindCount(3));
+			accountDto.setStock4_count(accountDao.stockKindCount(4));
+			accountDto.setStock5_count(accountDao.stockKindCount(5));
+			accountDto.setStock6_count(accountDao.stockKindCount(6));
+
+			accountDto.setFundSumCurrentPrice(accountDao.fundSumCurrentPrice());
+			accountDto.setAuctionSumCurrentPrice(accountDao.auctionSumCurrentPrice());
+			accountDto.setFundCurrentMember(accountDao.fundCurrentMember());
+			accountDto.setAuctionCurrentMember(accountDao.auctionCurrentMember());
+			
+			HttpSession session =request.getSession();
+			session.setAttribute("adminaccount", accountDto);
 			response.sendRedirect("admin/adminaccount.jsp");
 		}
+
+		
 	}
 	
 	private PagingDto pagingMethod(int currentpage, int totalpage) {

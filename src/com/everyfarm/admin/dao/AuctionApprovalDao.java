@@ -12,6 +12,21 @@ public class AuctionApprovalDao {
 	
 	private String namespace = "admin.";
 	
+	public List<AuctionApprovalDto> selectList(){
+		List<AuctionApprovalDto> list = null;
+		SqlSession session = null;
+		try {
+			session = getSqlSessionFactory().openSession();
+			list = session.selectList(namespace+"realtime_approvallist");
+		} catch (Exception e) {
+			System.out.println("ERROR: AuctionApprovalDao selectList");
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
 	public List<AuctionApprovalDto> selectList(int from, int to){
 		List<AuctionApprovalDto> list = null;
 		SqlSession session = null;

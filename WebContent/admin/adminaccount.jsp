@@ -21,9 +21,9 @@
 <style>
 	.chart-container{
 		width: 95%;
-		height: 55vh;
+		height: 550px;
 		border: 1px solid #ddd;
-		padding: 5%;
+		padding: 8%;
 		border-radius: 8px;
 		margin-left: 2.5%;
 	}
@@ -31,7 +31,6 @@
 		width: 100px;
 	}
 </style>
-
 <body>
 <%@ include file="../home/header.jsp" %>
 <div class="container-fluid">
@@ -48,15 +47,21 @@
 		
 				<!-- 차트1 -->			
 				<div class="chart-container">
-				품목수
+				품목별 상품 수
 				  <canvas id="pie-chart"></canvas>
 				</div> 
 				 
 				<script>
 					var mychart = $('#pie-chart');
-					var data2019 = {
-					  label:'2019',
-					  data:[10,8,6,5,3,9],
+					var stock1 = ${adminaccount.stock1_count };
+					var stock2 = ${adminaccount.stock2_count };
+					var stock3 = ${adminaccount.stock3_count };
+					var stock4 = ${adminaccount.stock4_count };
+					var stock5 = ${adminaccount.stock5_count };
+					var stock6 = ${adminaccount.stock6_count };
+					var piechart = {
+					  label:'piechart',
+					  data:[stock1,stock2,stock3,stock4,stock5,stock6],
 					  backgroundColor:[
 					    'rgba(200,0,0,.45)',
 					    'rgba(200,200,0,.45)',
@@ -73,7 +78,7 @@
 					  type:'pie',
 					  data: {
 					    labels:['과일','채소','곡류','견과류','약용작물','버섯'],
-					    datasets:[data2019]
+					    datasets:[piechart]
 					  },
 					  options:{
 					    maintainAspectRatio:false,
@@ -90,28 +95,33 @@
 	
 					<!-- 차트2 -->			
 				<div class="chart-container">
+				<span>현재 진행중인 상품 총액 </span><span style="font-size:5px;">펀드 단위 k (1000)</span>
 				  <canvas id="bar-chart3"></canvas>
 				</div>
 				 
 				<script>
 				var mychart3 = $('#bar-chart3');
+				var fundSumCurrentPrice = ${adminaccount.fundSumCurrentPrice};
+				var auctionSumCurrentPrice = ${adminaccount.auctionSumCurrentPrice};
+				var fundCurrentMember = ${adminaccount.fundCurrentMember};
+				var auctionCurrentMember = ${adminaccount.auctionCurrentMember};
 				var myBarChart3 = new Chart(mychart3, {
 				     type: 'bar',
 				     data: {
 				       labels: ['경매', '펀드'],
 				       datasets: [{
-				         label: '총액',
+				         label: '총액(좌)',
 				         yAxisID: 'A',
-				         data:[320, 240],
-				         backgroundColor:'rgba(40,161,130,.5)',
-				         borderColor:'rgba(40,161,130)',
+				         data:[auctionSumCurrentPrice, fundSumCurrentPrice/1000],
+				         backgroundColor:'rgba(40,180,130,.5)',
+				         borderColor:'rgba(40,180,130)',
 				         borderWidth:1
 				       }, {
-				         label: '인원수',
+				         label: '인원수(우)',
 				         yAxisID: 'B',
-				         data: [8,13],
-				         backgroundColor:'rgba(160,60,20,.5)',
-				         borderColor:'rgba(160,60,20)',
+				         data: [auctionCurrentMember,fundCurrentMember],
+				         backgroundColor:'rgba(180,40,20,.5)',
+				         borderColor:'rgba(180,40,20)',
 				         borderWidth:1
 				       }]
 				     },
