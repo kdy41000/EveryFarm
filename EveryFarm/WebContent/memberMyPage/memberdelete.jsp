@@ -7,9 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 탈퇴</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+<style type="text/css">
+.button{margin-left: 140px;}
+</style>
 </head>
 <link rel="stylesheet" href="../resources/css/membermypage/memberdelete.css">
 <link rel="stylesheet" href="../resources/css/membermypage/buttonstyle.css">
@@ -20,30 +22,31 @@
 	  <%@ include file="../home/sidemenu.jsp" %>
 	    <div class="col" >
 	    	 <div class="form-wrap">
-      <div class="form-wrap-inn">
-          <div class="frame">
-              <div class="form-content">
-                  <div class="header">
-                      <i class="fa fa-eye"></i>
-                      <h2>회원탈퇴</h2>
-                      <p>비밀번호를 다시 입력해주세요</p>
-                  </div>
-                  
-                  <div class="delete-form">
-                      <form action="" class="form">
-                        <div class="form-group">
-                          <input id="color" class="form-input" type="password" placeholder="Password">
-                        </div>
-                          <input type="button" class="button" value="확인" onclick="pwChk();" >
-                      </form>
-              </div>
-          </div>
-      </div>
- </div>
-	    </div>
-	  </div>
+			      <div class="form-wrap-inn">
+			          <div class="frame">
+			              <div class="form-content">
+			                  <div class="header">
+			                      <i class="fa fa-eye"></i>
+			                      <h2>회원탈퇴</h2>
+			                      <p>비밀번호를 다시 입력해주세요</p>
+			                  </div>
+			                  <div class="delete-form">
+			                      <form action="" class="form">
+			                        <div class="form-group">
+			                          <input id="color" class="form-input" type="password" placeholder="Password">
+			                        </div>
+			                          <input type="button" class="button" value="확인" onclick="pwChk();"  >
+			                      </form>
+					              </div>
+					          </div>
+					      </div>
+					   </div>
+				    </div>
+				  </div>
+		   </div>
 </div>
-</div>
+ <br><br><br><br><br><br><br><br><br><br><br><br>
+     <%@ include file="../home/footer.jsp" %>
 </body>
 <script type="text/javascript">
 	function pwChk(){

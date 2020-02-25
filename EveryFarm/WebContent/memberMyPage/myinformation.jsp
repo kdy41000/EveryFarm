@@ -35,6 +35,10 @@ function openDaumZipAddress() {   //클릭시 실행되는 함수
 	$("#detail02").show();
 }
 </script>
+<style type="text/css">
+	.row{margin-top:30px;}
+	.button{width: 100px; height:30px;}
+</style>
 </head>
 <body>
 <%@ include file="../home/header.jsp" %>

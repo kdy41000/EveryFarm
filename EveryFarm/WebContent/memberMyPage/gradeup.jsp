@@ -83,6 +83,8 @@
 	     </div>
 	    </div>
 	   </div>
+	   </br></br></br></br></br></br></br></br></br></br>
+	   <%@ include file="../home/footer.jsp" %>
 </body>
 <script type="text/javascript">
 	$(function(){

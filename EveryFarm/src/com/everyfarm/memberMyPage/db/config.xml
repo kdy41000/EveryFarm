@@ -6,6 +6,10 @@
 
 <typeAliases>
 	<typeAlias type="com.everyfarm.member.dto.MemberDto" alias="memberDto"/>
+	<typeAlias type="com.everyfarm.memberMyPage.dto.MyPurchaseListDto" alias="mypurchaselistDto"/>
+	<typeAlias type="com.everyfarm.memberMyPage.dto.MyFarmListDto" alias="myfarmlistDto"/>
+	<typeAlias type="com.everyfarm.memberMyPage.dto.MyPaymentDto" alias="mypaymentDto"/>
+	<typeAlias type="com.everyfarm.memberMyPage.dto.PagingDto" alias="pagingDto"/>
 </typeAliases>
 	
   <environments default="development">

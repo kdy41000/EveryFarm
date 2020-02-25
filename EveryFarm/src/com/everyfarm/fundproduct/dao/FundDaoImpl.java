@@ -139,7 +139,6 @@ public class FundDaoImpl extends SqlMapConfig implements FundDao {
 			//=>order_no, mem_id, pay_price 담겨있음
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			session.close();

@@ -73,6 +73,7 @@ public class LettersController extends HttpServlet {
 		} else if(command.equals("detail")) {	//쪽지 상세
 			int letter_id = Integer.parseInt(request.getParameter("letter_id"));
 			String mem_id = request.getParameter("mem_id");
+			int res = dao.updateStatus(letter_id);
 			LettersDto dto = dao.LettersDetail(letter_id);
 			HttpSession session = request.getSession();
 			session.setAttribute("lettersdetail", dto);

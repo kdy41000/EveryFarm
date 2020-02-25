@@ -81,6 +81,7 @@
 	     </div>
 	    </div>
 	   </div>
+	   <%@ include file="../home/footer.jsp" %>
 </body>
 <script type="text/javascript">
 	function allChk(bool){

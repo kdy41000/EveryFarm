@@ -45,29 +45,36 @@
 	      				<th>날짜</th>
 	      			</tr>
 	      		</thead>
-<%
-			if(list.size() == 0){
-%>
-					<tr>
-						<td colspan="4">쪽지가 없습니다.</td>
-					</tr>
-<%
-			} else{
-				for(LettersDto dto : list){
-%>	      		
-					<tr>
-					    <td><input type="checkbox" name="chk" value="<%=dto.getLetter_id() %>"></td>
-						<td class="sender"><%=dto.getLetter_sender() %></td>
-						<input type="hidden" name="letter_sender" value=<%=dto.getLetter_sender() %>>
-						<td class="title"><%=dto.getLetter_title() %></td>
-						<input type="hidden" name="letter_title" value=<%=dto.getLetter_title() %>>
-						<td><f:formatDate value="<%=dto.getLetter_regdate() %>" pattern="yyyy.MM.dd"/></td>
-					    <input type="hidden" name="letter_content" value=<%=dto.getLetter_content() %>>
-					</tr>
-<%
-				}
-			}
-%>
+					<c:if test="${empty inbox }">
+						<tr>
+							<td colspan="4">쪽지가 없습니다.</td>
+						</tr>
+					</c:if>
+    		        <c:forEach var="dto" items="${inbox }" >
+						<tr>
+						    <td><input type="checkbox" name="chk" value="${dto.letter_id }"></td>
+						    <c:choose>
+								<c:when test="${dto.letter_status == 0 }">
+									<td class="sender" style="color: blue">${dto.letter_sender }</td>
+								</c:when>
+								<c:otherwise>
+									<td class="sender">${dto.letter_sender }</td>
+								</c:otherwise>
+							</c:choose>
+							<input type="hidden" name="letter_sender" value=${dto.letter_sender }>
+							<c:choose>
+								<c:when test="${dto.letter_status == 0 }">
+									<td class="title" style="color: blue">${dto.letter_title }</td>
+								</c:when>
+								<c:otherwise>
+									<td class="title" >${dto.letter_title }</td>
+								</c:otherwise>
+							</c:choose>
+							<input type="hidden" name="letter_title" value=${dto.letter_title }>
+							<td><f:formatDate value="${dto.letter_regdate }" pattern="yyyy.MM.dd"/></td>
+						    <input type="hidden" name="letter_content" value=${dto.letter_content }>
+						</tr>
+					</c:forEach>
 					<tr>
 						<td colspan="4">
 							<input type="submit" value="선택삭제" class="button"  id="muldel" style="float: left;">
@@ -80,6 +87,7 @@
 	     </div>
 	    </div>
 	   </div>
+	   <%@ include file="../home/footer.jsp" %>
 </body>
 <script type="text/javascript">
 	function allChk(bool){
@@ -88,6 +96,7 @@
 			chks[i].checked = bool;
 		}
 	}
+	
 	$(function(){
 		$("#write").click(function(){
 			var option = "width=450, height=600,top = 100, left = 500, location = no"

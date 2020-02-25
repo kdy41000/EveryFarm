@@ -96,6 +96,25 @@ public class LettersDaoImpl extends SqlMapConfig implements LettersDao{
 		return dto;
 	}
 
+	@Override
+	public int updateStatus(int letter_id) {
+		SqlSession session = null;
+		int res = 0;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			res = session.update(namespace+"updateStatus", letter_id);
+			if(res>0) {
+				session.commit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return res;
+	}
+
 	
 	
 }
