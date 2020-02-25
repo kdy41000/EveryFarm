@@ -7,6 +7,66 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+
+
+			function formcheck(){
+				var form = document.registform;
+				if(form.stock_name.value=="" || form.stock_detail_01.value=="" || form.stock_detail_02.value=="" || 
+						form.stock_detail_03.value=="" || form.stock_detail_04.value=="" || form.stock_kg.value=="" || form.auc_startPrice.value=="" ||
+						form.auc_endDate.value=="" || form.stock_image_01.value=="" || form.stock_image_02.value=="" || form.stock_image_03.value=="" || form.stock_image_04.value==""){
+					
+					if(form.stock_name.value==""){
+						alert("상품명을 입력해주세요");
+						form.stock_name.focus();
+						return false;
+					} else if(form.stock_detail_01.value==""){
+						alert("상품 상세 정보를 입력해주세요");
+						form.stock_detail_01.focus();
+						return false;
+					} else if(form.stock_detail_02.value==""){
+						alert("상품 상세 정보를 입력해주세요");
+						form.stock_detail_02.focus();
+						return false;
+					} else if(form.stock_detail_03.value==""){
+						alert("상품 상세 정보를 입력해주세요");
+						form.stock_detail_03.focus();
+						return false;
+					} else if(form.stock_detail_04.value==""){
+						alert("상품 상세 정보를 입력해주세요");
+						form.stock_detail_04.focus();
+						return false;
+					} else if(form.stock_kg.value==""){
+						alert("상품 무게를 입력해주세요");
+						form.stock_kg.focus();
+						return false;
+					} else if(form.auc_startPrice.value==""){
+						alert("경매 시작 가격을 입력해주세요");
+						form.auc_startPrice.focus();
+						return false;
+					} else if(form.auc_endDate.value==""){
+						alert("경매 종료 날짜를 지정해주세요");
+						form.auc_endDate.focus();
+						return false;
+					} else if(form.stock_image_01.value==""){
+						alert("상품 이미지를 등록해주세요");
+						return false;
+					} else if(form.stock_image_02.value==""){
+						alert("상품 이미지를 등록해주세요");
+						return false;
+					} else if(form.stock_image_03.value==""){
+						alert("상품 이미지를 등록해주세요");
+						return false;
+					} else if(form.stock_image_04.value==""){
+						alert("상품 이미지를 등록해주세요");
+						return false;
+					}
+					
+				} else {
+					form.submit();
+				}
+				
+			}
+
 			
 			function areaChange(){
 				var seoul = ["강남구", "강북구", "강서구", "관악구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "성동구", "성북구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구"];
@@ -28,6 +88,8 @@
 					$('#area').append(option);
 				}
 			}
+			
+			
 			
 </script>
 <style type="text/css">
@@ -74,7 +136,7 @@ form{
 	width: 300px;
 }
 
-input[type="submit"]{
+ #submitbutton{
 	width: 150px;
 	height: 3em;
 	border: 0;
@@ -113,6 +175,40 @@ textarea{
 	border-radius: 4px;
 	font-size: 14pt;
 }
+
+.filebox label {
+  display: inline-block;
+  padding: .4em .6em;
+  color: #fff;
+  font-size: 11pt;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #c3ab82;
+  cursor: pointer;
+  border: 0px;
+  border-radius: .25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.filebox label:hover {
+  background-color: #c9baa2;
+}
+
+.filebox label:active {
+  background-color: #876837;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 </style>
 </head>
 <body>
@@ -121,7 +217,7 @@ textarea{
 	<section>
 		<div id="outline">
 		<h1 style="font-weight:bold;">경매 신청</h1>
-		<form action="../registauction.do" method="post" enctype="multipart/form-data">
+		<form action="../registauction.do" method="post" enctype="multipart/form-data" name="registform">
 			<input type="hidden" name="command" value="newauction">
 			<input type="hidden" name="mem_id" value= "${sessionScope.dto.mem_id}">
 			
@@ -131,8 +227,13 @@ textarea{
 			<div class="items"><label>상품 소개</label> <br>
 			<textarea name="stock_detail_01"></textarea><br>
 			
-			<div class="items"><label>상품 대표 이미지</label><br>
-			<input type="file" name="stock_image_01"></div>
+			<div class="items">
+				<label>상품 대표 이미지</label>
+				<div class="filebox">
+					<label for="file1">이미지 첨부</label>
+					<input type="file" name="stock_image_01" id="file1">
+				</div>
+			</div>
 			
 			<div class="items"><label>생산지역</label><br>
 			<select id="loc1" onchange="areaChange();">
@@ -182,25 +283,35 @@ textarea{
 			
 			<div class="items"><label>경매 시작 가격</label><br>
 			<input type="text" name="auc_startPrice" class="inputbox"><span> 원</span></div>
-
+			<input type="button" value="참고 가격" id="popup">
+			
 			<div class="items"><label>경매 종료일</label><br>
 			<input type="date" id="enddate" name="auc_endDate"></div>
 			
 			<div class="items"><label>상품 특징</label> <br>
 			<p>상품 이미지 3장과 그에 따른 상세설명 3가지를 작성해 주세요.<p>
-			<input type="file" name="stock_image_02"><br>
-			<textarea name="stock_detail_02"></textarea><br>
-			<input type="file" name="stock_image_03"><br>
-			<textarea name="stock_detail_03"></textarea><br>
-			<input type="file" name="stock_image_04"><br>
-			<textarea name="stock_detail_04"></textarea><br>
+				<div class="filebox">
+					<label for="file2">이미지 첨부</label>
+					<input type="file" name="stock_image_02" id="file2"><br>
+					<textarea name="stock_detail_02"></textarea><br>
+				</div>
+				<div class="filebox">
+					<label for="file3">이미지 첨부</label>
+					<input type="file" name="stock_image_03" id="file3"><br>
+					<textarea name="stock_detail_03"></textarea><br>
+				</div>
+				<div class="filebox">
+					<label for="file4">이미지 첨부</label>
+					<input type="file" name="stock_image_04" id="file4"><br>
+					<textarea name="stock_detail_04"></textarea><br>
+				</div>
 			</div>
 
 			
 			<br>
 			<br>
 			<br>
-			<input type="submit" value="등록 신청">
+			<input type="button" id="submitbutton" value="등록 신청" onclick="formcheck()">
 		    
 
 		</form>
@@ -208,5 +319,12 @@ textarea{
 	</section>
 	
 	<footer><%@ include file="../home/footer.jsp" %></footer>
+	<script type="text/javascript">
+		$(function(){
+			$("#popup").click(function(){
+				window.open("itempriceex.jsp", "경매 가격 정보", 'width=600px, height=700px;');
+				});
+			});
+	</script>
 </body>
 </html>

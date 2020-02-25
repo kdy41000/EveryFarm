@@ -146,7 +146,7 @@
 					<!-- 로그아웃 -->
 					<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../memberMyPage.do?command=mypage';">마이페이지</a></li>
 					<img src="../resources/images/home/header/farmer.png" alt="" style="border-radius:50px; width:40px; height:40px; margin: 1% 0% 0% 0%;"/>
-				   		<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farmerdetail.do?command=goFarmerMyPage';" style="margin: -1% 0% 0% 0%;">농부관리 페이지</a></li>
+				   		<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farmerfunddetail.do?command=goFarmerMyPage';" style="margin: -1% 0% 0% 0%;">농부관리 페이지</a></li>
 				     		
 				     	   
 				 

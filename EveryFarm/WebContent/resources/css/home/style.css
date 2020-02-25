@@ -9480,3 +9480,12 @@ textarea.form-control {
 	-webkit-transition-delay: 0s, 0.2s; transition-delay: 0s, 0.2s;
 }
 
+.list-group-item-sub{
+	position: relative;
+    display: block;
+    padding: 0rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid
+    box-sizing
+}
