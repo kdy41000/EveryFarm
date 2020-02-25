@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class SqlMapConfig {
 
-private SqlSessionFactory sqlsessionfactory;
+	private SqlSessionFactory sqlsessionfactory;
 	
 	public SqlSessionFactory getSqlSessionFactory() {
 		String resource = "com/everyfarm/farmer/auction/db/config.xml";

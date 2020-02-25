@@ -8,6 +8,65 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 			
+		function formcheck(){
+			var form = document.registform;
+			if(form.stock_name.value=="" || form.stock_detail_01.value=="" || form.stock_detail_02.value=="" || 
+					form.stock_detail_03.value=="" || form.stock_detail_04.value=="" || form.stock_kg.value=="" || form.stock_price.value=="" ||
+					form.fund_endDate.value=="" || form.stock_image_01.value=="" || form.stock_image_02.value=="" || form.stock_image_03.value=="" || form.stock_image_04.value==""){
+				
+				if(form.stock_name.value==""){
+					alert("상품명을 입력해주세요");
+					form.stock_name.focus();
+					return false;
+				} else if(form.stock_detail_01.value==""){
+					alert("상품 상세 정보를 입력해주세요");
+					form.stock_detail_01.focus();
+					return false;
+				} else if(form.stock_detail_02.value==""){
+					alert("상품 상세 정보를 입력해주세요");
+					form.stock_detail_02.focus();
+					return false;
+				} else if(form.stock_detail_03.value==""){
+					alert("상품 상세 정보를 입력해주세요");
+					form.stock_detail_03.focus();
+					return false;
+				} else if(form.stock_detail_04.value==""){
+					alert("상품 상세 정보를 입력해주세요");
+					form.stock_detail_04.focus();
+					return false;
+				} else if(form.stock_kg.value==""){
+					alert("상품 무게를 입력해주세요");
+					form.stock_kg.focus();
+					return false;
+				} else if(form.stock_price.value==""){
+					alert("경매 시작 가격을 입력해주세요");
+					form.auc_startPrice.focus();
+					return false;
+				} else if(form.fund_endDate.value==""){
+					alert("경매 종료 날짜를 지정해주세요");
+					form.auc_endDate.focus();
+					return false;
+				} else if(form.stock_image_01.value==""){
+					alert("상품 이미지를 등록해주세요");
+					return false;
+				} else if(form.stock_image_02.value==""){
+					alert("상품 이미지를 등록해주세요");
+					return false;
+				} else if(form.stock_image_03.value==""){
+					alert("상품 이미지를 등록해주세요");
+					return false;
+				} else if(form.stock_image_04.value==""){
+					alert("상품 이미지를 등록해주세요");
+					return false;
+				}
+				
+			} else {
+				form.submit();
+			}
+			
+		}
+			
+			
 			function areaChange(){
 				var seoul = ["강남구", "강북구", "강서구", "관악구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "성동구", "성북구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구"];
 				var gyeonggi = ["가평군", "고양시", "과천시", "광주시", "구리시", "군포시", "김포시", "남양주시", "동두천시", "성남시", "안양시", "양주시", "양평시", "여주시", "연천군", "의정부시", "파주시", "포천시", "하남시"];
@@ -86,7 +145,7 @@ form{
 	width: 300px;
 }
 
-input[type="submit"]{
+#submitbutton{
 	width: 150px;
 	height: 3em;
 	border: 0;
@@ -125,6 +184,40 @@ textarea{
 	border-radius: 4px;
 	font-size: 14pt;
 }
+
+.filebox label {
+  display: inline-block;
+  padding: .4em .6em;
+  color: #fff;
+  font-size: 11pt;
+  line-height: normal;
+  vertical-align: middle;
+  background-color: #c3ab82;
+  cursor: pointer;
+  border: 0px;
+  border-radius: .25em;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.filebox label:hover {
+  background-color: #c9baa2;
+}
+
+.filebox label:active {
+  background-color: #876837;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 </style>
 </head>
 <body>
@@ -133,7 +226,7 @@ textarea{
 	<section>
 		<div id="outline">
 		<h1 style="font-weight:bold;">펀드 신청</h1>
-		<form action="../registfund.do" method="post" enctype="multipart/form-data" onsubmit="return checkAll()" name="form">
+		<form action="../registfund.do" method="post" enctype="multipart/form-data" name="registform">
 			<input type="hidden" name="command" value="newfund">
 			<input type="hidden" name="mem_id" value= "${sessionScope.dto.mem_id}">
 			
@@ -143,8 +236,12 @@ textarea{
 			<div class="items"><label>상품 소개</label> <br>
 			<textarea name="stock_detail_01"></textarea><br>
 			
-			<div class="items"><label>상품 대표 이미지</label><br>
-			<input type="file" name="stock_image_01"></div>
+			<div class="items"><label>상품 대표 이미지</label>
+				<div class="filebox">
+					<label for="file1">이미지 첨부</label>
+					<input type="file" name="stock_image_01" id="file1">
+				</div>
+			</div>
 			
 			<div class="items"><label>생산지역</label><br>
 			<select id="loc1" onchange="areaChange();">
@@ -201,11 +298,21 @@ textarea{
 			
 			<div class="items"><label>펀드 특징</label> <br>
 			<p>상품 이미지 3장과 그에 따른 상세설명 3가지를 작성해 주세요.<p>
-			<input type="file" name="stock_image_02"><br>
+			<div class="filebox">
+				<label for="file2">이미지 첨부</label>
+			<input type="file" name="stock_image_02" id="file2"><br>
 			<textarea name="stock_detail_02"></textarea><br>
-			<input type="file" name="stock_image_03"><br>
+			</div>
+			
+			<div class="filebox">
+			<label for="file3">이미지 첨부</label>
+			<input type="file" name="stock_image_03" id="file3"><br>
 			<textarea name="stock_detail_03"></textarea><br>
-			<input type="file" name="stock_image_04"><br>
+			</div>
+			
+			<div class="filebox">
+			<label for="file4">이미지 첨부</label>
+			<input type="file" name="stock_image_04" id="file4"><br>
 			<textarea name="stock_detail_04"></textarea><br>
 			</div>
 
@@ -213,7 +320,7 @@ textarea{
 			<br>
 			<br>
 			<br>
-			<input type="submit" value="등록 신청">
+			<input type="button" id="submitbutton" value="등록 신청" onclick="formcheck()">
 		    
 
 		</form>
