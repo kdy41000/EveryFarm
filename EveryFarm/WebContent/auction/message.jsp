@@ -36,6 +36,15 @@ span{margin:0 5px 0 15px}
         	$("#sender").text(childmem_id);
         	$("#sender").val(childmem_id);
         	
+        	$("#button").click(function(){
+        		if($("#title").val()==""){
+        			alert("제목을 입력해주세요.");
+        		}else if($("#textarea").val()==""){
+        			alert("내용을 입력해주세요.");
+        		}else{
+        			$(".form").submit();
+        		}
+        	});
         });
    </script>
 
@@ -48,10 +57,10 @@ span{margin:0 5px 0 15px}
   
   <p type="수신자:"><input name="mem_id" value="${sessionScope.productdto.mem_id }" readonly></a></p>
   
-   <p type="제목:"><input name="letter_title" value="" placeholder="제목을 입력하세요"></input></p>
+  <p type="제목:"><input name="letter_title" id="title" value="" placeholder="제목을 입력하세요"/></p>
   
-  <p type="내용:"><textarea name="letter_content" value="" placeholder="내용을 입력하세요" style="width: 380px; height: 170px; border-radius:10px;"></textarea></p>
-  <input type="submit" id="button" value="Send Message">
+  <p type="내용:"><textarea name="letter_content" id="textarea" value="" placeholder="내용을 입력하세요" style="width:100%; height: 170px; border-radius:10px;"></textarea></p>
+  <input type="button" id="button" value="Send Message">
 </form>
 </body>
 </html>

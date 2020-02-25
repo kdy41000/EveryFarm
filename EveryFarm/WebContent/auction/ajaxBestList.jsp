@@ -23,6 +23,7 @@
 </head>
 <%
 	List<ProductDto>bestlist =(List<ProductDto>)session.getAttribute("LiveBestlist");
+	List<ProductDto>BestListTime = (List<ProductDto>)session.getAttribute("BestListTime");
 	
 	//리스트용 구분값
 	//String paramtype = (String)session.getAttribute("paramtype");
@@ -58,7 +59,7 @@
 	                        </table>
 	                         
 	                        	<img alt="img" src="../resources/images/auction/watch.png" style="width:20px; height:20px;">
-	                        	<div style="margin: -130px 0px 0px 40px;">21시간26분</div>
+	                        	<div style="margin: -130px 0px 0px 40px; color:red; font-weight:bold;"><%=BestListTime.get(i).getDay() %>일<%=BestListTime.get(i).getHours() %>시간<%=BestListTime.get(i).getMinutes() %>분</div>
 	                        </div>
 	                    </div>
 	

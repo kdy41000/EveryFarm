@@ -8,6 +8,42 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.slide_diagonal:hover {
+  box-shadow: inset 400px 50px 0 0 #D80286;
+}
+
+#outer {
+  width: 364px;
+  margin: 50px auto 0 auto;
+  text-align: center;
+}
+.button_slide {
+  color: #FFF;
+  border: 2px solid rgb(111, 162, 158);
+  border-radius: 10px;
+  padding: 5px 30px;
+  height:50px;
+  display: inline-block;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0 rgb(111, 162, 158);
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.4s;
+}
+@font-face{
+		font-family: "Goyang";
+		src: url("../resources/css/goyang/Goyang.ttf") format("truetype");  /* 고양체 파일 불러오기 */
+	}
+	#goyang{
+		font-family: "Goyang";
+		font-size:20px;
+		font-weight:bold;
+	}
+</style>
 </head>
 <body>
 <%@ include file="../home/header.jsp" %>
@@ -29,7 +65,7 @@
 		<img alt="img" src="../resources/images/farm/smartfarm.png" style="width:60%; height:400px;"/><br/>
 		<p>일상에 지치고 농작물을 관리할 시간이 부족한 고객을 위한, 각 토지마다 <b style="color:green;">최첨단 Iot시스템</b> 도입.</p><br/>
 		<p><b style="color:brown;">주말농장 신청하러 가기</b></p>
-		<input type="button" value="신청하기" onclick="location.href='../farm.do?command=farmmain';" style="width:13%; height:40px; background:#11ab11; color:white; font-weight:bold; border-radius:30px; border:1px solid white;"/>
+		 <div class="button_slide slide_diagonal" id="goyang" style="color:black;" onclick="location.href='../farm.do?command=farmmain';">주말농장 신청하기 </div>
 		<hr/>
 		<br/>
 		<h2 style="font-weight:bold;">CONTACT US</h2>

@@ -218,9 +218,9 @@ System.out.println(paramtype+"::컨트롤러 입력된 지역명");
 	    	  int res = biz.sendletter(letterdto);
 	    	  
 	    	  if(res > 0) {
-	    		 jsResponse("쪽지가 전송되었습니다.","farm/farmdetail.jsp",response);
+	    		 jsResponse("쪽지가 전송되었습니다.","farm/messageclose.jsp",response);
 	    	  }else{
-	    		 jsResponse("쪽지전송을 실패하였습니다.","farm/farmdetail.jsp",response);
+	    		 jsResponse("쪽지전송을 실패하였습니다.","farm/message.jsp",response);
 	    	  }
 	    	  
 	    /********************에이작스영역**********************/	  

@@ -23,6 +23,7 @@
      rel="stylesheet"    
      type="text/css" />        
 </head>
+
 <%
    PagingDto currentpage = (PagingDto)session.getAttribute("pagingdto");
    int pagegroup = (int)Math.ceil((double)currentpage.getCurrentpage()/currentpage.getUnderpagescale());
@@ -44,8 +45,6 @@
 <script type="text/javascript">
 	var sessionMem = '${sessionScope.dto.mem_grade}'; 
 	var sessionId = '${sessionScope.dto.mem_id}'; 
-	//alert("[세션]\n mem_grade= "+sessionMem+"\n\n// 0:비회원, 1:회원, 2:농부,3:관리자  ");
-	//alert("[세션]\n mem_id= "+sessionId);
 	
 </script>
 <!-- *****************************실시간 Ajax 영역******************************** -->
@@ -54,51 +53,49 @@ var cPage=<%=currentpage.getCurrentpage()%>; //상품 페이징
 var listGubun = "<%=listGubun%>"; // action이면 기본, 
 
 $(document).ready(function(){
-   //alert(cPage+"cPage");
+	var sessionMem = '${sessionScope.dto.mem_grade}'; 
+	var sessionId = '${sessionScope.dto.mem_id}'; 
+   // alert(cPage+"cPage");
     liveTimeAuc();   // 실시간 남은시간 현황  1초마다(종료시간-현재시간) /실시간  최고가 현황 1초마다 /실시간 참여인원 현황 1초마다
     ajaxProduct();
+    ajaxZeroTime();
     
-      function liveTimeAuc(){    // 실시간 남은시간 현황  1초마다(종료시간-현재시간)
+      function liveTimeAuc(){     //실시간 Ajax 베스트들 
          $.ajax({
               type: "post",
               url: "../product.do?command=livetimeajax&currentpage=",
               /* data: "start="+start+"end="+end+"fund_status="+fund_status, */
               success: function(data){ // callback함수 --> 결과값 돌려받는다.
-            	  alert("success");
             	  $(".ajaxbestDiv").html(data); // 결과 출력
-          
               },
               error: function(){
-                // alert("오류");
-              }, 
-              complete: function(){
-                 alert("complete");
+                 //alert("오류");
               }
          });
-        setTimeout(liveTimeAuc,10000);
+        setTimeout(liveTimeAuc,30000);
       }
     
-      ajaxProduct();
+     
     //ajaxProductDiv
-      function ajaxProduct(){    // 실시간 남은시간 현황  1초마다(종료시간-현재시간)
+      function ajaxProduct(){     //실시간 Ajax 상품들
          $.ajax({
               type: "post",
               url: "../product.do?command=liveProductAjax&currentpage="+cPage,
               /* data: "start="+start+"end="+end+"fund_status="+fund_status, */
               success: function(data){ // callback함수 --> 결과값 돌려받는다.
-            	  alert("success");
-                 $(".ajaxProductDiv").html(data); // 결과 출력
+            	  $(".ajaxProductDiv").html(data); // 결과 출력
               },
               error: function(){
-                // alert("오류");
-              },
-              complete: function(){
-                 alert("complete");
+                 //alert("오류");
               }
          });
-        setTimeout(ajaxProduct,10000);
+        setTimeout(ajaxProduct,20000);
       }
+      
 });
+
+	
+
 </script>
 <!-- *****************************실시간 Ajax 영역******************************** -->
 <script type="text/javascript">
@@ -120,51 +117,59 @@ var zonetwoval ="dummy";
       $("#btnOne").click(function(){
          var zone = document.getElementById("zone").value;
          var btnUrl ="";
+         var page =1 ;//원래는 cPage 를 파람으로 줬지만 지금은 1로 
          
          if(zone=="서울"){
              zoneoneval = $("#zoneone option:selected").val();
-             btnUrl="../product.do?command=searchArea&currentpage="+cPage+"&paramtype="+zoneoneval;
+             btnUrl="../product.do?command=searchArea&currentpage="+page+"&paramtype="+zoneoneval;
          
          }else if(zone=="경기도"){
              zonetwoval = $("#zonetwo option:selected").val();
-             btnUrl="../product.do?command=searchArea&currentpage="+cPage+"&paramtype="+zonetwoval;
+             btnUrl="../product.do?command=searchArea&currentpage="+page+"&paramtype="+zonetwoval;
          }
-         alert("btnOne");
+        // alert("btnOne");
          ///////////////////////////
           $.ajax({
                type: "post",
                url: btnUrl,
                success: function(data){ // callback함수 --> 결과값 돌려받는다.
-             	  alert("success지역 검색 테스트");
              	  $(".ajaxProductDiv").html(data); // 결과 출력
+             	 
+             	  if($('.ajaxProductDiv').css('display') == 'none'){
+                     $('.ajaxProductDiv').show();
+                  }
                },
                error: function(){
-                 // alert("오류");
+                  //alert("오류");
                }
           });
-           setTimeout(ajaxProduct,10000);
+          setTimeout(ajaxProduct,20000);
           ///////////////////////////
       });
       
-     $("#btnTwo").click(function(){
+      $("#btnTwo").click(function(){
          var searchtype = document.getElementById("searchtype").value;
-         var btnUrl ="../product.do?command=searchtype&currentpage="+cPage+"&paramtype="+searchtype;
-       // alert("btnTwo");
+         var page =1 ;//원래는 cPage 를 파람으로 줬지만 지금은 1로 
+         var btnUrl ="../product.do?command=searchtype&currentpage="+page+"&paramtype="+searchtype;
+        //alert("btnTwo");
          /////////////////////
          $.ajax({
              type: "post",
              url: btnUrl,
              success: function(data){ // callback함수 --> 결과값 돌려받는다.
-           	  alert("success상품타입 검색 테스트");
            	  $(".ajaxProductDiv").html(data); // 결과 출력
+           	  
+           	  if($('.ajaxProductDiv').css('display') == 'none'){
+                 $('.ajaxProductDiv').show();
+              }
              },
              error: function(){
-            //    alert("오류");
+                //alert("오류");
              }
         }); 
    });
-   });
-   
+
+});  
 </script>
 <%@ include file="../home/header.jsp" %>
 <main>
@@ -259,37 +264,16 @@ var zonetwoval ="dummy";
       <hr/><br/>
       <!-- 일반경매상품 -->
       <h1 class="bestproduct">경매상품</h1>
-            <div class="ajaxProductDiv"><!-- 일반 경매상품 ajax영역 --> </div>   
+            <div class="ajaxProductDiv">
+            <!-- 일반 경매상품 ajax영역 --> 
+            </div>   
                 <!-- 일반경매상품 끝-->
-                 <div class="overlay"></div>
- 
-    </section>
-       <!-- 페이징 시작 -->            
-    <div class="pagination">
-<%
-   if(pagegroup > 1){
-%>   
-   <a href="../product.do?command=<%=listGubun%>&currentpage=<%=startseq-1 %>&paramtype=${sessionScope.paramtype }" class="prev str">Prev</a>
-<%
-   }
-   for(int pagenum = startseq; pagenum <= ((endseq < totalpage)?endseq:totalpage); pagenum++){
-%>
-   <a href="../product.do?command=<%=listGubun%>&currentpage=<%=pagenum %>&paramtype=${sessionScope.paramtype }" class="pager"><%=pagenum %></a>   
-<%
-   }
-   if(endseq < currentpage.getTotalpage()){
-%>
-   <a href="../product.do?command=<%=listGubun%>&currentpage=<%=endseq+1 %>&paramtype=${sessionScope.paramtype }" class="next str">Next</a>
-<%      
-   }
-///////../product.do?command=searchArea&currentpage=1&zoneval="+zoneoneval;
-%>
-</div>   
-  <!-- 페이징 끝 -->   
-</main>
+ <!-- 요기부터 테스트 해보쟈아~~-->
+ <!-- 여기서부터 페이징 -->
 <%@ include file="../home/footer.jsp" %>
 
 <script type="text/javascript">
+	
 	function message(){
 		
 		if(${empty sessionScope.dto.mem_grade}){

@@ -45,4 +45,19 @@ public interface ProductBiz {
 	
 	//sectiontwo 경매Best Rank추출 함수
 	public ProductDto curBestRank();
+	
+	//일반상품 시간계산
+		public List<ProductDto>normalListProduct(PagingDto dto);
+		
+	//best상품 시간계산
+		public List<ProductDto>BestListProduct();
+		
+	//품목별 시간계산
+		public List<ProductDto>searchTypeListProduct(PagingDto dto,ProductDto productdto);
+		
+	//지역별 시간계산
+		public List<ProductDto>searchAreaListProduct(PagingDto dto,ProductDto productdto);
+	
+	//경매시간 마감상품 update 3
+		public int updateAucStatus();
 }

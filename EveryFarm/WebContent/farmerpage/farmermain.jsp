@@ -33,20 +33,7 @@
 			<section style="height:1000px;"> 
 				<div id="left">
 				<%@ include file="../home/sidemenu_fm.jsp" %>
-				</div>
-				
-				<div id="right">
-					<h1>마이페이지</h1>
-					<div class="mypage-main">프로필
-						<input type="hidden" value="">
-						<span></span>
-						<span></span>
-						<span></span>
-					</div>
-				</div>
-				
-				
-				
+			
 				
 			</section>
 			

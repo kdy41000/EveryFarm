@@ -40,7 +40,7 @@ function Farm_selected(){
             //alert("오류");
          }
     });
-    //setTimeout(Farm_selected,3000);
+    setTimeout(Farm_selected,20000);
  }
 });
 </script>
@@ -110,9 +110,9 @@ function Farm_selected(){
 		var areaCnt = 0 ; // 땅번호
 	
 	function sendVal(val){   //주말농장 위치 전달 받는 함수(val==땅번호)
-		alert("요깅"+val);
+		
 		selectArea[areaCnt] = val;
-		alert(selectArea[0]+"::셀렉트에리아"+selectArea.length);
+		//alert(selectArea[0]+"::셀렉트에리아"+selectArea.length);
 		areaCnt +=1;
  	    $('.areaimg').eq(val).attr('src','../resources/images/farm/locationcheck.png');
  	   $('.ground').eq(val).css('cursor','not-allowed');
@@ -122,12 +122,12 @@ function Farm_selected(){
 	
 	function btn(){
 		var totalAreaCnt = document.getElementById("area").value;
-		alert(totalAreaCnt+"::토탈에리아 카운트다");
+		//alert(totalAreaCnt+"::토탈에리아 카운트다");
 		if(totalAreaCnt==0){
 			alert("선택한 농장이 없습니다.");
 			self.close();
 		}else{
-			alert(selectArea+"::셀렉트에리아다");
+			//alert(selectArea+"::셀렉트에리아다");
 		//alert(selectedArea+"::선택된 땅의 수");
 		$("#hiddentag",opener.document).css("display","block");
 		opener.document.getElementById("receiveFromPopup").innerHTML = totalAreaCnt;

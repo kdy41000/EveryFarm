@@ -14,14 +14,11 @@ body{
   
   
   /* Center like a man */
-  position:absolute;
-  top:50%;
+ position: relative;
+    top: 20%;
     left: 70%;
 
-  margin-left:-150px;
-      margin-top: -300px;
-  
-  border-radius:5px;
+ 
   padding:5px;
 }
 h2{

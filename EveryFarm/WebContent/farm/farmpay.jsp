@@ -70,9 +70,16 @@
 }
  
  </script>
-
+ <!-- 결제후 뒤로가기 금지 시키기 -->
+<script type="text/javascript">
+ window.history.forward();
+ function noBack(){window.history.forward();}
+</script>
+ <!-- 결제후 뒤로가기 금지 시키기 -->
 </head>
-<body>
+ <!-- 결제후 뒤로가기 금지 시키기 -->
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+ <!-- 결제후 뒤로가기 금지 시키기 -->
 <%@ include file="../home/header.jsp" %>
 <section id="orderBody">
 	<div id="titleArea">

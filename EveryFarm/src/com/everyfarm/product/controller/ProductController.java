@@ -67,6 +67,27 @@ public class ProductController extends HttpServlet {
          session.setAttribute("bestlist", bestlist);
          session.setAttribute("listGubun", "auction");/////////////////
          session.setAttribute("paramtype", null);
+         
+         
+     	List<ProductDto>normalListTime = new ArrayList<ProductDto>();
+
+       	normalListTime = biz.normalListProduct(pagingdto);
+         	
+         	//normalListTime.add(normalListDto);
+         	
+         
+         System.out.println(normalListTime+"::리스트로 뽑은 시간들(일반상품)");
+         session.setAttribute("normalListTime", normalListTime);
+         
+         //남은시간 종료되면 status(2)->(3)으로 변경
+         int statusUpRes = biz.updateAucStatus();
+         	
+         //
+         if(statusUpRes>0) {
+        	 System.out.println("statusUpRes변경됨 "+statusUpRes);
+         }else {
+        	 System.out.println("statusUpRes변경 실패");
+         }
          response.sendRedirect("auction/auctionlist.jsp");
          
       }else if(command.equals("auctiondetail")) {
@@ -192,7 +213,16 @@ public class ProductController extends HttpServlet {
          //System.out.println(bestlist.get(2).getStock_image()+"********");
          HttpSession session = request.getSession();
          session.setAttribute("LiveBestlist", bestlist);
+       
+         
+     	List<ProductDto>bestListTime = new ArrayList<ProductDto>();
+
+       	bestListTime = biz.BestListProduct();  //시간계산
+         
+         session.setAttribute("BestListTime", bestListTime);
+         
          response.sendRedirect("auction/ajaxBestList.jsp");
+         
     //*************************경매리스트 best 에이작스********************************  
        
     //*************************경매리스트 일반 에이작스********************************        
@@ -210,25 +240,31 @@ public class ProductController extends HttpServlet {
          List<ProductDto>productlist = new ArrayList<ProductDto>(); //일반 경매상품 리스트
          
          productlist = biz.productlist(pagingdto);    //일반경매리스트
-         //테스트중
-         String liveAucTime = "";
-         for(int i = 0; i < productlist.size(); i++) {
-        	 liveAucTime += productlist.get(i).getAuc_no()+",";
-         }
-         /////////////////////////////
-         System.out.println(liveAucTime+"::실시간 남은시간 들어와야된다(배열객체)");
-         //System.out.println(bestlist.get(2).getStock_image()+"********");
+       
          HttpSession session = request.getSession();
+         
+         //세션초기화작업
+         session.removeAttribute("pagingdto");
+         session.removeAttribute("LiveProductlist");
+         session.removeAttribute("listGubun");
+         session.removeAttribute("paramtype");
+         ///
+         
          session.setAttribute("pagingdto", pagingdto);
          session.setAttribute("LiveProductlist", productlist);
          session.setAttribute("listGubun", "auction");/////////////////
          session.setAttribute("paramtype", null);
-         response.sendRedirect("auction/ajaxProducList.jsp");
-   //*************************경매리스트 일반 에이작스********************************    
-/////////////////////////////////////////작업중
-       //*************************경매리스트 일반 지역검색 에이작스********************************   
+         
+         if(request.getParameter("chk") != null) {
+       	  
+	 		  response.sendRedirect("auction/ajaxPagingList.jsp"); 
+	   	  }else {
+	   		
+	   		  response.sendRedirect("auction/ajaxProducList.jsp"); 
+	   	  }
+//*************************경매리스트 일반 지역검색 에이작스********************************   
       }else if(command.equals("searchArea")) {         //지역별로 Search
-    	  System.out.println("지역으로 와야할것이야 아작스양아아앙*******************");
+    	 
           String paramtype = request.getParameter("paramtype");   //지역 값
           System.out.println(paramtype+"::입력된 지역명*******************");
           
@@ -265,8 +301,24 @@ public class ProductController extends HttpServlet {
           session.setAttribute("pagingdto", pagingdto);
           session.setAttribute("LiveProductlist", searchlist);
           session.setAttribute("paramtype", paramtype);
-          session.setAttribute("listGubun", "searchArea");//////////////
-          response.sendRedirect("auction/ajaxProducList.jsp");
+          session.setAttribute("listGubun", "searchArea");/////////////
+          
+          /////////////////////////////////////////////////////
+          List<ProductDto>searchAreaListTime = new ArrayList<ProductDto>();
+
+          searchAreaListTime = biz.searchAreaListProduct(pagingdto,dto);  //시간계산
+         
+         System.out.println(searchAreaListTime+"::리스트로 뽑은 시간들(일반상품)");
+         session.setAttribute("normalListTime", searchAreaListTime);
+         /////////////////////////////////////////////////////////////
+          
+          if(request.getParameter("chk") != null) {
+        	 
+	 		  response.sendRedirect("auction/ajaxPagingList.jsp"); 
+    	  }else {
+    		
+    		  response.sendRedirect("auction/ajaxProducList.jsp"); 
+    	  }
           
 //*************************경매리스트 일반 상품타입검색 에이작스********************************  
        }else if(command.equals("searchtype")) {   //품목별로 search
@@ -301,9 +353,23 @@ public class ProductController extends HttpServlet {
           session.setAttribute("LiveProductlist", searchtypelist);
           session.setAttribute("paramtype", paramtype);
           session.setAttribute("listGubun", "searchtype");////////////
-          response.sendRedirect("auction/ajaxProducList.jsp");
+         
+          List<ProductDto>searchTypeListTime = new ArrayList<ProductDto>();
+
+          searchTypeListTime = biz.searchTypeListProduct(pagingdto,dto);  //시간계산
+         
+         System.out.println(searchTypeListTime+"::리스트로 뽑은 시간들(일반상품)");
+         session.setAttribute("normalListTime", searchTypeListTime);
           
-/////////////////////////////////////////////////////작업중
+          
+          if(request.getParameter("chk") != null) {
+        	
+	 		  response.sendRedirect("auction/ajaxPagingList.jsp"); 
+    	  }else {
+    		 
+    		  response.sendRedirect("auction/ajaxProducList.jsp"); 
+    	  }
+         
    //*************************경매detail 에이작스********************************        
       }else if(command.equals("liveTimeAuc")){   //auctiondetail 실시간 남은시간 에이작스 영역
     	 int auc_no = Integer.parseInt(request.getParameter("auc_no"));
@@ -362,9 +428,9 @@ public class ProductController extends HttpServlet {
     	  int res = biz.sendletter(letterdto);
     	  
     	  if(res > 0) {
-    		 jsResponse("쪽지가 전송되었습니다.","auction/auctiondetail.jsp",response);
+    		 jsResponse("쪽지가 전송되었습니다.","auction/messageclose.jsp",response);
     	  }else{
-    		 jsResponse("쪽지전송을 실패하였습니다.","auction/auctiondetail.jsp",response);
+    		 jsResponse("쪽지전송을 실패하였습니다.","auction/message.jsp",response);
     	  }
     //*************************경매detail 에이작스********************************	  
     //*************************sectiontwo BestRank 에이작스**********************
@@ -377,6 +443,7 @@ public class ProductController extends HttpServlet {
     	  HttpSession session = request.getSession();
     	  session.setAttribute("curBestRank", productdto);
     	  response.sendRedirect("home/sectionajax.jsp");
+    	  
       }
         
       doGet(request,response);

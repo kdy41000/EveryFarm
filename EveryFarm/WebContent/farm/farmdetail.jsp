@@ -112,11 +112,11 @@
 		
 	<div style="margin: -2.1% 0% 0% 40%;">	
 		<p><%=dto.getWfarm_content().split("/")[0] %></p>
-		<img alt="img" src="../<%=dto.getWfarm_image().split("/")[1]%>" style="width:48%; height:45%;"/>
+		<img alt="img" src="../<%=dto.getWfarm_image().split("/")[1]%>" style="width:50%; height:350px;"/>
 		<p><%=dto.getWfarm_content().split("/")[1] %></p>
-		<img alt="img" src="../<%=dto.getWfarm_image().split("/")[2]%>" style="width:48%; height:45%;"/>
+		<img alt="img" src="../<%=dto.getWfarm_image().split("/")[2]%>" style="width:50%; height:350px;"/>
 		<p><%=dto.getWfarm_content().split("/")[2] %></p>
-		<img alt="img" src="../<%=dto.getWfarm_image().split("/")[3]%>" style="width:48%; height:45%;"/>
+		<img alt="img" src="../<%=dto.getWfarm_image().split("/")[3]%>" style="width:50%; height:350px;"/>
 		<p><%=dto.getWfarm_content().split("/")[3] %></p>
 	</div>
 	<br/><br/>
@@ -186,7 +186,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-geocoder.addressSearch('<%=dto.getWfarm_addr() %>(<%=dto.getWfarm_zoneCode()%>)', function(result, status) {
+geocoder.addressSearch('<%=dto.getWfarm_addr() %>', function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {

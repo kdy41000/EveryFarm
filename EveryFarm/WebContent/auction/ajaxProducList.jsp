@@ -7,7 +7,8 @@
 <% request.setCharacterEncoding("UTF-8");%>
 <% response.setContentType("text/html; charset=UTF-8");%>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +31,7 @@
 	int totalpage = currentpage.getTotalpage();
 
 	List<ProductDto>productlist = (List<ProductDto>)session.getAttribute("LiveProductlist");
-	
+	List<ProductDto>normalListTime = (List<ProductDto>)session.getAttribute("normalListTime");
 	//리스트용 구분값
 	String listGubun =(String)session.getAttribute("listGubun");
 	
@@ -38,12 +39,12 @@
 %>
 <script type="text/javascript">
 $(function(){
-var cPage =<%=currentpage.getCurrentpage()%>; //상품 페이징 	
-alert("과일페이징cPage"+cPage);
+	var cPage =<%=currentpage.getCurrentpage()%>; //상품 페이징 	
+	//alert("과일페이징cPage"+cPage);
 });
 </script>
 <body>
- 		 <div class="fixed-container">
+ 		 <div class="fixed-container" id="showbox" >
             <div class="shop-list">
             
 <%
@@ -78,7 +79,7 @@ alert("과일페이징cPage"+cPage);
                         	<tr/>
                         </table>
                         	<img alt="img" src="../resources/images/auction/watch.png" style="width:20px; height:20px;">
-                        	<div style="margin: -130px 0px 0px 40px;">21시간26분</div>
+                        	<div style="margin: -130px 0px 0px 40px; color:red; font-weight:bold;"><%=normalListTime.get(i).getDay() %>일<%=normalListTime.get(i).getHours() %>시간<%=normalListTime.get(i).getMinutes() %>분</div>
                         </div>
                     </div>
 
@@ -88,28 +89,54 @@ alert("과일페이징cPage"+cPage);
 	}
 %>                
                 </div>
-                </div>
-<!-- 여기서부터 페이징 -->
+                </div>  
+                <div class="ajaxProductDivPage">
+            		<!-- 일반 경매상품 ajax영역 --> 
+            	</div>  
+                <!-- 여기서부터 페이징 -->
                 <div class="overlay"></div>
- <div class="pagination"> 에이작스 내의 페이징
+ <div class="pagination">
 <%
    if(pagegroup > 1){
 %>   
-   <a href="../product.do?command=<%=listGubun%>&currentpage=<%=startseq-1 %>&paramtype=${sessionScope.paramtype }" class="prev str">Prev</a>
+   <a onclick="nowStr('<%=listGubun%>',<%=startseq-1 %>,'${sessionScope.paramtype }')" href="#" class="prev str">Prev</a>
 <%
    }
    for(int pagenum = startseq; pagenum <= ((endseq < totalpage)?endseq:totalpage); pagenum++){
 %>
-   <a  href="../product.do?command=<%=listGubun%>&currentpage=<%=pagenum %>&paramtype=${sessionScope.paramtype }" class="pager"><%=pagenum %></a>   
+   <a onclick="nowStr('<%=listGubun%>',<%=pagenum %>,'${sessionScope.paramtype }')" href="#"  class="pager"><%=pagenum %></a>   
 <%
    }
    if(endseq < currentpage.getTotalpage()){
 %>
-   <a href="../product.do?command=<%=listGubun%>&currentpage=<%=endseq+1 %>&paramtype=${sessionScope.paramtype }" class="next str">Next</a>
-<%      
+   <a onclick="nowStr('<%=listGubun%>',<%=endseq+1 %>,'${sessionScope.paramtype }')" href="#" class="next str">Next</a>
+<%     
    }
 ///////../product.do?command=searchArea&currentpage=1&zoneval="+zoneoneval;
 %>
+<script type="text/javascript">
+	//listGubun은 기본 : auction , 지역 : searchArea, 품목 : searchtype
+///////////////////페이징 눌렀을떄 
+	 //now 페이징 클릭 
+   function nowStr(command,currentpage,paramtype){
+	// alert("command :"+command+ "\n currentpage : "+currentpage+"\n paramtype : "+paramtype);
+	 //chk값에 page넣어주깅
+	 	$.ajax({
+	        type: "post",
+	        url: "../product.do?command="+command+"&currentpage="+currentpage+"&paramtype="+paramtype+"&chk=page",
+	        success: function(data){ // callback함수 --> 결과값 돌려받는다.
+	      	  $(".ajaxProductDivPage").html(data); // 결과 출력
+	      	  
+	      	  $('.ajaxProductDivPage').show();
+	      	  $('#showbox').hide(); // 원래꺼 숨기기 
+	        },
+	        error: function(){
+	          // alert("오류");
+	        }
+	   });
+	}
+    ////////////////////
+</script>  
 </div>   
      </section>
 <!-- 여기서부터 페이징 -->

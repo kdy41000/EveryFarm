@@ -41,6 +41,31 @@
     
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
    <script type="text/javascript" src="../resources/js/home/header.js"></script>
+   <!-- 쪽지 안읽음 갯수 추출 에이작스 영역 -->
+   <script type="text/javascript">
+   $(function(){
+	   
+	  ajaxLetterCnt();
+	   
+	 function ajaxLetterCnt(){  /* 쪽지 안읽은 거 개수 출력 에이작스 영역 */
+	  $.ajax({
+		 type: "post",
+		 url: "../home.do?command=liveTimeLetters&mem_id=${sessionScope.dto.mem_id }",
+			
+		 success: function(data){
+			$(".ajaxCount").html(data);
+			
+		 },
+		 error: function(){
+			 alert("오류");
+		 }
+	  }); 
+	  	setTimeout(ajaxLetterCnt,20000);
+	 }
+
+   });
+   </script>
+   <!-- 쪽지 안읽음 갯수 추출 에이작스 영역 -->
 </head>
 <body>
 
@@ -61,7 +86,6 @@
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction&currentpage=1';">경매상품</a></li>
 
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../fund.do?command=fundlist&page=1'">펀드상품</a></li>
-		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction';">경매상품</a></li>
 
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farm.do?command=farmmain';">주말농장</a></li>        
 
@@ -69,7 +93,7 @@
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>
 				           <li><a href="#">자유게시판</a></li>
-				           <li><a href="#">이벤트</a></li>
+				           <li><a href="#" onclick="location.href='../eventboard.do?command=eventboardlist&currentpage=1';">이벤트</a></li>
 				         </ul>
 			        </li>
 			        <li class="nav-item active" id="menu-hover"><a href="" class="nav-link">고객센터</a>
@@ -99,7 +123,7 @@
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>
 				           <li><a href="#">자유게시판</a></li>
-				           <li><a href="#">이벤트</a></li>
+				           <li><a href="#" onclick="location.href='../eventboard.do?command=eventboardlist&currentpage=1';">이벤트</a></li>
 				         </ul>
 			        </li>
 			        <li class="nav-item active" id="menu-hover"><a href="" class="nav-link">고객센터</a>
@@ -112,7 +136,12 @@
 			        <a href="#"><img src="../resources/images/home/header/logout.png" onclick="location.href='../login.do?command=logout';"></a>
 				    <!-- 로그아웃 -->
 				    <li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../memberMyPage.do?command=mypage';">마이페이지</a></li>
-				    <img src="../resources/images/home/header/member.png" alt="" style="border-radius:50px; width:40px; height:40px; margin: 1% 0% 0% 0%;"/>      	
+				    <img src="../resources/images/home/header/member.png" alt="" style="border-radius:50px; width:40px; height:40px; margin: 1% 0% 0% -1%;"/>      	
+					
+					<!-- 쪽지알람 -->
+					<img class="alramtoggle" src="../resources/images/home/header/alram.png" alt="" style="width:30px; height:30px; margin-top:1.5%; margin-left:1%; cursor:pointer;" onclick="location.href='../letters.do?command=letters&mem_id=${sessionScope.dto.mem_id}';"/>&nbsp;
+					<span style="color:red; font-weight:bold; margin-top:1.8%;">[<span class="ajaxCount"></span>]</span>
+					<!-- 쪽지알람 -->
 				</ul>
 		      </div>
 		   </div>
@@ -132,7 +161,7 @@
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>
 				           <li><a href="#">자유게시판</a></li>
-				           <li><a href="#">이벤트</a></li>
+				           <li><a href="#" onclick="location.href='../eventboard.do?command=eventboardlist&currentpage=1';">이벤트</a></li>
 				         </ul>
 			        </li>
 			        <li class="nav-item active" id="menu-hover"><a href="" class="nav-link">고객센터</a>
@@ -147,9 +176,12 @@
 					<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../memberMyPage.do?command=mypage';">마이페이지</a></li>
 					<img src="../resources/images/home/header/farmer.png" alt="" style="border-radius:50px; width:40px; height:40px; margin: 1% 0% 0% 0%;"/>
 				   		<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farmerdetail.do?command=goFarmerMyPage';" style="margin: -1% 0% 0% 0%;">농부관리 페이지</a></li>
-				     		
-				     	   
+				     <!-- 쪽지알람 -->
 				 
+					<img class="alramtoggle" src="../resources/images/home/header/alram.png" alt="" style="width:30px; height:30px; margin-top:1.5%; cursor:pointer;" onclick="location.href='../letters.do?command=letters&mem_id=${sessionScope.dto.mem_id}';"/>&nbsp;
+					<span style="color:red; font-weight:bold; margin-top:1.5%;">[<span class="ajaxCount"></span>]</span>
+				
+					<!-- 쪽지알람 -->
 				</ul>
 		      </div>
 		   </div>
@@ -170,7 +202,7 @@
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>
 				           <li><a href="#">자유게시판</a></li>
-				           <li><a href="#">이벤트</a></li>
+				           <li><a href="#" onclick="location.href='../eventboard.do?command=eventboardlist&currentpage=1';">이벤트</a></li>
 				         </ul>
 			        </li>
 			        <li class="nav-item active" id="menu-hover"><a href="" class="nav-link">고객센터</a>

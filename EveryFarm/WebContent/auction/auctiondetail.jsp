@@ -37,7 +37,7 @@
 %>
 <script type="text/javascript">
 $(function(){
-   alert(<%=dto.getAuc_no()%>);
+ 
 /* **************Ajax : 실시간 경매 현황*************** */         
    
    liveTimeAuc(); // 실시간 남은시간 - 1초마다

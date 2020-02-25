@@ -40,7 +40,7 @@
 </script>
 <div class="chat" style="border: 1px solid black; margin-top: 2%;">
 <div class="new">
-    		<p style="color:white; font-weight:bold; font-size: 20px; font-family: inherit;">EveryFarm고객센터</p>
+    		<p style="color:white; font-weight:bold; font-size: 20px; font-family: inherit;">EveryTalk</p>
   		</div>
 	  <section class="messages" style="width:100%; background: rgb(33, 13, 5);">
 			<body>
@@ -48,6 +48,7 @@
 			        <textarea id="messageWindow" rows="15" cols="60" readonly="true" style="resize:none; width: 100%; height: 90%; border-radius: 10px; border: 2px solid #b35e5e; font-family:sans-serif;"></textarea>
 			        <br/>
 			        <img alt="img" src="../resources/images/chatting/lefticon.png" style="width:40px; height:40px;">
+			        <input type="hidden" id="id" value="${sessionScope.dto.mem_id }"/>
 			        <input id="inputMessage" type="text" style="width: 250px;
     					height: 27px;
    						 border: 1px solid #FF9800;
@@ -62,6 +63,7 @@
 </body>
   <script type="text/javascript">
   $(function(){
+	  
 	 $('#inputMessage').keypress(function(){  //엔터키 눌러서 send
 		 if (window.event.keyCode == 13) {
 
@@ -71,8 +73,10 @@
   });
   /*******************************************/
         var textarea = document.getElementById("messageWindow");
-        var webSocket = new WebSocket('ws://192.168.1.249:8787/WebSocketTest/broadcasting');  //localhost를 상대방ip주소로 변경
+  		//ipv4 주소 변경해야함
+        var webSocket = new WebSocket('ws://192.168.50.246:8787/EveryFarm/broadcasting');  //localhost를 상대방ip주소로 변경
         var inputMessage = document.getElementById('inputMessage');
+        var id = document.getElementById("id").value;
        
     webSocket.onerror = function(event) {
       onError(event)
@@ -83,12 +87,13 @@
     };
 
     webSocket.onmessage = function(event) {   //상대가 보낸 메세지(파라미터)
-    	
+    
+  	  document.getElementById("messageWindow").scrollTop = document.getElementById("messageWindow").scrollHeight;	
       onMessage(event)          //onMessage함수실행(파라미터 전달)
     };
 
     function onMessage(event) {
-        textarea.value += "상대:" + event.data + "\n";
+        textarea.value += event.data + "\n";
     }
 
     function onOpen(event) {
@@ -107,8 +112,14 @@
     		return false;
     	}else{
         	textarea.value += "${sessionScope.dto.mem_id}(${sessionScope.dto.mem_name}) : " + inputMessage.value + "\n";
-        	webSocket.send(inputMessage.value);
+        	webSocket.send(id + " : " + inputMessage.value);
         	inputMessage.value = "";   //보낸 후 input태그 공백으로 돌리기
+ 
+        	//스크롤바 가장 하단으로 내리기
+      	    document.getElementById("messageWindow").scrollTop = document.getElementById("messageWindow").scrollHeight;
+
+
+
     	}
     }
   </script>

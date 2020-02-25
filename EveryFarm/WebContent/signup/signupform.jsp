@@ -168,11 +168,11 @@ function openDaumZipAddress() {   //클릭시 실행되는 함수
 
 <body>
 <%@ include file="../home/header.jsp" %>
-<section style="      height: 1100px;   background: #ececec;">
+<section style="      height: 1300px;   background: #ececec;">
 <img alt="img" src="../resources/images/signup/signupmain.png" style="width: 11%;
-    height: 23%;
-    margin: 0% 0% 0% 45%; position:absolute;">
-<div id="loginform" style="margin-left: -40%; margin-top: -6%; border-radius:10px; height: 100%;">
+    height: 17%;
+    margin: 1% 0% 0% 45%; position:relative;">
+<div id="loginform" style="margin-left: -40%; margin-top: -16%; border-radius:10px; height: 65%; top: 25%;">
   <h2 style="margin-left:70px;">Signup</h2>
   <form action="../signup.do" method="post" style="margin-left: 13%;">
   <input type="hidden" name="command" value="signupres"/>

@@ -55,7 +55,7 @@
 			            		</div>
     						</div>
     						<div class="col-md-3">
-    							<div class="featured-menus ftco-animate"><a href="">
+    							<div class="featured-menus ftco-animate"><a href="#" onclick="location.href='../farmbook.do?command=gofarmbook';">
 			              <div class="menu-img img" style="background-image: url(../resources/images/home/section/book.png);"></div>
 			              <div class="text text-center">
 		                  <h3>농작물 도감</h3>
@@ -63,7 +63,7 @@
 			            </div>
     						</div>
     						<div class="col-md-3">
-    							<div class="featured-menus ftco-animate"><a href="">
+    							<div class="featured-menus ftco-animate"><a href="#" onclick="location.href='../chat.do?command=gofaq';">
 			              <div class="menu-img img" style="background-image: url(../resources/images/home/section/cs.png);"></div>
 			              <div class="text text-center">
 		                  <h3>고객센터</h3>
@@ -84,8 +84,6 @@
     cursor:pointer;" onclick="chatting();"/>
  <!-- 채팅 구역 -->
     </section>
-
-
 
    <%@ include file="footer.jsp" %> 
 

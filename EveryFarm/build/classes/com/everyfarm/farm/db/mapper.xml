@@ -42,7 +42,7 @@
 	</select>
 	<insert id="insertletter" parameterType="farmDto">
 		INSERT INTO LETTERS
-		VALUES(LETTERSSEQ.NEXTVAL,#{mem_id},#{letter_sender},#{letter_title},#{letter_content},sysdate)
+		VALUES(LETTERSSEQ.NEXTVAL,#{mem_id},#{letter_sender},#{letter_title},#{letter_content},sysdate,0)
 	</insert>
 	<select id="selectTotalSize" resultType="int" parameterType="Integer">
 		SELECT wfarm_totalArea FROM WEEKENDFARM

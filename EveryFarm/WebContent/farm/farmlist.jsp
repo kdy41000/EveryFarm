@@ -44,7 +44,7 @@
 %>
 <script type="text/javascript">
 
-alert("farmlist:"+<%=cnt%>);
+
 	$(function(){
 		$("#zone").change(function(){
 		var zone = document.getElementById("zone").value;
@@ -164,7 +164,7 @@ alert("farmlist:"+<%=cnt%>);
 	for(int i = 0; i < farmlist.size(); i++){
 %>
 	<!-- 썸네일이미지  -->
-               <article class="shop-list__item currently-dont-selling">  
+               <article class="shop-list__item currently-dont-selling" style="height: 495px;">  
                     <img src="../<%=farmlist.get(i).getWfarm_image().split("/")[0] %>" alt="product" style="width:350px; height:250px; cursor:pointer; margin-left: 4%; margin-top: 3%;"    
                     	onclick="location.href='../farm.do?command=farmdetail&wfarm_key=<%=farmlist.get(i).getWfarm_key()%>';">
                     
@@ -185,7 +185,7 @@ alert("farmlist:"+<%=cnt%>);
                     </div>
                     <div class="item-price-block">
                         <div class="item-price">
-                        <table border="1">
+                        <table border="1" style="width: 150%; border-radius: 10px;">
                         	<tr>
                         		<td>총 평수:[<%=farmlist.get(i).getWfarm_totalArea() %>]</td>
                         		<td>평당가격:[<%=farmlist.get(i).getWfarm_price() %>원]</td>
@@ -226,6 +226,7 @@ alert("farmlist:"+<%=cnt%>);
 <%		
 	}
 %>
+</div>
 </main>
 <%@ include file="../home/footer.jsp" %>
 </body>

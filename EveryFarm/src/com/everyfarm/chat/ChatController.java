@@ -29,6 +29,8 @@ public class ChatController extends HttpServlet {
 		
 		if(command.equals("gochat")) {
 			response.sendRedirect("chatting/chat.jsp");
+		}else if(command.equals("gofaq")) {
+			response.sendRedirect("chatting/gofaq.jsp");
 		}
 	}
 

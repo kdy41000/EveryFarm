@@ -15,4 +15,5 @@ public interface LettersDao {
 	public int deleteLetters(String[] letter_id);
 	//쪽지 상세
 	public LettersDto LettersDetail(int letter_id);
+
 }

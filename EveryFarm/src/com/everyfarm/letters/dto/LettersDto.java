@@ -9,13 +9,14 @@ public class LettersDto {
 	private String letter_title;
 	private String letter_content;
 	private Date letter_regdate;
+	private int letter_status;
 	
 	public LettersDto() {
 		
 	}
 
 	public LettersDto(int letter_id, String mem_id, String letter_sender, String letter_title, String letter_content,
-			Date letter_regdate) {
+			Date letter_regdate, int letter_status) {
 		super();
 		this.letter_id = letter_id;
 		this.mem_id = mem_id;
@@ -23,6 +24,7 @@ public class LettersDto {
 		this.letter_title = letter_title;
 		this.letter_content = letter_content;
 		this.letter_regdate = letter_regdate;
+		this.letter_status = letter_status;
 	}
 
 	public int getLetter_id() {
@@ -72,5 +74,15 @@ public class LettersDto {
 	public void setLetter_regdate(Date letter_regdate) {
 		this.letter_regdate = letter_regdate;
 	}
+
+	public int getLetter_status() {
+		return letter_status;
+	}
+
+	public void setLetter_status(int letter_status) {
+		this.letter_status = letter_status;
+	}
+
+	
 	
 }

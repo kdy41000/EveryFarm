@@ -22,8 +22,8 @@ $(function(){
 <body style="background:#f3f2f2;">
 <div style="text-align: center; margin-top:20%;">
 	<img alt="img" src="../resources/images/chatting/gochaticonTwo.png" style="width:150px; height:140px;"/>
-	<br/><h2><b style="color:brown;">EveryFarm</b> 실시간 고객센터</h2><br/>
-	<input type="button" value="1:1채팅 문의하기" id="gobtn" onclick="location.href='../chat.do?command=gochat';" style="background:black; width:300px; height:50px; color:white; font-weight:bold; border-radius:20px;"/>
+	<br/><h2><b style="color:brown;">EveryFarm</b> 실시간 Talk</h2><br/>
+	<input type="button" value="입장하기" id="gobtn" onclick="location.href='../chat.do?command=gochat';" style="background:black; width:300px; height:50px; color:white; font-weight:bold; border-radius:20px;"/>
 </div>
 </body>
 </html>

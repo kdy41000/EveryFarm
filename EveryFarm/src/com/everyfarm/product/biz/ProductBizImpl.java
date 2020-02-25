@@ -101,5 +101,48 @@ public class ProductBizImpl implements ProductBiz{
 		return dao.curBestRank();
 	}
 
+	@Override
+	public List<ProductDto> normalListProduct(PagingDto dto) {
+		int currentpage = dto.getCurrentpage();   //초기값 1
+		int column = dto.getColumn();   //16
+		
+		int startseq = column * (currentpage - 1) + 1;  //1
+		int endseq = column * currentpage;   //16
+		
+		return dao.normalListProduct(startseq,endseq);
+	}
+
+	@Override
+	public List<ProductDto> BestListProduct() {
+	
+		return dao.BestListProduct();
+	}
+
+	@Override
+	public List<ProductDto> searchTypeListProduct(PagingDto dto, ProductDto productdto) {
+		int currentpage = dto.getCurrentpage();   //초기값 1
+		int column = dto.getColumn();   //16
+		
+		int startseq = column * (currentpage - 1) + 1;  //1
+		int endseq = column * currentpage;   //16
+		return dao.searchTypeListProduct(startseq,endseq,productdto);
+	}
+
+	@Override
+	public List<ProductDto> searchAreaListProduct(PagingDto dto, ProductDto productdto) {
+		int currentpage = dto.getCurrentpage();   //초기값 1
+		int column = dto.getColumn();   //16
+		
+		int startseq = column * (currentpage - 1) + 1;  //1
+		int endseq = column * currentpage;   //16
+		return dao.searchAreaListProduct(startseq,endseq,productdto);
+	}
+
+	@Override
+	public int updateAucStatus() {
+		
+		return dao.updateAucStatus();
+	}
+
 	
 }

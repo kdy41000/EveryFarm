@@ -20,7 +20,7 @@ CREATE TABLE WEEKENDFARM(
 );
 
 INSERT INTO WEEKENDFARM
-VALUES(WEEKENDFARMSEQ.NEXTVAL,'FARMER','에이작스팜','01234','경기도 용인시 동천동 232',25,1000,'2',SYSDATE,
+VALUES(WEEKENDFARMSEQ.NEXTVAL,'FARMERKANG','에이작스팜','01234','경기도 용인시 가평군 23',25,1000,'2',SYSDATE,
 'resources\images\farmimage\farm01-02.png/
 resources\images\farmimage\farm01-01.png/
 resources\images\farmimage\farm01-02.png/

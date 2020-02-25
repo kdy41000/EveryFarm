@@ -11,7 +11,7 @@
  	<select id="bestauctionlist" resultType="productDto">
  		SELECT * FROM
 		(SELECT * FROM AUCTION INNER JOIN STOCK
-		ON AUCTION.stock_no = STOCK.stock_no
+		ON AUCTION.stock_no = STOCK.stock_no WHERE auc_status=2
 		ORDER BY auc_join DESC)
 		WHERE ROWNUM <![CDATA[ <= ]]> 4
  	</select>
@@ -69,7 +69,7 @@
 	</select>
 	<insert id="insertletter" parameterType="productDto">
 		INSERT INTO LETTERS
-		VALUES(LETTERSSEQ.NEXTVAL,#{mem_id},#{letter_sender},#{letter_title},#{letter_content},sysdate)
+		VALUES(LETTERSSEQ.NEXTVAL,#{mem_id},#{letter_sender},#{letter_title},#{letter_content},sysdate,0)
 	</insert>
 	<select id="curBestRank" resultType="productDto">
 		SELECT * 
@@ -78,4 +78,69 @@
 			)
 		WHERE ROWNUM = 1
 	</select>
+	<select id="normalListProduct" resultType="productDto" parameterType="pagingDto">
+		SELECT * FROM		
+	(SELECT A.*,ROWNUM AS RNUM
+	FROM (SELECT 
+       	TRUNC(EndDate - StartDate) as "day", 
+         TRUNC(((EndDate - StartDate) - TRUNC(EndDate - StartDate)) * 24) as "hours", 
+         FLOOR(((((EndDate - StartDate) -TRUNC(EndDate - StartDate)) * 24) 
+         - TRUNC(((EndDate - StartDate)-TRUNC(EndDate - StartDate)) * 24)) * 60) as "minutes" 
+  FROM (SELECT sysdate as StartDate,
+        TO_DATE(auc_endDate,'rrrr-mm-dd hh24:mi:ss') as EndDate 
+        FROM AUCTION WHERE auc_status=2 ORDER BY auc_regDate DESC)
+        )A
+        )
+WHERE RNUM BETWEEN #{startseq } AND #{endseq }
+	</select>
+	<select id="BestListProduct" resultType="productDto">
+		SELECT *
+	FROM (SELECT 
+       	TRUNC(EndDate - StartDate) as "day", 
+         TRUNC(((EndDate - StartDate) - TRUNC(EndDate - StartDate)) * 24) as "hours", 
+         FLOOR(((((EndDate - StartDate) -TRUNC(EndDate - StartDate)) * 24) 
+         - TRUNC(((EndDate - StartDate)-TRUNC(EndDate - StartDate)) * 24)) * 60) as "minutes" 
+  FROM (SELECT sysdate as StartDate,
+        TO_DATE(auc_endDate,'rrrr-mm-dd hh24:mi:ss') as EndDate 
+        FROM AUCTION WHERE auc_status=2 ORDER BY auc_join DESC)
+        )
+WHERE ROWNUM <![CDATA[ <= ]]> 4
+	</select>
+	<select id="searchTypeListProduct" resultType="productDto" parameterType="hashmap">
+	SELECT * FROM		
+	(SELECT A.*,ROWNUM AS RNUM
+	FROM (SELECT 
+       	TRUNC(EndDate - StartDate) as "day", 
+         TRUNC(((EndDate - StartDate) - TRUNC(EndDate - StartDate)) * 24) as "hours", 
+         FLOOR(((((EndDate - StartDate) -TRUNC(EndDate - StartDate)) * 24) 
+         - TRUNC(((EndDate - StartDate)-TRUNC(EndDate - StartDate)) * 24)) * 60) as "minutes" 
+  FROM (SELECT sysdate as StartDate,
+        TO_DATE(auc_endDate,'rrrr-mm-dd hh24:mi:ss') as EndDate 
+        FROM AUCTION INNER JOIN STOCK
+        ON AUCTION.stock_no = STOCK.stock_no WHERE stock_kind = #{stock_kind } AND auc_status=2 ORDER BY auc_regDate DESC)
+        )A
+        )
+WHERE RNUM BETWEEN #{startseq } AND #{endseq }
+	</select>
+	<select id="searchAreaListProduct" resultType="productDto" parameterType="hashmap">
+		SELECT * FROM		
+	(SELECT A.*,ROWNUM AS RNUM
+	FROM (SELECT 
+       	TRUNC(EndDate - StartDate) as "day", 
+         TRUNC(((EndDate - StartDate) - TRUNC(EndDate - StartDate)) * 24) as "hours", 
+         FLOOR(((((EndDate - StartDate) -TRUNC(EndDate - StartDate)) * 24) 
+         - TRUNC(((EndDate - StartDate)-TRUNC(EndDate - StartDate)) * 24)) * 60) as "minutes" 
+  FROM (SELECT sysdate as StartDate,
+        TO_DATE(auc_endDate,'rrrr-mm-dd hh24:mi:ss') as EndDate 
+        FROM AUCTION INNER JOIN STOCK
+        ON AUCTION.stock_no = STOCK.stock_no WHERE stock_location = #{stock_location } AND auc_status=2 ORDER BY auc_regDate DESC)
+        )A
+        )
+WHERE RNUM BETWEEN #{startseq } AND #{endseq }
+	</select>
+	<update id="updateAucStatus">		
+    update AUCTION
+	 set auc_status = 3
+	 where auc_no in (select auc_no from AUCTION where auc_endDate <![CDATA[ <= ]]> sysdate and auc_status = 2)
+   </update>
 </mapper>

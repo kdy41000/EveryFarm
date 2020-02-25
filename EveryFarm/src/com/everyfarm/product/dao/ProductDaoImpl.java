@@ -309,6 +309,125 @@ public class ProductDaoImpl extends SqlMapConfig implements ProductDao{
 		return productdto;
 	}
 
+	@Override
+	public List<ProductDto> normalListProduct(int startseq, int endseq) {
+		SqlSession session = null;
+		List<ProductDto>list = null;
+		PagingDto dto = new PagingDto();
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			
+			dto.setStartseq(startseq);
+			dto.setEndseq(endseq);
+			
+			list = session.selectList(namespace+"normalListProduct",dto);
+			
+		} catch (Exception e) {
+			System.out.println("[error] : selectList");
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<ProductDto> BestListProduct() {
+		SqlSession session = null;
+		List<ProductDto>list = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+
+			list = session.selectList(namespace+"BestListProduct");
+			
+		} catch (Exception e) {
+			System.out.println("[error] : selectList");
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<ProductDto> searchTypeListProduct(int startseq, int endseq, ProductDto productdto) {
+		SqlSession session = null;
+		List<ProductDto>list = null;
+		PagingDto dto = new PagingDto();
+		HashMap<String, Integer>hashmap = new HashMap<String, Integer>();
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+		
+			hashmap.put("startseq", startseq);
+			hashmap.put("endseq", endseq);
+			hashmap.put("stock_kind", productdto.getStock_kind());
+			
+			list = session.selectList(namespace+"searchTypeListProduct",hashmap);
+			
+		} catch (Exception e) {
+			System.out.println("[error] : selectList");
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<ProductDto> searchAreaListProduct(int startseq, int endseq, ProductDto productdto) {
+		SqlSession session = null;
+		List<ProductDto>list = null;
+		PagingDto dto = new PagingDto();
+		HashMap<String, String>hashmap = new HashMap<String, String>();
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+		
+			hashmap.put("startseq", Integer.toString(startseq));
+			hashmap.put("endseq", Integer.toString(endseq));
+			hashmap.put("stock_location", productdto.getStock_location());
+			
+			list = session.selectList(namespace+"searchAreaListProduct",hashmap);
+			
+		} catch (Exception e) {
+			System.out.println("[error] : selectList");
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public int updateAucStatus() {
+		SqlSession session = null;
+		int res = 0;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			res = session.update(namespace+"updateAucStatus");
+			
+			if (res>0) {
+				session.commit();
+			}
+			
+		} catch (Exception e) {
+			System.out.println("[error] : selectList");
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return res;
+	}
+
 	
 
 }
