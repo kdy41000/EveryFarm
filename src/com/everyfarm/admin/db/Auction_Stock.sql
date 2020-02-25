@@ -1,3 +1,5 @@
+DROP TABLE AUCTION;
+DROP TABLE STOCK;
 
 CREATE TABLE "AUCTION" 
    (	"AUC_NO" NUMBER(15,0) NOT NULL ENABLE, 
@@ -50,13 +52,13 @@ INSERT INTO STOCK (STOCK_NO,MEM_ID,STOCK_NAME,STOCK_DETAIL,STOCK_KG,STOCK_PRICE,
 (2,'user2','포천시 사과','맛있습니다.',50,20000,'resources\images\productstorage\banana.png/
 					resources\images\productstorage\banana.png/
 					resources\images\productstorage\banana.png/
-					resources\images\productstorage\banana.png','연천시',1)
+					resources\images\productstorage\banana.png','연천시',2)
 ;
 INSERT INTO STOCK (STOCK_NO,MEM_ID,STOCK_NAME,STOCK_DETAIL,STOCK_KG,STOCK_PRICE,STOCK_IMAGE,STOCK_LOCATION,STOCK_KIND) VALUES 
 (3,'user3','남양주시 배','맛있습니다.',50,20000,'resources\images\productstorage\banana.png/
 					resources\images\productstorage\banana.png/
 					resources\images\productstorage\banana.png/
-					resources\images\productstorage\banana.png','연천시',1)
+					resources\images\productstorage\banana.png','연천시',3)
 ;	
 
 SELECT ROWNUM AS RNUM, R.*
@@ -73,6 +75,12 @@ UPDATE AUCTION SET AUC_STATUS=2 WHERE AUC_NO=2
 -- 원래대로 되돌리기
 UPDATE AUCTION SET AUC_STATUS=1 WHERE AUC_NO=2
 
+
+SELECT R.RNUM, R.MEM_ID, R.STOCK_NAME, R.AUC_STARTPRICE, R.AUC_REGDATE, R.AUC_ENDDATE, R.AUC_STATUS, R.AUC_NO
+FROM (SELECT ROWNUM AS RNUM, A.*, B.*
+	FROM AUCTION A, STOCK B
+	WHERE A.STOCK_NO = B.STOCK_NO
+	ORDER BY A.AUC_REGDATE DESC) R 
 
 -----------------------  품목별 카운팅 -----------------------
 

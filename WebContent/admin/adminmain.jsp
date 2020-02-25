@@ -14,7 +14,18 @@
     <link rel="stylesheet" href="../resources/css/admin/admin.css">   
 	<link rel="stylesheet" href="../resources/css/membermypage/buttonstyle.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+	<script src="../resources/js/admin/bootstrap.js"></script>
+	<style>
+		.admin_container{
+			width: 95%;
+			height: 350px;
+			border: 1px solid #ddd;
+			padding: 8%;
+			border-radius: 8px;
+			margin-left: 3.5%;
+			overflow-y: auto;
+		}
+	</style>	
 <body>
 <%@ include file="../home/header.jsp" %>
 <div class="container-fluid">
@@ -22,14 +33,31 @@
 	<%@ include file="admin_sidebar.jsp" %>
 		<div class="col" >
 		<div class="section_content">	
+			<h2 style="margin: 40px;">메인화면</h2>
 			<!-- 좌측바디 -->
-			<div style="width:50%; float: left;">
-				좌측 내용
+			<div style="width:69%; float: left; border-right: 1px solid #ddd;">
+				
+				<div class="admin_container">
+		
+				</div> 
+				<br>
+				<div class="admin_container">
+		
+				</div> 
+				
 			</div>
 			
 			<!-- 우측바디 -->
-			<div style="width:50%; float: left;">
-				우측내용
+			<div style="width:30%; float: left;">
+
+				<div class="admin_container">
+		
+				</div> 
+				<br>
+				<div class="admin_container">
+		
+				</div> 
+
 			</div> 
 	    </div>
 		</div>

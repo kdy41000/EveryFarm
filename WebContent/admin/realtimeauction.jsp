@@ -129,7 +129,7 @@
 								<c:choose>
 									<c:when test="${empty adminrealtime }">
 										<tr>
-											<td colspan="8">회원 목록이 없습니다.</td>
+											<td colspan="8">경매 목록이 없습니다.</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
@@ -168,10 +168,8 @@
 		} */
 		
 	// 새로고침 간격
-/* 	function getInfiniteInterval() { 
-		setInterval(function() {
-			realtimeFunction();
-		}, 5000); // 새로고침 5초
-	}	 */
+	function 함수이름(){  
+      setTimeout('location.reload()',5000); 
+	}
 </script>
 </html>
