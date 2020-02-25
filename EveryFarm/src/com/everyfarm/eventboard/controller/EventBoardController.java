@@ -45,7 +45,7 @@ public class EventBoardController extends HttpServlet {
 			EventBoardDto dto = new EventBoardDto();
 			EventPagingDto pagingdto = new EventPagingDto();
 			pagingdto.setCurrentpage(currentpage);   //현재페이지 (초기값 1)
-			pagingdto.setColumn(7);   //게시글은 7개씩
+			pagingdto.setColumn(5);   //게시글은 5개씩
 			pagingdto.setUnderpagescale(5);    //아래 페이지 수의 크기는 5개씩
 			pagingdto.setTotalpage(biz.totalPage(pagingdto.getColumn()));  //마지막 페이지 번호     (1)
 			List<EventBoardDto>list = new ArrayList<EventBoardDto>();

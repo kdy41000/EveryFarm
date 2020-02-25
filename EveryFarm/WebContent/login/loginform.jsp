@@ -109,23 +109,26 @@
 
     	     Kakao.API.request({
 
-    	       url: '/v1/user/me',
+    	       url: '/v2/user/me',
 
     	       success: function(res) {
 
-    	            // alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
+    	             //alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
 
-    	            // alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
+    	             //alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
 
-    	            // console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
+    	             console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
 
-    	            // console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
+    	             console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
 
-    	            // console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
-					var mem_email = res.kaccount_email;
+    	             console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
+					var mem_email = res.kakao_account.email;
     	            var mem_id = res.id;
     	            var mem_name = res.properties['nickname'];
     	            
+    	            //alert(mem_email+"::카카오이메일");
+    	            //alert(mem_id+"::카카오아이디");
+    	            //alert(mem_name+"::카카오이름");
     	            location.href="../apilogin.do?command=login&mem_email="+mem_email+"&mem_name="+mem_name+"&mem_id="+mem_id;	
     	         // res.properties.nickname으로도 접근 가능 )
 

@@ -171,12 +171,12 @@ $(function(){
 <!-- 테이블 영역 -->	
 
 <!-- 관리자 글등록 -->
-<div class="wrapper" style="margin: 20% 0% 0% 27%; display:none;">
+<div class="wrapper" style="margin: 12% 0% 0% 27%; display:none;">
   <a id="atag" href="#" onclick="location.href='../eventboard.do?command=writeboard';"><span>글쓰기</span></a>
 </div>			
 <!-- 관리자 글등록 -->
 <!-- 관리자 글삭제 -->
-<div class="wrapper" style="margin: 20% 0% 0% 39%; display:none;">
+<div class="wrapper" style="margin: 12% 0% 0% 39%; display:none;">
   <a id="atag" href="#" onclick="deleteboard();"><span>글삭제</span></a>
 </div>	
 		
