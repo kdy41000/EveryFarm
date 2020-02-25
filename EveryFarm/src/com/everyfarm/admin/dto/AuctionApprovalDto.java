@@ -24,6 +24,22 @@ public class AuctionApprovalDto {
 	private String stock_image;
 	private String stock_location;
 	private int stock_kind;
+	
+	public AuctionApprovalDto() {
+		super();
+	}
+
+	public AuctionApprovalDto(int auc_startPrice, int auc_nowPrice, Date auc_regDate, Date auc_endDate, String mem_id,
+			String stock_name) {
+		super();
+		this.auc_startPrice = auc_startPrice;
+		this.auc_nowPrice = auc_nowPrice;
+		this.auc_regDate = auc_regDate;
+		this.auc_endDate = auc_endDate;
+		this.mem_id = mem_id;
+		this.stock_name = stock_name;
+	}
+	
 	public int getAuc_no() {
 		return auc_no;
 	}

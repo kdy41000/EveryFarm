@@ -5,9 +5,13 @@
 <properties resource="com/everyfarm/admin/db/db.properties"></properties>
 
 <typeAliases>
+	<typeAlias type="com.everyfarm.admin.dto.PagingDto" alias="PagingDto"/>
 	<typeAlias type="com.everyfarm.admin.dto.UpgradeListDto" alias="UpgradeListDto"/>
 	<typeAlias type="com.everyfarm.admin.dto.AuctionApprovalDto" alias="AuctionApprovalDto"/>
-	<typeAlias type="com.everyfarm.admin.dto.PagingDto" alias="PagingDto"/>
+	<typeAlias type="com.everyfarm.admin.dto.UserListDto" alias="UserListDto"/>
+	<typeAlias type="com.everyfarm.admin.dto.AdminFundListDto" alias="AdminFundListDto"/>
+	<typeAlias type="com.everyfarm.admin.dto.AdminBillListDto" alias="AdminBillListDto"/>
+	<typeAlias type="com.everyfarm.admin.dto.AdminWFDto" alias="AdminWFDto"/>
 </typeAliases>
 	
   <environments default="development">

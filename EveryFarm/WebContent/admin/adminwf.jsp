@@ -18,7 +18,7 @@
 	<script src="../resources/js/admin/bootstrap.js"></script>
 
 <%
-	PagingDto paging = (PagingDto)session.getAttribute("approvallist_paging");
+	PagingDto paging = (PagingDto)session.getAttribute("adminwf_paging");
 	int pagegroup = (int)Math.ceil((double)paging.getCurrentpage()/paging.getPagescale()); 
 	int startpage = paging.getPagescale()*(pagegroup-1)+1;
 	int endpage = paging.getPagescale()*pagegroup;
@@ -35,59 +35,57 @@
 			
 		<!-- 바디 -->
 		<div class="section_content">
-			<h2 style="margin: 40px;">경매승인</h2>
+			<h2 style="margin: 40px;">농장관리</h2>
 			
 			<div style="margin: 40px;">
 				<table id="admin_table" class="table table-striped table-bordered">
-				<col width="15%">
-				<col width="35%">
 				<col width="10%">
-				<col width="15%">
-				<col width="15%">
+				<col width="10%">
+				<col width="40%">
+				<col width="10%">
+				<col width="10%">
+				<col width="10%">
 				<col width="10%">
 					<tr>
 						<th>아이디</th>
-						<th>상품명</th>
-						<th>시작가</th>
+						<th>농장이름</th>
+						<th>농장주소</th>
+						<th>총평수</th>
+						<th>평당가격</th>
+						<th>승인상태</th>
 						<th>등록일</th>
-						<th>종료일</th>
-						<th>승인</th>
 					</tr>
-					
 					<c:choose>
-						<c:when test="${empty approvallist }">
+						<c:when test="${empty adminwf }">
 							<tr>
-								<td colspan="6">경매 목록이 없습니다.</td>
+								<td colspan="7">농장 목록이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${approvallist }" var="dto">
+							<c:forEach items="${adminwf }" var="dto">
 								<tr>
 									<td>${dto.mem_id }</td>
-									<td>${dto.stock_name }</td>
-									<td>${dto.auc_startPrice }</td>
-									<td>${dto.auc_regDate }</td>
-									<td>${dto.auc_endDate }</td>
+									<td>${dto.wfarm_title }</td>
+									<td>${dto.wfarm_addr }</td>
+									<td>${dto.wfarm_totalArea }</td>
+									<td>${dto.wfarm_price }</td>
 									<td>
 										<c:choose>
-											<c:when test="${dto.auc_status eq 1}">
-												<button type="button" class="btn btn-primary"
-												onclick="location.href='../admin.do?command=approvalres&no=${dto.auc_no}&pageNumber=<%=currentpage %>'"
-												>미등록</button>
+											<c:when test="${dto.wfarm_status eq '1'}">
+												<c:out value="승인대기"></c:out>
 											</c:when>
-											<c:when test="${dto.auc_status eq 2}">
-												<button type="button" class="btn btn-success"
-												style="cursor: default;" disabled="disabled"
-												onclick="location.href='#'"
-												>진행중</button>
+											<c:when test="${dto.wfarm_status eq '2'}">
+												<c:out value="승인"></c:out>
 											</c:when>
-											<c:when test="${dto.auc_status eq 3}">
-												<button type="button" class="btn btn-primary" 
-												style="background-color: gray; border-color: gray; cursor: default;"
-												disabled="disabled">낙찰</button>
-											</c:when>										
+											<c:when test="${dto.wfarm_status eq '3'}">
+												<c:out value="품절"></c:out>
+											</c:when>
+											<c:otherwise>
+												<c:out value="오류"></c:out>
+											</c:otherwise>											
 										</c:choose>
 									</td>
+									<td>${dto.wfarm_regDate }</td>
 								</tr>								
 							</c:forEach>
 						</c:otherwise>
@@ -100,7 +98,7 @@
 				<%
 					if(pagegroup!=1){
 				%>							
-						<li><a href="../admin.do?command=auctionapproval&pageNumber=<%=startpage-1%>">
+						<li><a href="../admin.do?command=adminwf&pageNumber=<%=startpage-1%>">
 						<span class="glyphicon glyphicon-chevron-left">&lt;</span></a></li>
 				<%
 					} else if(pagegroup==1){
@@ -111,17 +109,17 @@
 					for(int pagenum = startpage; pagenum <= ((endpage<totalpage)?endpage:totalpage); pagenum++){
 						if(paging.getCurrentpage()==pagenum){					
 				%>					
-						<li class="active"><a href="../admin.do?command=auctionapproval&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
+						<li class="active"><a href="../admin.do?command=adminwf&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
 				<%
 							} else {
 				%>
-						<li><a href="../admin.do?command=auctionapproval&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
+						<li><a href="../admin.do?command=adminwf&pageNumber=<%=pagenum%>"><%=pagenum %></a></li>
 				<%
 							}
 						}
-					if(endpage < paging.getTotalpage()){						
+					if(endpage < paging.getTotalpage()){				
 				%>
-						<li><a href="../admin.do?command=auctionapproval&pageNumber=<%=endpage+1%>">
+						<li><a href="../admin.do?command=adminwf&pageNumber=<%=endpage+1%>">
 						<span class="glyphicon glyphicon-chevron-right">&gt;</span></a></li>
 				<%
 					} else {
