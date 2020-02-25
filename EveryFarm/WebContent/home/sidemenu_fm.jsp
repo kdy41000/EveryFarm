@@ -28,19 +28,6 @@
   </div>
 <!-- 메뉴목록 -->
   <ul class="list-group" id="sidebar-menu">
-<<<<<<< HEAD
-   <li class="list-group-item"><a href="#" onclick="location.href='../farmerdetail.do?command=applyfund';">펀드신청</a></li>
-   <li class="list-group-item"><a href="#" onclick="location.href='../farmerdetail.do?command=applyauction';">경매신청</a></li>
-   <li class="list-group-item"><a href="#">펀드상세</a></li>
-   <li class="list-group-item"><a href="#">펀드진행현황</a></li>
-   <li class="list-group-item"><a href="#" onclick="location.href='../letters.do?command=letters&mem_id=${sessionScope.dto.mem_id}'">펀드완료내역</a></li>
-   <li class="list-group-item"><a href="#">펀드환불현황</a></li>
-   <li class="list-group-item"><a href="#">경매상세</a></li>
-   <li class="list-group-item"><a href="#" onclick="location.href='../dykim.do?command=cur_auclist&currentpage=1';">경매진행현황</a></li>
-   <li class="list-group-item"><a href="#" onclick="location.href='../dykim.do?command=end_auclist&currentpage=1';">경매완료내역</a></li>
-     <li class="list-group-item"><a href="#" onclick="location.href='../dykim.do?command=send_history&currentpage=1';">배송내역</a></li>
-       <li class="list-group-item"><a href="#">주말농장 관리</a></li>
-=======
    <li class="list-group-item"><a href="#" onclick="location.href='../farmerfunddetail.do?command=applyfund';">펀드신청</a></li>
    <li class="list-group-item"><a href="#" onclick="location.href='../farmerfunddetail.do?command=applyauction';">경매신청</a></li>
    <li class="list-group-item"><a href="#" onclick="location.href='../farmerfunddetail.do?command=cur_fundlist&currentpage=1';">펀드진행현황</a></li>
@@ -50,7 +37,6 @@
    <li class="list-group-item"><a href="#" onclick="location.href='../farmerauctiondetail.do?command=end_auclist&currentpage=1';">경매완료내역</a></li>
      <li class="list-group-item"><a href="#" onclick="location.href='../farmerauctiondetail.do?command=send_history&currentpage=1';">배송내역</a></li>
        <li class="list-group-item"><a href="#" onclick="location.href='../supervisefarm.do?command=farmdetaillist&currentpage=1'">주말농장 관리</a></li>
->>>>>>> a238d4b49111a5c9c3c6800e92bd5aa011773362
          <li class="list-group-item"><a href="#" onclick="location.href='../letters.do?command=letters&mem_id=${sessionScope.dto.mem_id}'">쪽지</a></li>
   </ul>
 </div>

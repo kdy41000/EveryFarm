@@ -4,15 +4,11 @@
 	<properties resource="com/everyfarm/farmer/auction/db/db.properties"></properties>
 	
 	<typeAliases>
-<<<<<<< HEAD
-		<typeAlias type="com.everyfarm.farmer.auction.dto.DyKimPagingDto" alias="pagingDto"/>
-		<typeAlias type="com.everyfarm.farmer.auction.dto.AuctionDetailDto" alias="auctionDetailDto"/>
-=======
+
 		 <typeAlias type="com.everyfarm.farmer.auction.dto.ADPagingDto" alias="pagingDto"/>
 		
 		<typeAlias type="com.everyfarm.farmer.auction.dto.AuctionDetailDto" alias="auctionDetailDto"/>
-		
->>>>>>> a238d4b49111a5c9c3c6800e92bd5aa011773362
+
 	</typeAliases>
 		
 	  <environments default="development">
