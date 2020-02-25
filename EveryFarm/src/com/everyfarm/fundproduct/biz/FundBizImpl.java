@@ -47,15 +47,23 @@ public class FundBizImpl implements FundBiz {
 	}
 
 	@Override
-	public FundPayDto orderInput(int stock_no, String mem_id, int orderinfo_kg) {
+	public FundPayDto orderInput(int stock_no, String mem_id, int orderinfo_kg, int fund_no) {
 		// TODO Auto-generated method stub
-		return dao.orderInput(stock_no, mem_id, orderinfo_kg);
+		return dao.orderInput(stock_no, mem_id, orderinfo_kg, fund_no);
 	}
 
 	@Override
-	public int payInput(int order_no, int pay_price) {
+	public int payInput(int order_no, int pay_price, int fund_no, String mem_id) {
+		int payInfoInsert = dao.payInput(order_no, pay_price);	//결재완료 후 pay table에 데이터 input, orderinfo table 구매완료로 업데이트
+		int memJoinUpdate = dao.memJoinUpdate(fund_no, pay_price);	//fund table 참여인원 update
+		int memJoinInsert = dao.memJoinInsert(mem_id, fund_no, pay_price);	//memjoin table 참여내역 insert
+		return payInfoInsert +memJoinUpdate + memJoinInsert;
+	}
+
+	@Override
+	public FundDto deadLineAjax(int fund_no) {
 		// TODO Auto-generated method stub
-		return dao.payInput(order_no, pay_price);
+		return dao.deadLineAjax(fund_no);
 	}
 
 

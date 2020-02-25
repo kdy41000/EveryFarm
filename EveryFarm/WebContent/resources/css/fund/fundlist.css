@@ -130,7 +130,7 @@ table{
 .item-price {
 	margin-top: -6%;
   display: grid;
-  grid-template-rows: 1fr 2fr;
+
 }
 
 
@@ -139,5 +139,57 @@ table{
    transform: translateY(-8px);
 }
 
+
+/*페이징 시작*/
+.paging {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+    position: relative;
+}
+ 
+.paging span, .paging a {
+    display: block;
+    width: auto;
+    margin: 4px;
+    padding: 8px;
+    background-color: #fff;
+    text-decoration: none;
+    text-align: center;
+    line-height: 16px;
+}
+ 
+ 
+/* ページ番号 */
+.paging .pager{
+    width: 32px;
+    border: 1px solid #ddd;
+}
+ 
+/* ホバー時 & 現在のページ */
+.paging a:hover,
+.paging .current{
+    color: #fff;
+    border-color: #333;
+    background-color: #333;
+}
+ 
+.paging .str{
+    font-weight: bold;
+}
+/* 前へ */
+.paging a.prev {
+    margin-right: 16px;
+}
+/* 次へ */
+.paging a.next {
+    margin-left: 16px;
+}
+/* Page x / y */
+.paging span.page_num {
+    display: none;
+}
+/* 페이징 끝*/
 
 

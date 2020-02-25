@@ -1,5 +1,7 @@
 package com.everyfarm.fundproduct.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import com.everyfarm.fundproduct.dto.FundDto;
 import com.everyfarm.fundproduct.dto.FundPagingDto;
 import com.everyfarm.fundproduct.dto.FundPayDto;
-import com.everyfarm.fundproduct.dto.FundPayInputDto;
 
 public class FundDaoImpl extends SqlMapConfig implements FundDao {
 	
@@ -19,13 +20,20 @@ public class FundDaoImpl extends SqlMapConfig implements FundDao {
 		
 		List<FundDto> list = null;
 		SqlSession session = null;	
+		int statusUpdate = 0;
 		FundPagingDto dto = new FundPagingDto();
 			dto.setTo(to);
 			dto.setFrom(from);
 		
 		try {
 			session = getSqlSessionFactory().openSession();
-			list = session.selectList(namespace+"selectList",dto);
+			statusUpdate = session.update(namespace+"fundStatusUpdate");
+			System.out.println("업데이트"+statusUpdate);
+			if(statusUpdate>0) {
+				session.commit();
+			}
+			
+			list = session.selectList(namespace+"selectList",dto);		
 			
 		} catch (Exception e) {
 			System.out.println("session");
@@ -101,26 +109,35 @@ public class FundDaoImpl extends SqlMapConfig implements FundDao {
 	}
 
 	@Override
-	public FundPayDto orderInput(int stock_no, String mem_id, int orderinfo_kg) {
+	//bill table에 input해서 주문번호 받기, 그 주문번호를 가지고 orderinfo 상세 페이지에 구매요청으로 데이터 입력
+	public FundPayDto orderInput(int stock_no, String mem_id, int orderinfo_kg, int fund_no) {
 		FundPayDto payDto = null;
 		SqlSession session = null;
 		
 		payDto = new FundPayDto();
+		payDto.setFund_no(fund_no);
 		payDto.setStock_no(stock_no);
 		payDto.setMem_id(mem_id);
-		payDto.setOrderinfo_kg(orderinfo_kg);
+		payDto.setPay_price(orderinfo_kg);
 		
 		try {
 			session = getSqlSessionFactory().openSession();
-			int res = session.insert(namespace+"orderinput",payDto);
-			System.out.println(payDto.getOrder_no());
+			int res = session.insert(namespace+"orderinput",payDto);	//bill table insert => order_no 가져옴
+			System.out.println("주문번호 : "+payDto.getOrder_no());
 			
 			if(res>0) {
-				int res2 = session.insert(namespace+"orderdetail",payDto);
+				int res2 = session.insert(namespace+"orderdetail",payDto); //orderinfo table insert 
 				if(res2>0) {
 					session.commit();					
 				}
 			}
+			payDto = session.selectOne(namespace+"orderRes",payDto.getOrder_no()); 
+			System.out.println("daoImpl orderNo :"+payDto.getOrder_no());
+			System.out.println("daoImpl memId :"+payDto.getMem_id());
+			System.out.println("daoImpl payPrice :"+payDto.getPay_price());
+
+			//=>order_no, mem_id, pay_price 담겨있음
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,13 +149,14 @@ public class FundDaoImpl extends SqlMapConfig implements FundDao {
 	}
 
 	@Override
+	//결재완료 후 pay table에 데이터 input, orderinfo table 구매완료로 업데이트
 	public int payInput(int order_no, int pay_price) {
 		int payRes = 0;
 		SqlSession session = null;
 		
 		System.out.println(order_no);
 		System.out.println(pay_price);
-		FundPayInputDto payInput = new FundPayInputDto();
+		FundPayDto payInput = new FundPayDto();
 		payInput.setOrder_no(order_no);
 		payInput.setPay_price(pay_price);
 		
@@ -158,8 +176,91 @@ public class FundDaoImpl extends SqlMapConfig implements FundDao {
 			session.close();
 		}
 		
-		
 		return payRes;
+	}
+
+	
+	@Override
+	//fund table 참여인원 update
+	public int memJoinUpdate(int fund_no, int pay_price) {
+		int updateRes = 0;
+		SqlSession session = null;
+		
+		FundPayDto payDto = new FundPayDto();
+		payDto.setFund_no(fund_no);
+		payDto.setPay_price(pay_price);
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			updateRes = session.update(namespace+"memJoinUpdate",payDto);
+			
+			if(updateRes>0) {
+				session.commit();
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return updateRes;
+	}
+
+	@Override
+	//memjoin table 참여내역 insert
+	public int memJoinInsert(String mem_id, int fund_no, int pay_price) {
+		int memJoinInsertRes = 0;
+		SqlSession session = null;
+		
+		FundPayDto payDto = new FundPayDto();
+		payDto.setMem_id(mem_id);
+		payDto.setFund_no(fund_no);
+		payDto.setPay_price(pay_price);
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			memJoinInsertRes = session.insert(namespace+"joinInsert",payDto);
+			
+			if(memJoinInsertRes>0) {
+				session.commit();
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}		
+		
+		return memJoinInsertRes;
+	}
+
+	@Override
+	public FundDto deadLineAjax(int fund_no) {
+
+		SqlSession session = null;
+		
+		FundDto deadDto = new FundDto();
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			deadDto = session.selectOne(namespace+"deadAjax",fund_no);
+			
+			System.out.println(deadDto.getDay()+"result----");
+			System.out.println(deadDto.getHours());
+			System.out.println(deadDto.getMinutes());
+			System.out.println(deadDto.getSeconds());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		
+		return deadDto;
 	}
 
 }
