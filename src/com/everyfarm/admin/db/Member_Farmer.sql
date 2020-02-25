@@ -30,6 +30,9 @@ INSERT INTO MEMBER VALUES(
 INSERT INTO MEMBER VALUES(
 'user3','1234','사용자','010-0000-0000','11176','서울시 강남구 역삼동','정보교육원','t@t.com',1,SYSDATE,'N'
 );
+INSERT INTO MEMBER VALUES(
+'admin','1234','관리자','010-0000-0000','11176','서울시 강남구 역삼동','정보교육원','t@t.com',3,SYSDATE,'N'
+);
 
 INSERT INTO FARMER VALUES(
 'user3', 1, SYSDATE
@@ -143,3 +146,13 @@ SELECT * FROM AUCTION
 			FROM MEMBER
 			) R 
 		WHERE R.RNUM BETWEEN 1 AND 10
+		
+		
+-----------------------------------------------------------------------------
+
+SELECT R.* 
+FROM (SELECT ROWNUM AS RNUM, MEM_ID, MEM_NAME, MEM_PHONE, MEM_ZONECODE, MEM_ADDR, MEM_ADDRETC, MEM_EMAIL, MEM_GRADE, MEM_REGDATE, MEM_DROP
+	FROM MEMBER
+	) R 
+WHERE R.RNUM BETWEEN 1 AND 5
+		

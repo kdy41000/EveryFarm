@@ -93,6 +93,14 @@
 		WHERE R.RNUM BETWEEN #{from} AND #{to}
  	</select>
  	
+ 	 <select id="userlist_main" resultType="UserListDto">
+		SELECT R.* 
+		FROM (SELECT ROWNUM AS RNUM, MEM_ID, MEM_NAME, MEM_PHONE, MEM_ZONECODE, MEM_ADDR, MEM_ADDRETC, MEM_EMAIL, MEM_GRADE, MEM_REGDATE, MEM_DROP
+			FROM MEMBER
+			) R 
+		WHERE R.RNUM BETWEEN 1 AND 5
+ 	</select>
+ 	
  	 <select id="adminfundlist" resultType="AdminFundListDto" parameterType="pagingDto">
 		SELECT BB.*
 		FROM	(
@@ -104,6 +112,10 @@
 						) AA
 				) BB		
 		WHERE BB.RNUM BETWEEN #{from} AND #{to}
+ 	</select>
+ 	
+ 	<select id="adminfundres">
+		UPDATE FUND SET FUND_STATUS=2 WHERE FUND_NO=#{no}
  	</select>
  	
  	 <select id="adminbilllist" resultType="AdminBillListDto" parameterType="pagingDto">
@@ -120,6 +132,20 @@
 		WHERE BB.RNUM BETWEEN #{from} AND #{to}
  	</select>
  	
+ 	 <select id="adminbilllist_main" resultType="AdminBillListDto">
+		SELECT BB.*
+		FROM	(
+				SELECT 	ROWNUM AS RNUM, AA.*	
+				FROM	(
+						SELECT * 
+						FROM STOCK S INNER JOIN BILL B ON S.STOCK_NO = B.STOCK_NO
+						LEFT JOIN ORDERINFO O ON B.ORDER_NO = O.ORDER_NO
+						ORDER BY O.ORDER_NO DESC
+						) AA
+				) BB		
+		WHERE BB.RNUM BETWEEN 1 AND 5
+ 	</select>
+ 	
  	 <select id="adminwf" resultType="AdminWFDto" parameterType="pagingDto">
 		SELECT BB.*
 		FROM	(
@@ -132,8 +158,7 @@
 				) BB		
 		WHERE BB.RNUM BETWEEN #{from} AND #{to}
  	</select>
- 	
- 	
+
  	
  	
  	<select id="stockKindCount" resultType="int">

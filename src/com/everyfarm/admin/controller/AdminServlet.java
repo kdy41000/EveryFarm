@@ -56,6 +56,27 @@ public class AdminServlet extends HttpServlet {
 		
 		//------------- 메인화면 (admin main) -------------------
 		if(command.equals("adminmain")) {
+			AdminAccountDto accountDto = new AdminAccountDto();
+			accountDto.setStock1_count(accountDao.stockKindCount(1));
+			accountDto.setStock2_count(accountDao.stockKindCount(2));
+			accountDto.setStock3_count(accountDao.stockKindCount(3));
+			accountDto.setStock4_count(accountDao.stockKindCount(4));
+			accountDto.setStock5_count(accountDao.stockKindCount(5));
+			accountDto.setStock6_count(accountDao.stockKindCount(6));
+
+			accountDto.setFundSumCurrentPrice(accountDao.fundSumCurrentPrice());
+			accountDto.setAuctionSumCurrentPrice(accountDao.auctionSumCurrentPrice());
+			accountDto.setFundCurrentMember(accountDao.fundCurrentMember());
+			accountDto.setAuctionCurrentMember(accountDao.auctionCurrentMember());
+			
+			HttpSession session =request.getSession();
+			session.setAttribute("adminaccount_main", accountDto);
+			
+			List<UserListDto> userlist = userListDao.mainList();
+			List<UserListDto> orderlist = billListDao.mainList();
+			session.setAttribute("userlist_adminmain", userlist);
+			session.setAttribute("orderlist_adminmain", orderlist);
+			
 			response.sendRedirect("admin/adminmain.jsp");
 		}
 		//------------- 등급관리 (upgradelist) -------------------
@@ -154,6 +175,24 @@ public class AdminServlet extends HttpServlet {
 			session.setAttribute("adminfundlist", list);
 			response.sendRedirect("admin/adminfundlist.jsp");
 		}
+		else if(command.equals("adminfundres")) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			System.out.println(no);
+			int res = fundListDao.adminfundres(no);
+			System.out.println("펀드 상태 변경: "+res);
+			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
+			PagingDto paging = null;
+			int totalpage = fundListDao.totalPage(TOTAL_PAGE_ROW);
+			paging = pagingMethod(currentpage, totalpage);
+			List<AdminFundListDto> list = fundListDao.selectList(paging.getFrom(), paging.getTo());
+			
+			HttpSession session =request.getSession();
+			session.setAttribute("adminfundlist_paging", paging);
+			session.setAttribute("adminfundlist", list);
+			response.sendRedirect("admin/adminfundlist.jsp");
+
+		}
+		
 		//------------- 주문관리 (admin bill list) -------------------
 		else if(command.equals("adminbilllist")) {
 			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));

@@ -21,7 +21,7 @@
 <style>
 	.chart-container{
 		width: 95%;
-		height: 550px;
+		height: 50vh;
 		border: 1px solid #ddd;
 		padding: 8%;
 		border-radius: 8px;
@@ -150,6 +150,11 @@
 				</script>
 				<!-- 차트 2 끝 -->
 			</div> 
+
+	    	<div style="height:300px; text-align: center;">
+				<img src="../resources/images/admin/img01.jpg" style="width: 97%; height: 100%; 
+				margin-top: 25px; border-radius: 8px;">	    	
+	    	</div>
 	    	
 	    	</div>
 	    

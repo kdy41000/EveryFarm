@@ -39,6 +39,12 @@
 			
 			<div style="margin: 40px;">
 				<table id="admin_table" class="table table-striped table-bordered">
+				<col width="15%">
+				<col width="10%">
+				<col width="10%">
+				<col width="40%">
+				<col width="15%">
+				<col width="10%">
 					<tr>
 						<th>아이디</th>
 						<th>거래상태</th>

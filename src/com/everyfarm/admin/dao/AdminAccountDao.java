@@ -16,7 +16,6 @@ public class AdminAccountDao {
 		try {
 			session = getSqlSessionFactory().openSession();
 			totalstock = session.selectOne(namespace+"stockKindCount", kindnumber);
-			System.out.println("품목별 카운트 수 : "+totalstock);
 			if(totalstock>0) {
 				session.commit();
 			}
@@ -36,7 +35,6 @@ public class AdminAccountDao {
 		try {
 			session = getSqlSessionFactory().openSession();
 			totalres = session.selectOne(namespace+"fundSumCurrentPrice");
-			System.out.println("펀드 진행중인 현재 총액 : "+totalres);
 			if(totalres>0) {
 				session.commit();
 			}
@@ -56,7 +54,6 @@ public class AdminAccountDao {
 		try {
 			session = getSqlSessionFactory().openSession();
 			totalres = session.selectOne(namespace+"auctionSumCurrentPrice");
-			System.out.println("경매 진행중인 현재 총액 : "+totalres);
 			if(totalres>0) {
 				session.commit();
 			}
@@ -76,7 +73,6 @@ public class AdminAccountDao {
 		try {
 			session = getSqlSessionFactory().openSession();
 			totalres = session.selectOne(namespace+"fundCurrentMember");
-			System.out.println("펀드 진행중인 참여자 수 : "+totalres);
 			if(totalres>0) {
 				session.commit();
 			}
@@ -96,7 +92,6 @@ public class AdminAccountDao {
 		try {
 			session = getSqlSessionFactory().openSession();
 			totalres = session.selectOne(namespace+"auctionCurrentMember");
-			System.out.println("경매 진행중인 참여자 수 : "+totalres);
 			if(totalres>0) {
 				session.commit();
 			}

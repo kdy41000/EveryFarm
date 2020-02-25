@@ -54,4 +54,24 @@ private String namespace = "admin.";
 		return res; 
 	}
 	
+	public int adminfundres(int no) {
+		int res = 0;
+		SqlSession session = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession(false);
+			res = session.update(namespace+"adminfundres",no);
+			if(res>0) {
+				session.commit();
+			}
+			
+		} catch (Exception e) {
+			System.out.println("AuctionApprovalDao ERROR : adminfundres");
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return res;
+	}
+	
 }

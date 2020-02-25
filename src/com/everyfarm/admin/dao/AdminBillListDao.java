@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.everyfarm.admin.dto.AdminBillListDto;
 import com.everyfarm.admin.dto.PagingDto;
+import com.everyfarm.admin.dto.UserListDto;
 
 public class AdminBillListDao {
 	
@@ -52,6 +53,21 @@ public class AdminBillListDao {
 			session.close();
 		}
 		return res; 
+	}
+	
+	public List<UserListDto> mainList(){
+		List<UserListDto> list = null;
+		SqlSession session = null;
+		try {
+			session = getSqlSessionFactory().openSession();
+			list = session.selectList(namespace+"adminbilllist_main");
+		} catch (Exception e) {
+			System.out.println("ERROR: AdminBillListDao mainList()");
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
 	}
 
 }

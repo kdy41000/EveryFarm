@@ -39,15 +39,23 @@
 			
 			<div style="margin: 40px;">
 				<table id="admin_table" class="table table-striped table-bordered">
+				<col width="10%">
+				<col width="10%">
+				<col width="15%">
+				<col width="15%">
+				<col width="10%">
+				<col width="15%">
+				<col width="15%">
+				<col width="10%">
 					<tr>
 						<th>펀드번호</th>
 						<th>상품번호</th>
 						<th>현재액</th>
 						<th>목표액</th>
-						<th>펀드상태</th>
 						<th>등록일</th>
 						<th>종료일</th>
 						<th>참여인원</th>
+						<th>펀드상태</th>
 					</tr>
 					<c:choose>
 						<c:when test="${empty adminfundlist }">
@@ -62,29 +70,37 @@
 									<td>${dto.stock_no }</td>
 									<td>${dto.fund_currentprice }</td>
 									<td>${dto.fund_price }</td>
-									<td>
-										<c:choose>
-											<c:when test="${dto.fund_status eq 1}">
-												<c:out value="미등록"></c:out>
-											</c:when>
-											<c:when test="${dto.fund_status eq 2}">
-												<c:out value="진행중"></c:out>
-											</c:when>
-											<c:when test="${dto.fund_status eq 3}">
-												<c:out value="완료"></c:out>
-											</c:when>
-											<c:when test="${dto.fund_status eq 4}">
-												<c:out value="배송"></c:out>
-											</c:when>
-											<c:otherwise>
-												<c:out value="오류"></c:out>
-											</c:otherwise>											
-										</c:choose>
-									</td>
 									<td>${dto.fund_regDate }</td>
 									<td>${dto.fund_endDate }</td>
 									<td>${dto.fund_join }</td>
-
+									<td>
+										<c:choose>
+											<c:when test="${dto.fund_status eq 1}">
+												<button type="button" class="btn btn-primary"
+												onclick="location.href='../admin.do?command=adminfundres&no=${dto.fund_no}&pageNumber=<%=currentpage %>'"
+												>미등록</button>
+											</c:when>
+											<c:when test="${dto.fund_status eq 2}">
+												<button type="button" class="btn btn-success"
+												style="cursor: default;" disabled="disabled"
+												onclick="location.href='#'"
+												>진행중</button>
+											</c:when>
+											<c:when test="${dto.fund_status eq 3}">
+												<button type="button" class="btn btn-primary" 
+												style="background-color: gray; border-color: gray; cursor: default;"
+												disabled="disabled">완료</button>
+											</c:when>										
+											<c:when test="${dto.fund_status eq 4}">
+												<button type="button" class="btn btn-primary" 
+												style="background-color: gray; border-color: gray; cursor: default;"
+												disabled="disabled">배송</button>
+											</c:when>	
+											<c:otherwise>
+												<c:out value="오류"></c:out>
+											</c:otherwise>										
+										</c:choose>
+									</td>
 								</tr>								
 							</c:forEach>
 						</c:otherwise>

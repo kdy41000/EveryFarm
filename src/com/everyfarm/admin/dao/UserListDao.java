@@ -54,4 +54,20 @@ private String namespace = "admin.";
 		return res; 
 	}
 	
+	public List<UserListDto> mainList(){
+		List<UserListDto> list = null;
+		SqlSession session = null;
+		try {
+			session = getSqlSessionFactory().openSession();
+			list = session.selectList(namespace+"userlist_main");
+		} catch (Exception e) {
+			System.out.println("ERROR: UserListDao mainList()");
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	
 }
