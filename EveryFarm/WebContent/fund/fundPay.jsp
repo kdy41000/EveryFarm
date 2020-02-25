@@ -4,6 +4,8 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% request.setCharacterEncoding("UTF-8");%>
+<% response.setContentType("text/html; charset=UTF-8");%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +16,8 @@
 
 <%
 	MemberDto memDto = (MemberDto)session.getAttribute("dto");	//회원정보
-	FundPayDto fundPayDto = (FundPayDto)session.getAttribute("fundPayDto");	//주문정보
-	FundDto detailDto = (FundDto)session.getAttribute("detailDto");		//상품정보	
+	FundPayDto fundPayDto = (FundPayDto)session.getAttribute("fundPayDto");	//주문정보(order_no, mem_id, pay_price 담겨있음)
+	FundDto detailDto = (FundDto)session.getAttribute("detailDto");		//stock,fund 정보	
 
 %>
 
@@ -36,7 +38,7 @@
 	   pay_method: "card",
 	   merchant_uid: "<%=fundPayDto.getOrder_no()%>",	//주문번호, 결제가 된 적이 있는 주문번호의 경우 재결제 불가
 	   name: "<%=detailDto.getStock_name()%>",	//품목명
-	   amount: "<%=fundPayDto.getOrderinfo_kg()%>",			//주문금액
+	   amount: "<%=fundPayDto.getPay_price()%>",			//주문금액
 	   buyer_email: "<%=memDto.getMem_email()%>",		
 	   buyer_name: "<%=memDto.getMem_name()%>",			
 	   buyer_tel: "<%=memDto.getMem_phone()%>",	
@@ -111,14 +113,14 @@
 						<td><a href="../fund.do?command=fundDetail&stock_no=<%=detailDto.getStock_no()%>"><%=detailDto.getStock_name() %></a>
 						<td>
 							<div class="">
-							<fmt:formatNumber type="number" value="<%=fundPayDto.getOrderinfo_kg() %>" />	won
+							<fmt:formatNumber type="number" value="<%=fundPayDto.getPay_price() %>" />	won
 							</div>
 						</td>
 
 						<td><div class="">기본배송</div></td>
 						<td>
 							<div class="">
-							<fmt:formatNumber type="number" value="<%=fundPayDto.getOrderinfo_kg() %>" />	won
+							<fmt:formatNumber type="number" value="<%=fundPayDto.getPay_price() %>" />	won
 							</div>
 						</td>
 					</tr>
@@ -269,7 +271,7 @@
 	<div id="" class="totalPay">
 		<div class="total">
 			<span id="">최종결제 금액</span>
-			<input id="inputTypeText" name="" size="6" readonly="readonly"	value="<%=fundPayDto.getOrderinfo_kg() %>" type="text">
+			<input id="inputTypeText" name="" size="6" readonly="readonly"	value="<%=fundPayDto.getPay_price() %>" type="text">
 				&nbsp;won
 			
 		</div>

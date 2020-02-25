@@ -20,10 +20,19 @@ public interface FundDao {
 	public int totalpage();
 	
 	//주문 테이블에 insert 하기
-	public FundPayDto orderInput(int stock_no, String mem_id, int orderinfo_kg);
+	public FundPayDto orderInput(int stock_no, String mem_id, int orderinfo_kg, int fund_no);
 	
 	//결제 완료 후 pay 테이블에 insert하기, orderinfo테이블 업데이트하기
 	public int payInput(int order_no, int pay_price);
+
+	//fund table 참여인원 update
+	public int memJoinUpdate(int fund_no, int pay_price);
+
+	//memjoin table에 참여내역 insert
+	public int memJoinInsert(String mem_id, int fund_no, int pay_price);
+
+	//남은시간 ajax
+	public FundDto deadLineAjax(int fund_no);
 	
 
 	

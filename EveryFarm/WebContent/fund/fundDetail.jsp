@@ -1,7 +1,11 @@
+<%@page import="com.everyfarm.member.dto.MemberDto"%>
 <%@page import="com.everyfarm.fundproduct.dto.FundDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% request.setCharacterEncoding("UTF-8");%>
+<% response.setContentType("text/html; charset=UTF-8");%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +15,7 @@
 		rel="stylesheet" type="text/css">
 
 <%
+	MemberDto memDto = (MemberDto)session.getAttribute("dto");
 	FundDto detail = (FundDto)session.getAttribute("detailDto");
 %>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>	
@@ -21,46 +26,33 @@
 		var idx = reward.selectedIndex;
 		var val = reward.options[idx].value;
 		document.getElementById("totalAmount").innerHTML = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
+		//val.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") => 천단위 콤마찍기
 		
 	})
-	
 
 	function selectOption() {
 		var reward = document.getElementById("reward");
 		var idx = reward.selectedIndex;
 		var val = reward.options[idx].value;
 		document.getElementById("totalAmount").innerHTML = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");
-		//val.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",") => 천단위 콤마찍기
 	}
-
-	$(function() {
-		alert(<%=detail.getFund_no()%>)
-		//ajax -종료시간 카운트
-		
-		deadLineFund();	//종료시간 카운트
-		curFundPrice();	//현재까지 펀딩된 금액
-		fund_join();	//참여인원
-		
-		function deadLlineFund() {
-			$.ajax({
-				type:"post",
-				url:"../fund.do?command=deadLineFund&fund_no=<%=detail.getFund_no()%>",
-				success: function (data) {
-					$("#deadLine").html(data);	// 아래 html에 클래스명 ajax01인 곳에 출력
-				},
-				error: function () {
-					alert("failed");
-				}
-			});
-			setTimeout(deadLineFund,1000);
-		}
-		
-		
-	})
-
-
+	
+	
 
 </script>		
+<script type="text/javascript">
+function letter() {
+
+	if(${empty sessionScope.dto.mem_grade}){
+		alert("로그인이 필요합니다.");
+	}else if(${sessionScope.dto.mem_grade!=1 and sessionScope.dto.mem_grade!=2}){
+		alert("권한이 없습니다.");
+	}else {
+
+		window.open("fund_writeletters.jsp","","width=500,height=600,left=500,top=100");
+	}
+}			
+</script>
 
 
 </head>
@@ -70,18 +62,18 @@
 	<section>
 
 		<div class="movehome">
-			<a id="home" href="#">Home</a> > <a id="list" href="#">List</a>
+			<a id="home" href="../home/section.jsp">Home</a> > <a id="list" href="../fund.do?command=fundlist&page=1">List</a>
 		</div>
-		<img id="thumbnail" alt="firstphoto" src="<%=detail.getStock_image() %>" />
-
+		<img id="thumbnail" alt="firstphoto" src="../<%=detail.getStock_image().split("/")[0] %>" />
+		<%	System.out.println(detail.getStock_image().split("/")[0]);	%>
 		<div class="thumbnailContent">
 			<h1><%=detail.getStock_name() %></h1>	<!-- 상품이름 -->
 			<hr/>
-			<p class="space"><span id="deadLine"><%=detail.getFund_enddate() %></span><span class="titleone">일 남음</span></p>	<!-- 펀딩 종료일 ajax-->
+			<p class="space"><span id="deadLine"><!-- 펀딩 종료일 ajax--></span><span class="titleone">일 남음</span></p>	
 			<p class="space"><span class="titletwo">
 				<fmt:formatNumber value="<%=detail.getFund_currentprice() %>" type="number"/></span>
-				<span class="titleone">원 펀딩</span></p>	<!-- 현재 모금액 ajax-->
-			<p class="space"><span class="titletwo"><%=detail.getFund_join() %></span><span class="titleone">명 참여 중 </span></p>	<!-- 현재 참여자 ajax-->
+				<span class="titleone">원 펀딩</span></p>	
+			<p class="space"><span class="titletwo"><%=detail.getFund_join() %></span><span class="titleone">명 참여 중 </span></p>	
 			<hr>
 			<p style="color: green; font-size: 14px;">
 			※펀딩하기는 쇼핑하기가 아닙니다. 결제 완료 후 펀딩한 리워드가 바로 발송되지 않습니다.<br>
@@ -92,7 +84,7 @@
 			</p>
 			<p class="detailTitle">
 				<span style="font-weight: bold; font-size: 14px;">생산자  : </span><%=detail.getMem_id() %>
-				<img id="notice" alt="img" src="../resources/images/auction/messageicon.png"/>
+				<a href="#" onclick="letter();"><img id="notice" alt="img" src="../resources/images/auction/messageicon.png"/></a>
 			</p>
 			<p  class="detailTitle">
 				<span style="font-weight: bold; font-size: 14px;">배송방법  : </span>택배
@@ -106,7 +98,8 @@
 			<form action="../fund.do?">
 			<input type = "hidden" name = "command" value = "fundPay">
 			<input type = "hidden" name = "stock_no" value = "<%=detail.getStock_no()%>">
-			<select name = "orderinfo_kg" id="reward" onchange="selectOption();"><!-- 옵션 바뀔 떄 마다 -->
+			<input type="hidden" name = "fund_no" value = "<%=detail.getFund_no()%>">
+			<select name = "pay_price" id="reward" onchange="selectOption();"><!-- 옵션 바뀔 떄 마다 -->
 				<option selected="selected" value="<%=detail.getStock_price()%>"><%=detail.getStock_kg() %>kg (<fmt:formatNumber value="<%=detail.getStock_price()%>" type="number"/>원)</option>
 				<option value="<%=detail.getStock_price() *2 %>"><%=detail.getStock_kg() *2 %>kg (<fmt:formatNumber value="<%=detail.getStock_price() *2%>" type="number"/>원)</option>
 			</select> <br /><br /> 
@@ -131,16 +124,22 @@
 		</div>
 
 		<div style="margin: -2.1% 0% 0% 40%;">
-			<p>[내용 넣어야함!!!!!!!!!!!!!!!]</p>
-			<img alt="img" src="../resources/images/auction/apple.png"
+			<p><%=detail.getStock_detail().split("/")[0] %></p>
+			<img alt="img" src="../<%=detail.getStock_image().split("/")[1] %>"
 				style="width: 48%; height: 45%;" />
-			<p>[내용 넣어야함!!!!!!!!!!!!!!!]</p>
-			<img alt="img" src="../resources/images/auction/apple.png"
+			<%	System.out.println(detail.getStock_image().split("/")[1]);	%>
+			
+			<p><%=detail.getStock_detail().split("/")[1] %></p>
+			<img alt="img" src="../<%=detail.getStock_image().split("/")[2] %>"
 				style="width: 48%; height: 45%;" />
-			<p>[내용 넣어야함!!!!!!!!!!!!!!!]</p>
-			<img alt="img" src="../resources/images/auction/apple.png"
+			<%	System.out.println(detail.getStock_image().split("/")[2]);	%>
+				
+			<p><%=detail.getStock_detail().split("/")[2] %></p>
+			<img alt="img" src="../<%=detail.getStock_image().split("/")[3] %>"
 				style="width: 48%; height: 45%;" />
-			<p>[내용 넣어야함!!!!!!!!!!!!!!!]</p>
+			<%	System.out.println(detail.getStock_image().split("/")[3]);	%>
+				
+			<p><%=detail.getStock_detail().split("/")[3] %></p>
 		</div>
 		
 		<div class="bottom">

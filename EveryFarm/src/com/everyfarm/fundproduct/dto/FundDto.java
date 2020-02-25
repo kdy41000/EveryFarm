@@ -24,6 +24,82 @@ public class FundDto {
 	private int stock_kind;
 	private int stock_kg;
 	
+	///ajax영역
+	private int day;
+	private int hours;
+	private int minutes;
+	
+	
+	public int getDay() {
+		return day;
+	}
+
+
+	public void setDay(int day) {
+		this.day = day;
+	}
+
+
+	public int getHours() {
+		return hours;
+	}
+
+
+	public void setHours(int hours) {
+		this.hours = hours;
+	}
+
+
+	public int getMinutes() {
+		return minutes;
+	}
+
+
+	public void setMinutes(int minutes) {
+		this.minutes = minutes;
+	}
+
+
+	public int getSeconds() {
+		return seconds;
+	}
+
+
+	public void setSeconds(int seconds) {
+		this.seconds = seconds;
+	}
+
+
+	public FundDto(int fund_no, int stock_no, int fund_currentprice, int fund_price, int fund_status, Date fund_regdate,
+			Date fund_enddate, int fund_join, String mem_id, String stock_name, String stock_detail, int stock_price,
+			String stock_image, String stock_location, int stock_kind, int stock_kg, int day, int hours, int minutes,
+			int seconds) {
+		super();
+		this.fund_no = fund_no;
+		this.stock_no = stock_no;
+		this.fund_currentprice = fund_currentprice;
+		this.fund_price = fund_price;
+		this.fund_status = fund_status;
+		this.fund_regdate = fund_regdate;
+		this.fund_enddate = fund_enddate;
+		this.fund_join = fund_join;
+		this.mem_id = mem_id;
+		this.stock_name = stock_name;
+		this.stock_detail = stock_detail;
+		this.stock_price = stock_price;
+		this.stock_image = stock_image;
+		this.stock_location = stock_location;
+		this.stock_kind = stock_kind;
+		this.stock_kg = stock_kg;
+		this.day = day;
+		this.hours = hours;
+		this.minutes = minutes;
+		this.seconds = seconds;
+	}
+
+
+	private int seconds;
+	
 	
 	public FundDto() {
 		super();

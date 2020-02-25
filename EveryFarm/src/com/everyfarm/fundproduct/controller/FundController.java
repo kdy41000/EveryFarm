@@ -66,15 +66,20 @@ public class FundController extends HttpServlet {
 			
 		}if(command.equals("fundDetail")) {
 			int stock_no = Integer.parseInt(request.getParameter("stock_no"));
-			System.out.println(stock_no);
+			System.out.println("상품번호:"+stock_no);
 			FundDto detailDto = new FundDto();			
-			detailDto = biz.fundDetail(stock_no);
+			detailDto = biz.fundDetail(stock_no);	
 		
-			session.setAttribute("detailDto", detailDto);
+			session.setAttribute("detailDto", detailDto); //stock, fund 정보 담음
 			response.sendRedirect("fund/fundDetail.jsp");
 			
 		}else if(command.equals("deadLineFund")) {
+			int fund_no = Integer.parseInt(request.getParameter("fund_no"));
+			FundDto deadDto = biz.deadLineAjax(fund_no);
+			System.out.println("ajax...");
+			session.setAttribute("deadLineAjax", deadDto);
 			
+			response.sendRedirect("fund/fundDeadLineAjax.jsp");
 			
 		}else if(command.equals("fundPay")) {
 			System.out.println("결제 들어옴");
@@ -87,40 +92,47 @@ public class FundController extends HttpServlet {
 			}else{
 				System.out.println("else들어옴");
 				//상품 번호와 아이디, 결제 금액 받아온다
-				int stock_no = Integer.parseInt(request.getParameter("stock_no"));	
+				int stock_no = Integer.parseInt(request.getParameter("stock_no"));
+				int fund_no = Integer.parseInt(request.getParameter("fund_no"));
 				System.out.println("상품번호 :"+stock_no);
+				System.out.println("펀드번호  :"+fund_no);
+				
 				MemberDto dto = (MemberDto)session.getAttribute("dto");
 				String mem_id = dto.getMem_id();
 				System.out.println("아이디 : "+mem_id);
-				int orderinfo_kg = Integer.parseInt(request.getParameter("orderinfo_kg"));
-				System.out.println("주문량 :"+orderinfo_kg);
+				
+				int pay_price = Integer.parseInt(request.getParameter("pay_price"));
+				System.out.println("주문금액 :"+pay_price);
 				
 				//주문테이블과 주문상세 테이블에 데이터 insert
-				FundPayDto fundPayDto = biz.orderInput(stock_no, mem_id, orderinfo_kg);
-				System.out.println(fundPayDto.getOrderinfo_kg());
-				System.out.println(fundPayDto.getOrder_no());
+				FundPayDto fundPayDto = biz.orderInput(stock_no, mem_id, pay_price, fund_no);
 
 				//fundpay에 memeber, stock테이블, kg, 금액을 보내야한다 
 				session.setAttribute("fundPayDto", fundPayDto);
 				response.sendRedirect("fund/fundPay.jsp");						
-					}	
-			}else if(command.equals("paySuccess")) {
-				//주문 완료되면 주문번호(FK), 결제금액을 pay 테이블에 insert
+				}	
+			
+		}else if(command.equals("paySuccess")) {
+				//결제 완료되면 주문번호(FK), 결제금액을 pay 테이블에 insert
 				FundPayDto payRes = (FundPayDto)session.getAttribute("fundPayDto");
+				int pay_price = payRes.getPay_price();
+				String mem_id = payRes.getMem_id();
 				int order_no = payRes.getOrder_no();
-				int pay_price = payRes.getOrderinfo_kg();
-				int inputSuccess = biz.payInput(order_no, pay_price);
+				FundDto detailDto = (FundDto)session.getAttribute("detailDto");
+				int fund_no = detailDto.getFund_no();
+				int inputSuccess = biz.payInput(order_no, pay_price, fund_no, mem_id);
+				//결재완료 후 pay table에 데이터 input, orderinfo table 구매완료로 업데이트
+				
+				//fund table 참여인원 update, memjoin table 
 				
 				System.out.println("페이 성공");
-				if(inputSuccess>0) {
+				if(inputSuccess>2) {
 					response.sendRedirect("fund.do?command=fundlist&page=1");
+				}else {
+					System.out.println("insert실패");
 				}
-				
-				
-				
+
 			}
-			
-			
 		}
 		
 	

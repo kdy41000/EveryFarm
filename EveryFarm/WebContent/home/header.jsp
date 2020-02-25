@@ -89,7 +89,7 @@
 
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farm.do?command=farmmain';">주말농장</a></li>        
 
-		        	<li class="nav-item active" id="menu-hover"><a href="" class="nav-link">게시판</a>
+		        	<li class="nav-item active" id="menu-hover"><a href="#" class="nav-link" onclick="location.href='../board.do?command=boardList&page=1'">게시판</a>
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>
 				           <li><a href="#">자유게시판</a></li>
@@ -119,7 +119,7 @@
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction&currentpage=1';">경매상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farm.do?command=farmmain';">주말농장</a></li>
 
-		        	<li class="nav-item active" id="menu-hover"><a href="" class="nav-link">게시판</a>
+		        	<li class="nav-item active" id="menu-hover"><a href="#" class="nav-link" onclick="location.href='../board.do?command=boardList&page=1'">게시판</a>
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>
 				           <li><a href="#">자유게시판</a></li>
@@ -157,7 +157,7 @@
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction&currentpage=1';">경매상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farm.do?command=farmmain';">주말농장</a></li>
 
-		        	<li class="nav-item active" id="menu-hover"><a href="" class="nav-link">게시판</a>
+		        	<li class="nav-item active" id="menu-hover"><a href="#" class="nav-link" onclick="location.href='../board.do?command=boardList&page=1'">게시판</a>
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>
 				           <li><a href="#">자유게시판</a></li>
@@ -203,7 +203,7 @@
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../product.do?command=auction&currentpage=1';">경매상품</a></li>
 		        	<li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../farm.do?command=farmmain';">주말농장</a></li>
 
-		        	<li class="nav-item active" id="menu-hover"><a href="" class="nav-link">게시판</a>
+		        	<li class="nav-item active" id="menu-hover"><a href="#" class="nav-link" onclick="location.href='../board.do?command=boardList&page=1'">게시판</a>
 			        	 <ul style="border:1px solid black; width:100px; height:100px; background:black; border-radius:5px;">
 				           <li><a href="#">공지사항</a></li>
 				           <li><a href="#">자유게시판</a></li>

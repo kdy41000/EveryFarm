@@ -5,6 +5,8 @@
 <%@taglib prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<% request.setCharacterEncoding("UTF-8");%>
+<% response.setContentType("text/html; charset=UTF-8");%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,11 +14,10 @@
 <title>funding list</title>
 <link href="../resources/css/fund/fundlist.css" rel="stylesheet"
 	type="text/css">
+	
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
 	
-</script>
 
 
 </head>
@@ -72,9 +73,12 @@
 									<a
 										href="../fund.do?command=fundDetail&stock_no=<%=bestlist.get(i).getStock_no()%>">
 										<img alt="bestproduct"
-										src="<%=bestlist.get(i).getStock_image()%>" width="300px"
+										src="../<%=bestlist.get(i).getStock_image().split("/")[0]%>" width="300px"
 										height="250px">
 									</a>
+									<%
+									System.out.println(bestlist.get(i).getStock_image().split("/")[0]);
+									%>
 								</div>
 								<div id="item-title"><%=bestlist.get(i).getMem_id()%></div>
 								<h2 class="seller"><%=bestlist.get(i).getStock_name()%></h2><br>
@@ -129,7 +133,7 @@
 							<div class="item-disc">
 								<a
 									href="../fund.do?command=fundDetail&stock_no=<%=list.get(i).getStock_no()%>">
-									<img alt="itemPic" src="<%=list.get(i).getStock_image()%>"
+									<img alt="itemPic" src="../<%=list.get(i).getStock_image().split("/")[0]%>"
 									width="300px" height="250px">
 								</a>
 								<div id="item-title"><%=list.get(i).getMem_id()%></div>
@@ -174,18 +178,18 @@
 				<%
 					if (pagegroup > 1) {
 				%>
-				<a href="../fund.do?command=fundlist&page=<%=startpage - 1%>">이전
-					페이지</a>
-				<%
+				<a href="../fund.do?command=fundlist&page=<%=startpage - 1%>" class="prev">Prev</a>
+				<span><%
 					}
 					for (int pagenum = startpage; pagenum <= ((endpage < totalpage) ? endpage : totalpage); pagenum++) {
 				%>
-				<a href="../fund.do?command=fundlist&page=<%=pagenum%>"><%=pagenum%></a>
+				<a href="../fund.do?command=fundlist&page=<%=pagenum%>" class="pager"><%=pagenum%></a>
+				</span>
 				<%
 					}
 					if (endpage < fundPaging.getTotalpage()) {
 				%>
-				<a href="../fund.do?command=fundlist&page=<%=endpage + 1%>">다음페이지</a>
+				<a href="../fund.do?command=fundlist&page=<%=endpage + 1%>" class="next">Next</a>
 				<%
 					}
 				%>

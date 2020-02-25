@@ -7,7 +7,6 @@
 		<typeAlias type="com.everyfarm.fundproduct.dto.FundDto" alias="fundDto"/>
 		<typeAlias type="com.everyfarm.fundproduct.dto.FundPagingDto" alias="fundPagingDto"/>
 		<typeAlias type="com.everyfarm.fundproduct.dto.FundPayDto" alias="fundPayDto"/>
-		<typeAlias type="com.everyfarm.fundproduct.dto.FundPayInputDto" alias="fundPayInputDto"/>
 	</typeAliases>
 
 	<environments default="development">
