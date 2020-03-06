@@ -37,7 +37,7 @@
 	<section>
 		<div id="fundIntro">
 			<img alt="fundIntroImage"
-				src="../resources/images/auction/introduce.png">
+				src="../resources/images/auction/introduce.png" style="width:100%;">
 		</div>
 		<br>
 

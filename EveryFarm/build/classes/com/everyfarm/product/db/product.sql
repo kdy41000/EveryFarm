@@ -1,3 +1,8 @@
+SELECT*FROM MEMBER;
+
+delete from member
+where mem_id = '1268419765';
+
 DROP TABLE STOCK;
 CREATE SEQUENCE STOCKSEQ;
 DROP SEQUENCE STOCKSEQ;
@@ -28,14 +33,14 @@ VALUES(STOCKSEQ.NEXTVAL,'FARMERKIM','싱싱사과','포천시 싱싱한 사과�
 					resources\images\productstorage\사과2.png/
 					resources\images\productstorage\사과3.png/
 					resources\images\productstorage\사과4.png',
-		'포천시',6);
+		'포천시',1);
 -----------------------------------------------------------------------------------------------------
 select *from stock order by stock_no desc;
 
 --더미 데이터 입력---------------------------------------------------
 
 INSERT INTO AUCTION
-VALUES(AUCTIONSEQ.NEXTVAL,173,100000,0,2,sysdate,to_date('2020/03/22 00:00:00','YYYY/MM/DD HH24:MI:SS'),0);
+VALUES(AUCTIONSEQ.NEXTVAL,311,1000,0,2,sysdate,to_date('2020/02/29 00:00:00','YYYY/MM/DD HH24:MI:SS'),0);
 
 ----------------------------------------------------------		
 

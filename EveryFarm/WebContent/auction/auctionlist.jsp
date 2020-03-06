@@ -174,7 +174,7 @@ var zonetwoval ="dummy";
 <%@ include file="../home/header.jsp" %>
 <main>
     <section class="shop">
-       <img alt="img" src="../resources/images/auction/introduce.png" style="width:2000px;"/>
+       <img alt="img" src="../resources/images/auction/introduce.png" style="width:100%;"/>
    <a id="titleone">지역별:</a><select id="zone">
       <option>서울</option>
       <option>경기도</option>
