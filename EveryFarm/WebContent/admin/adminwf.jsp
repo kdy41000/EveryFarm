@@ -41,10 +41,10 @@
 				<table id="admin_table" class="table table-striped table-bordered">
 				<col width="10%">
 				<col width="10%">
-				<col width="40%">
+				<col width="35%">
 				<col width="10%">
 				<col width="10%">
-				<col width="10%">
+				<col width="15%">
 				<col width="10%">
 					<tr>
 						<th>아이디</th>
@@ -52,8 +52,8 @@
 						<th>농장주소</th>
 						<th>총평수</th>
 						<th>평당가격</th>
-						<th>승인상태</th>
 						<th>등록일</th>
+						<th>승인상태</th>
 					</tr>
 					<c:choose>
 						<c:when test="${empty adminwf }">
@@ -69,23 +69,30 @@
 									<td>${dto.wfarm_addr }</td>
 									<td>${dto.wfarm_totalArea }</td>
 									<td>${dto.wfarm_price }</td>
+									<td>${dto.wfarm_regDate }</td>
 									<td>
 										<c:choose>
-											<c:when test="${dto.wfarm_status eq '1'}">
-												<c:out value="승인대기"></c:out>
+											<c:when test="${dto.wfarm_status eq 1}">
+												<button type="button" class="btn btn-primary"
+												onclick="location.href='../admin.do?command=adminwfres&no=${dto.wfarm_key}&pageNumber=<%=currentpage %>'"
+												>승인대기</button>
 											</c:when>
-											<c:when test="${dto.wfarm_status eq '2'}">
-												<c:out value="승인"></c:out>
+											<c:when test="${dto.wfarm_status eq 2}">
+												<button type="button" class="btn btn-success"
+												style="cursor: default;" disabled="disabled"
+												onclick="location.href='#'"
+												>승인</button>
 											</c:when>
-											<c:when test="${dto.wfarm_status eq '3'}">
-												<c:out value="품절"></c:out>
-											</c:when>
+											<c:when test="${dto.wfarm_status eq 3}">
+												<button type="button" class="btn btn-primary" 
+												style="background-color: gray; border-color: gray; cursor: default;"
+												disabled="disabled">품절</button>
+											</c:when>											
 											<c:otherwise>
 												<c:out value="오류"></c:out>
 											</c:otherwise>											
 										</c:choose>
 									</td>
-									<td>${dto.wfarm_regDate }</td>
 								</tr>								
 							</c:forEach>
 						</c:otherwise>
@@ -99,11 +106,11 @@
 					if(pagegroup!=1){
 				%>							
 						<li><a href="../admin.do?command=adminwf&pageNumber=<%=startpage-1%>">
-						<span class="glyphicon glyphicon-chevron-left">&lt;</span></a></li>
+						<span>&lt;&lt;</span></a></li>
 				<%
 					} else if(pagegroup==1){
 				%>
-						<li><span style="color: gray;">&lt;</span></li>
+						<li><span style="color: gray;">&lt;&lt;</span></li>
 				<%	
 					}
 					for(int pagenum = startpage; pagenum <= ((endpage<totalpage)?endpage:totalpage); pagenum++){
@@ -120,11 +127,11 @@
 					if(endpage < paging.getTotalpage()){				
 				%>
 						<li><a href="../admin.do?command=adminwf&pageNumber=<%=endpage+1%>">
-						<span class="glyphicon glyphicon-chevron-right">&gt;</span></a></li>
+						<span>&gt;&gt;</span></a></li>
 				<%
 					} else {
 				%>
-						<li><span style="color: gray;">&gt;</span></li>
+						<li><span style="color: gray;">&gt;&gt;</span></li>
 				<%
 					}
 				%>

@@ -95,7 +95,7 @@
    
                <!-- 차트2 -->         
             <div class="chart-container">
-            <span>현재 진행중인 상품 총액 </span><span style="font-size:5px;">펀드 단위 k (1000)</span>
+            <span>현재 진행중인 상품 총액 </span><span style="font-size:5px;">펀드 단위</span>
               <canvas id="bar-chart3"></canvas>
             </div>
              
@@ -112,7 +112,7 @@
                    datasets: [{
                      label: '총액(좌)',
                      yAxisID: 'A',
-                     data:[auctionSumCurrentPrice, fundSumCurrentPrice/1000],
+                     data:[auctionSumCurrentPrice, fundSumCurrentPrice],
                      backgroundColor:'rgba(40,180,130,.5)',
                      borderColor:'rgba(40,180,130)',
                      borderWidth:1

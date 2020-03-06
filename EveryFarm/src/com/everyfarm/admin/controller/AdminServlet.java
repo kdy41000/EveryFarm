@@ -206,8 +206,40 @@ public class AdminServlet extends HttpServlet {
 			session.setAttribute("adminbilllist", list);
 			response.sendRedirect("admin/adminbilllist.jsp");
 		}
+		else if(command.equals("adminbillres")) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			System.out.println(no);
+			int res = billListDao.adminbillres(no);
+			System.out.println("주문 승인 완료 "+res);
+			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
+			PagingDto paging = null;
+			int totalpage = fundListDao.totalPage(TOTAL_PAGE_ROW);
+			paging = pagingMethod(currentpage, totalpage);
+			List<AdminBillListDto> list = billListDao.selectList(paging.getFrom(), paging.getTo());
+			
+			HttpSession session =request.getSession();
+			session.setAttribute("adminbilllist_paging", paging);
+			session.setAttribute("adminbilllist", list);
+			response.sendRedirect("admin/adminbilllist.jsp");
+		}
 		//------------- 농장관리 (admin wf) -------------------
 		else if(command.equals("adminwf")) {
+			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
+			PagingDto paging = null;
+			int totalpage = wfDao.totalPage(TOTAL_PAGE_ROW);
+			paging = pagingMethod(currentpage, totalpage);
+			List<AdminWFDto> list = wfDao.selectList(paging.getFrom(), paging.getTo());
+			
+			HttpSession session =request.getSession();
+			session.setAttribute("adminwf_paging", paging);
+			session.setAttribute("adminwf", list);
+			response.sendRedirect("admin/adminwf.jsp");
+		}
+		else if(command.equals("adminwfres")) {
+			int no = Integer.parseInt(request.getParameter("no"));
+			System.out.println(no);
+			int res = wfDao.adminwfres(no);
+			System.out.println("농장 승인 완료 "+res);
 			int currentpage = Integer.parseInt(request.getParameter("pageNumber"));
 			PagingDto paging = null;
 			int totalpage = wfDao.totalPage(TOTAL_PAGE_ROW);

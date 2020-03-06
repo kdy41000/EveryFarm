@@ -70,4 +70,23 @@ public class AdminBillListDao {
 		return list;
 	}
 
+	public int adminbillres(int no) {
+		int res = 0;
+		SqlSession session = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession(false);
+			res = session.update(namespace+"adminbillres",no);
+			if(res>0) {
+				session.commit();
+			}
+			
+		} catch (Exception e) {
+			System.out.println("AdminBillListDao ERROR : adminbillres");
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return res;
+	}
 }

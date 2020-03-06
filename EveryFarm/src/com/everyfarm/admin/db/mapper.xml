@@ -29,7 +29,7 @@
  	 <select id="totalpage_adminbilllist" resultType="int">
 		SELECT COUNT(*)
 		FROM STOCK S INNER JOIN BILL B ON S.STOCK_NO = B.STOCK_NO
-		LEFT JOIN ORDERINFO O ON B.ORDER_NO = O.ORDER_NO
+		INNER JOIN ORDERINFO O ON B.ORDER_NO = O.ORDER_NO
 		ORDER BY O.ORDER_NO DESC
  	</select>
 
@@ -45,7 +45,7 @@
 		FROM (SELECT ROWNUM AS RNUM, A.MEM_ID, A.MEM_NAME, A.MEM_GRADE, B.FARMER_STATUS
 			FROM MEMBER A, FARMER B
 			WHERE A.MEM_ID = B.MEM_ID
-			AND A.MEM_DROP = 'N') R 
+			AND A.MEM_DROP = 'y') R 
 		WHERE R.RNUM BETWEEN #{from} AND #{to}
  	</select>
 
@@ -125,7 +125,7 @@
 				FROM	(
 						SELECT * 
 						FROM STOCK S INNER JOIN BILL B ON S.STOCK_NO = B.STOCK_NO
-						LEFT JOIN ORDERINFO O ON B.ORDER_NO = O.ORDER_NO
+						INNER JOIN ORDERINFO O ON B.ORDER_NO = O.ORDER_NO
 						ORDER BY O.ORDER_NO DESC
 						) AA
 				) BB		
@@ -139,11 +139,15 @@
 				FROM	(
 						SELECT * 
 						FROM STOCK S INNER JOIN BILL B ON S.STOCK_NO = B.STOCK_NO
-						LEFT JOIN ORDERINFO O ON B.ORDER_NO = O.ORDER_NO
+						INNER JOIN ORDERINFO O ON B.ORDER_NO = O.ORDER_NO
 						ORDER BY O.ORDER_NO DESC
 						) AA
 				) BB		
 		WHERE BB.RNUM BETWEEN 1 AND 5
+ 	</select>
+ 	
+ 	 <select id="adminbillres">
+		UPDATE ORDERINFO SET ORDERINFO_STATUS=2 WHERE ORDER_NO=#{no}
  	</select>
  	
  	 <select id="adminwf" resultType="AdminWFDto" parameterType="pagingDto">
@@ -159,6 +163,9 @@
 		WHERE BB.RNUM BETWEEN #{from} AND #{to}
  	</select>
 
+ 	<select id="adminwfres">
+		UPDATE WEEKENDFARM SET WFARM_STATUS=2 WHERE WFARM_KEY=#{no}
+ 	</select>
  	
  	
  	<select id="stockKindCount" resultType="int">

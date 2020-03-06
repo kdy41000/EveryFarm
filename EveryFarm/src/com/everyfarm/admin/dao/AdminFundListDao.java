@@ -66,7 +66,7 @@ private String namespace = "admin.";
 			}
 			
 		} catch (Exception e) {
-			System.out.println("AuctionApprovalDao ERROR : adminfundres");
+			System.out.println("AdminFundListDao ERROR : adminfundres");
 			e.printStackTrace();
 		} finally {
 			session.close();

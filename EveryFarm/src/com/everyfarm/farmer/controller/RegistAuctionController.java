@@ -23,7 +23,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @WebServlet("/registauction.do")
 public class RegistAuctionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	String savePath = "C:\\Git_chaewon\\EveryFarm\\EveryFarm\\WebContent\\resources\\images\\productstorage";
+	String savePath = "C:\\Git_semifinal\\EveryFarm\\EveryFarm\\WebContent\\resources\\images\\productstorage";
 	
     
     public RegistAuctionController() {

@@ -23,7 +23,7 @@ import com.oreilly.servlet.multipart.FileRenamePolicy;
 public class RegistFarmController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	String savePath = "C:\\git_everyfarm\\EveryFarm\\WebContent\\resources\\images\\farmimage";
+	String savePath = "C:\\Git_semifinal\\EveryFarm\\EveryFarm\\WebContent\\resources\\images\\farmimage";
 	
     
     public RegistFarmController() {
@@ -82,7 +82,7 @@ public class RegistFarmController extends HttpServlet {
 			if(res>0) {
 				jsResponse("농장 등록이 신청되었습니다!", "index.jsp" ,response);
 			} else {
-				jsResponse("농장 등록 실패ㅠ", "farmer.do?command=registform", response);
+				jsResponse("농장 등록 실패", "farmer.do?command=registform", response);
 			}
 		}
 	}

@@ -47,11 +47,11 @@
 				<col width="10%">
 					<tr>
 						<th>아이디</th>
-						<th>거래상태</th>
+						<th>품목</th>
 						<th>주문종류</th>
 						<th>상품명</th>
 						<th>상품가격</th>
-						<th>품목</th>
+						<th>거래상태</th>
 					</tr>
 					<c:choose>
 						<c:when test="${empty adminbilllist }">
@@ -63,40 +63,6 @@
 							<c:forEach items="${adminbilllist }" var="dto">
 								<tr>
 									<td>${dto.mem_id }</td>
-									<td>
-										<c:choose>
-											<c:when test="${dto.orderInfo_status eq 1}">
-												<c:out value="구매요청"></c:out>
-											</c:when>
-											<c:when test="${dto.orderInfo_status eq 2}">
-												<c:out value="구매완료"></c:out>
-											</c:when>
-											<c:when test="${dto.orderInfo_status eq 3}">
-												<c:out value="환불요청"></c:out>
-											</c:when>
-											<c:when test="${dto.orderInfo_status eq 4}">
-												<c:out value="환불완료"></c:out>
-											</c:when>
-											<c:otherwise>
-												<c:out value="오류"></c:out>
-											</c:otherwise>											
-										</c:choose>
-									</td>
-									<td>
-										<c:choose>
-											<c:when test="${dto.orderInfo_kind eq 1}">
-												<c:out value="펀드"></c:out>
-											</c:when>
-											<c:when test="${dto.orderInfo_kind eq 2}">
-												<c:out value="경매"></c:out>
-											</c:when>
-											<c:otherwise>
-												<c:out value="오류"></c:out>
-											</c:otherwise>											
-										</c:choose>
-									</td>
-									<td>${dto.stock_name }</td>
-									<td>${dto.stock_price }</td>
 									<td>
 										<c:choose>
 											<c:when test="${dto.stock_kind eq 1}">
@@ -122,6 +88,50 @@
 											</c:otherwise>											
 										</c:choose>
 									</td>
+									<td>
+										<c:choose>
+											<c:when test="${dto.orderInfo_kind eq 1}">
+												<c:out value="펀드"></c:out>
+											</c:when>
+											<c:when test="${dto.orderInfo_kind eq 2}">
+												<c:out value="경매"></c:out>
+											</c:when>
+											<c:otherwise>
+												<c:out value="오류"></c:out>
+											</c:otherwise>											
+										</c:choose>
+									</td>
+									<td>${dto.stock_name }</td>
+									<td>${dto.stock_price }</td>
+									<td>
+										<c:choose>
+											<c:when test="${dto.orderInfo_status eq 1}">
+												<button type="button" class="btn btn-primary"
+												style="cursor: default;" disabled="disabled"
+												onclick="location.href='#'"
+												>구매요청</button>
+											</c:when>
+											<c:when test="${dto.orderInfo_status eq 2}">
+												<button type="button" class="btn btn-success"
+												style="cursor: default;" disabled="disabled"
+												onclick="location.href='#'"
+												>구매완료</button>
+											</c:when>
+											<c:when test="${dto.orderInfo_status eq 3}">
+												<button type="button" class="btn btn-primary" 
+												style="background-color: gray; border-color: gray; cursor: default;"
+												disabled="disabled">환불요청</button>
+											</c:when>										
+											<c:when test="${dto.orderInfo_status eq 4}">
+												<button type="button" class="btn btn-primary" 
+												style="background-color: gray; border-color: gray; cursor: default;"
+												disabled="disabled">환불완료</button>
+											</c:when>	
+											<c:otherwise>
+												<c:out value="오류"></c:out>
+											</c:otherwise>	
+										</c:choose>
+									</td>
 								</tr>								
 							</c:forEach>
 						</c:otherwise>
@@ -135,11 +145,11 @@
 					if(pagegroup!=1){
 				%>							
 						<li><a href="../admin.do?command=adminbilllist&pageNumber=<%=startpage-1%>">
-						<span class="glyphicon glyphicon-chevron-left">&lt;</span></a></li>
+						<span>&lt;&lt;</span></a></li>
 				<%
 					} else if(pagegroup==1){
 				%>
-						<li><span style="color: gray;">&lt;</span></li>
+						<li><span style="color: gray;">&lt;&lt;</span></li>
 				<%	
 					}
 					for(int pagenum = startpage; pagenum <= ((endpage<totalpage)?endpage:totalpage); pagenum++){
@@ -156,11 +166,11 @@
 					if(endpage < paging.getTotalpage()){				
 				%>
 						<li><a href="../admin.do?command=adminbilllist&pageNumber=<%=endpage+1%>">
-						<span class="glyphicon glyphicon-chevron-right">&gt;</span></a></li>
+						<span>&gt;&gt;</span></a></li>
 				<%
 					} else {
 				%>
-						<li><span style="color: gray;">&gt;</span></li>
+						<li><span style="color: gray;">&gt;&gt;</span></li>
 				<%
 					}
 				%>

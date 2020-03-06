@@ -22,7 +22,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @WebServlet("/registfund.do")
 public class RegistFundController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    String savePath = "C:\\Git_chaewon\\EveryFarm\\EveryFarm\\WebContent\\resources\\images\\productstorage";
+    String savePath = "C:\\Git_semifinal\\EveryFarm\\EveryFarm\\WebContent\\resources\\images\\productstorage";
     
     public RegistFundController() {
         super();
@@ -61,6 +61,7 @@ public class RegistFundController extends HttpServlet {
 			String stock_detail_4 = multi.getParameter("stock_detail_04");
 			int stock_kg = Integer.parseInt(multi.getParameter("stock_kg"));
 			int stock_price = Integer.parseInt(multi.getParameter("stock_price"));
+			int fund_price = Integer.parseInt(multi.getParameter("fund_price"));
 			String stock_image_01 = imagePath + multi.getFilesystemName("stock_image_01")+"/";
 			String stock_image_02 = imagePath + multi.getFilesystemName("stock_image_02")+"/";
 			String stock_image_03 = imagePath + multi.getFilesystemName("stock_image_03")+"/";
@@ -79,12 +80,12 @@ public class RegistFundController extends HttpServlet {
 			dto.setStock_kind(stock_kind);
 			dto.setFund_endDate(fund_endDate);
 			dto.setStock_location(stock_location);
-			
+			dto.setFund_price(fund_price);
 			int res1 = biz.registStock(dto);
 			int res2 = biz.registFund(dto);
 			
 			if(res1>0 && res2>0) {
-				jsResponse("펀드 등록 완료", "index.jsp", response);
+				jsResponse("펀드 등록 완료", "farmermain.jsp", response);
 			} else {
 				jsResponse("펀드 등록 실패ㅠㅠ", "registfund.do?command=newfund", response);
 			}

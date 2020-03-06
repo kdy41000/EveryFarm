@@ -66,6 +66,8 @@ public class FarmDetailController extends HttpServlet {
 			session.setAttribute("sendfarmdetail", list);
 			
 			response.sendRedirect("farmerpage/sendfarmdetail.jsp");
+		} else if(command.equals("registform")) {
+			response.sendRedirect("farmerpage/registfarm.jsp");
 		}
 		
 	}

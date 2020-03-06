@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resources/css/farmermypage/buttonstyle.css">
-<title>마이페이지</title>
+<title>농부 마이페이지</title>
 </head>
 
 <style type="text/css">
@@ -103,7 +103,7 @@
                <c:choose>
                   <c:when test="${empty sessionScope.farmapplylist}">
                      <tr>
-                        <td colspan="4" align="center">-----신청내역이 없습니다-----</td>
+                        <td colspan="4" align="center">신청내역이 없습니다</td>
                      </tr>
                   </c:when>
                   <c:otherwise>
@@ -137,7 +137,7 @@
                <c:choose>
                   <c:when test="${empty sessionScope.recentorderlist}">
                      <tr>
-                        <td colspan="5" align="center">-----최근 주문 내역이 없습니다-----</td>
+                        <td colspan="5" align="center">최근 주문 내역이 없습니다</td>
                      </tr>
                   </c:when>
                   <c:otherwise>
@@ -180,7 +180,7 @@
                <c:choose>
                   <c:when test="${empty sessionScope.recentrefund}">
                      <tr>
-                        <td colspan="5" align="center">----환불요청 내역이 없습니다----</td>
+                        <td colspan="5" align="center">&emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; 환불요청 내역이 없습니다</td>
                      </tr>
                   </c:when>
                   <c:otherwise>
@@ -195,7 +195,7 @@
                      </c:forEach>
                   </c:otherwise>
                </c:choose>
-               </tbody>
+              </tbody>
        </div>
        
              </div>

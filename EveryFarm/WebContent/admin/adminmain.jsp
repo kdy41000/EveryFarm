@@ -104,10 +104,10 @@
 										<td>${dto1.mem_regdate }</td>
 										<td>
 											<c:choose>
-												<c:when test="${dto1.mem_drop eq 'Y'}">
+												<c:when test="${dto1.mem_drop eq 'n'}">
 													<c:out value="탈퇴"></c:out>
 												</c:when>
-												<c:when test="${dto1.mem_drop eq 'N'}">
+												<c:when test="${dto1.mem_drop eq 'y'}">
 													<c:out value="가입"></c:out>
 												</c:when>	
 												<c:otherwise>
@@ -284,11 +284,11 @@
 					var myBarChart3 = new Chart(mychart3, {
 					     type: 'bar',
 					     data: {
-					       labels: ['경매', '펀드(k)'],
+					       labels: ['경매', '펀드'],
 					       datasets: [{
 					         label: '총액(좌)',
 					         yAxisID: 'A',
-					         data:[auctionSumCurrentPrice, fundSumCurrentPrice/1000],
+					         data:[auctionSumCurrentPrice, fundSumCurrentPrice],
 					         backgroundColor:'rgba(40,180,130,.5)',
 					         borderColor:'rgba(40,180,130)',
 					         borderWidth:1
