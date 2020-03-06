@@ -31,7 +31,7 @@
  
  function requestPay() {
 	//IMP.request_pay(param, callback) 호출
-		alert("확인");
+		//alert("확인");
 			
 		IMP.request_pay({ // param -> 내용 수정하기
 	   pg: "inicis",
@@ -109,7 +109,7 @@
 				<tbody>
 					<tr>
 						<td><input id="" name="" value="" type="checkbox"></td>
-						<td><a href="../fund.do?command=fundDetail&stock_no=<%=detailDto.getStock_no()%>"><img src="<%=detailDto.getStock_image() %>" width="100px" height="100px"></a></td>
+						<td><a href="../fund.do?command=fundDetail&stock_no=<%=detailDto.getStock_no()%>"><img src="../<%=detailDto.getStock_image().split("/")[0] %>" width="100px" height="100px"></a></td>
 						<td><a href="../fund.do?command=fundDetail&stock_no=<%=detailDto.getStock_no()%>"><%=detailDto.getStock_name() %></a>
 						<td>
 							<div class="">

@@ -21,7 +21,7 @@
 			FUNDSEQ.NEXTVAL,
 			(SELECT stock_no FROM (SELECT * FROM STOCK WHERE mem_id=#{mem_id} ORDER BY stock_no DESC) WHERE ROWNUM=1),
 			0,
-			0,
+			#{fund_price},
 			1,
 			SYSDATE,
 			#{fund_endDate},

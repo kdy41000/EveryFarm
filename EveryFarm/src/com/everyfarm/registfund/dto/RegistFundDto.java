@@ -12,13 +12,16 @@ public class RegistFundDto {
 	private String stock_location;
 	private int stock_kind;
 	private Date fund_endDate;
+	private int fund_price;
 	
 	public RegistFundDto() {
 		
 	}
 	
+	
+
 	public RegistFundDto(String mem_id, String stock_name, String stock_detail, int stock_kg, int stock_price,
-			String stock_image, String stock_location, int stock_kind, Date fund_endDate) {
+			String stock_image, String stock_location, int stock_kind, Date fund_endDate, int fund_price) {
 		super();
 		this.mem_id = mem_id;
 		this.stock_name = stock_name;
@@ -29,7 +32,22 @@ public class RegistFundDto {
 		this.stock_location = stock_location;
 		this.stock_kind = stock_kind;
 		this.fund_endDate = fund_endDate;
+		this.fund_price = fund_price;
 	}
+
+
+
+	public int getFund_price() {
+		return fund_price;
+	}
+
+
+
+	public void setFund_price(int fund_price) {
+		this.fund_price = fund_price;
+	}
+
+
 
 	public String getMem_id() {
 		return mem_id;

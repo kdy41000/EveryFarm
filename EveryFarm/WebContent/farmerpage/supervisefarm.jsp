@@ -75,7 +75,7 @@
 	  <%@ include file="../home/sidemenu_fm.jsp" %>
 	    <div class="col" >
 	    	<h3 style="margin : 3em 3em 0 3em; font-weight: bold; color:#593b10;">${sessionScope.dto.mem_id } 님의 농장</h3>
-	    	<input type="button" id="newfarm" value="새 농장 등록" onclick=""><br><br>
+	    	<input type="button" id="newfarm" value="새 농장 등록" onclick="location.href='../supervisefarm.do?command=registform'"><br><br>
 	    	<c:choose>
 	    		<c:when test="${empty sessionScope.supervisefarmlist }">
 			    	<div class="box">

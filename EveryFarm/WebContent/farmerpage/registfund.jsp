@@ -99,6 +99,108 @@
 				}
 			}
 			
+			$(document).ready(function(){
+				$("#file1").on("change", handleImgFileSelect01);
+			});
+			
+			function handleImgFileSelect01(e) {
+				var files = e.target.files;
+				var filesArr = Array.prototype.slice.call(files);
+				
+				filesArr.forEach(function(f) {
+					if(!f.type.match("image.*")){
+						alert("이미지 파일만 첨부 가능합니다.");
+						return false;
+					}
+					
+					sel_file = f;
+					
+					var reader = new FileReader();
+					reader.onload = function(e){
+						$("#farm_img1").attr("src", e.target.result).attr("style", "margin : 20px;");
+						$("#farm_img1").parent().attr("style","height:auto;");
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+			
+			
+			$(document).ready(function(){
+				$("#file2").on("change", handleImgFileSelect02);
+			});
+			
+			function handleImgFileSelect02(e) {
+				var files = e.target.files;
+				var filesArr = Array.prototype.slice.call(files);
+				
+				filesArr.forEach(function(f) {
+					if(!f.type.match("image.*")){
+						alert("이미지 파일만 첨부 가능합니다.");
+						return false;
+					}
+					
+					sel_file = f;
+					
+					var reader = new FileReader();
+					reader.onload = function(e){
+						$("#farm_img2").attr("src", e.target.result).attr("style", "margin : 20px;");
+						$("#farm_img2").parent().attr("style","height:auto;");
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+			
+			
+			$(document).ready(function(){
+				$("#file3").on("change", handleImgFileSelect03);
+			});
+			
+			function handleImgFileSelect03(e) {
+				var files = e.target.files;
+				var filesArr = Array.prototype.slice.call(files);
+				
+				filesArr.forEach(function(f) {
+					if(!f.type.match("image.*")){
+						alert("이미지 파일만 첨부 가능합니다.");
+						return false;
+					}
+					
+					sel_file = f;
+					
+					var reader = new FileReader();
+					reader.onload = function(e){
+						$("#farm_img3").attr("src", e.target.result).attr("style", "margin : 20px;");
+						$("#farm_img3").parent().attr("style","height:auto;");
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+			
+			$(document).ready(function(){
+				$("#file4").on("change", handleImgFileSelect04);
+			});
+			
+			function handleImgFileSelect04(e) {
+				var files = e.target.files;
+				var filesArr = Array.prototype.slice.call(files);
+				
+				filesArr.forEach(function(f) {
+					if(!f.type.match("image.*")){
+						alert("이미지 파일만 첨부 가능합니다.");
+						return false;
+					}
+					
+					sel_file = f;
+					
+					var reader = new FileReader();
+					reader.onload = function(e){
+						$("#farm_img4").attr("src", e.target.result).attr("style", "margin : 20px;");
+						$("#farm_img4").parent().attr("style","height:auto;");
+					}
+					reader.readAsDataURL(f);
+				});
+			}
+			
 			
 </script>
 <style type="text/css">
@@ -201,11 +303,11 @@ textarea{
 }
 
 .filebox label:hover {
-  background-color: #c9baa2;
+  background-color: #876837;
 }
 
 .filebox label:active {
-  background-color: #876837;
+  background-color: #c9baa2;
 }
 
 .filebox input[type="file"] {
@@ -217,6 +319,27 @@ textarea{
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+.img_wrap{
+	width : 300px;
+	height: 0;
+}
+.img_wrap img{
+	max-width: 100%;
+}
+
+.img_wrap2{
+	width : 600px;
+	height: 0;
+}
+.img_wrap2 img{
+	max-width: 100%;
+}
+
+span{
+	height:46px;
+	vertical-align: text-top;
 }
 </style>
 </head>
@@ -240,6 +363,9 @@ textarea{
 				<div class="filebox">
 					<label for="file1">이미지 첨부</label>
 					<input type="file" name="stock_image_01" id="file1">
+					<div class = "img_wrap">
+						<img id="farm_img1" />
+					</div>
 				</div>
 			</div>
 			
@@ -290,8 +416,10 @@ textarea{
 			</div>
 			
 			<div class="items"><label>상품가격</label><br>
-			<input type="text" name="stock_price" class="inputbox"><span> 원</span></div>
+			<input type="text" name="stock_price" class="inputbox"><span>원</span></div>
 
+			<div class="items"><label>펀드 목표액</label><br>
+			<input type="text" name="fund_price" class="inputbox"><span>원</span></div>
 			
 			<div class="items"><label>펀드 종료일</label><br>
 			<input type="date" id="enddate" name="fund_endDate"></div>
@@ -301,18 +429,27 @@ textarea{
 			<div class="filebox">
 				<label for="file2">이미지 첨부</label>
 			<input type="file" name="stock_image_02" id="file2"><br>
+			<div class = "img_wrap2">
+						<img id="farm_img2" />
+					</div>
 			<textarea name="stock_detail_02"></textarea><br>
 			</div>
 			
 			<div class="filebox">
 			<label for="file3">이미지 첨부</label>
 			<input type="file" name="stock_image_03" id="file3"><br>
+			<div class = "img_wrap2">
+						<img id="farm_img3" />
+					</div>
 			<textarea name="stock_detail_03"></textarea><br>
 			</div>
 			
 			<div class="filebox">
 			<label for="file4">이미지 첨부</label>
 			<input type="file" name="stock_image_04" id="file4"><br>
+			<div class = "img_wrap2">
+				<img id="farm_img4" />
+			</div>
 			<textarea name="stock_detail_04"></textarea><br>
 			</div>
 
