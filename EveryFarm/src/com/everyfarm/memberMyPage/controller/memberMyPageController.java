@@ -136,7 +136,7 @@ public class memberMyPageController extends HttpServlet {
 			response.sendRedirect("memberMyPage/myweekendfarmlist.jsp");
 		
 		} else if(command.equals("myauctionlist")) {	//내 경매내역 조회
-			
+			 
 			int currentpage = Integer.parseInt(request.getParameter("currentpage"));
 			String mem_id = request.getParameter("mem_id");
 	         System.out.println(currentpage+"커랜트 페이지");
@@ -181,7 +181,7 @@ public class memberMyPageController extends HttpServlet {
 			response.sendRedirect("memberMyPage/mypaymentlist.jsp");
 			
 		} else if(command.equals("order")) {	//경매 주문페이지
-			
+		
 			if(session.getAttribute("dto")==null) {
 				PrintWriter out = response.getWriter();
 				out.println("<script>");

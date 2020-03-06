@@ -56,5 +56,9 @@
 			alert("비밀번호가 틀렸습니다.");
 		}
 	}
+	if(${empty sessionScope.dto.mem_id}){
+		alert("로그인이 필요합니다");
+		location.href="../login/loginform.jsp";
+	}
 </script>
 </html>

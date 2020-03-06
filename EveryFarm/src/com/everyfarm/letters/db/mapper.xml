@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="letters">
-	<select id="inboxLetters" resultType="lettersDto" parameterType="String">
-		SELECT * FROM LETTERS
+	<select id="inboxTotalPage" parameterType="String" resultType="int">
+		SELECT COUNT(*) AS TOTALPAGE FROM
+		(SELECT * FROM LETTERS
+		WHERE mem_id=#{mem_id})
+	</select>
+	<select id="inboxLetters" resultType="lettersDto" parameterType="lettersDto">
+		SELECT B.* 
+		FROM (SELECT A.*, ROWNUM AS RNUM
+		FROM (SELECT * FROM LETTERS
 		WHERE mem_id=#{mem_id}
-		ORDER BY letter_status, letter_id DESC
+		ORDER BY letter_status, letter_id DESC) A) B
+		WHERE RNUM BETWEEN #{startseq } AND #{endseq }
 	</select>
 	<insert id="sendLetters" parameterType="lettersDto">
 		INSERT INTO LETTERS
@@ -17,10 +25,18 @@
 			#{letter_id}
 		</foreach>
 	</delete>
-	<select id="sentLetters" resultType="lettersDto" parameterType="String">
-		SELECT * FROM LETTERS
+	<select id="sentTotalPage" parameterType="String" resultType="int">
+		SELECT COUNT(*) AS TOTALPAGE FROM
+		(SELECT * FROM LETTERS
+		WHERE letter_sender=#{mem_id})
+	</select>
+	<select id="sentLetters" resultType="lettersDto" parameterType="lettersDto">
+		SELECT B.* 
+		FROM (SELECT A.*, ROWNUM AS RNUM
+		FROM (SELECT * FROM LETTERS
 		WHERE letter_sender=#{mem_id}
-		ORDER BY letter_id DESC
+		ORDER BY letter_id DESC) A) B
+		WHERE RNUM BETWEEN #{startseq } AND #{endseq }
 	</select>
 	<select id="LettersDetail" resultType="lettersDto" parameterType="int">
 		SELECT * FROM LETTERS

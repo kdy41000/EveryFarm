@@ -18,9 +18,8 @@
 %>
 <style type="text/css">
 	.box{border: 1px solid gray; padding:10px; margin:30px; background: white; border-radius: 10px;}
-	.button{margin:15px; margin-left:600px;  width:180px; height:60px; font-size: 20px;}
+	
 	.button:hover {transform: translateY(-5px); background-color:#e74c3c;}
-	.cctvbox{ box-shadow:0px 10px 122px 0px rgba(170,102,255,0.23);}
 </style>
 </head>
 <body>
@@ -31,8 +30,6 @@
 	    <div class="col" >
 	    	<fieldset class="box">
 	      <h4><strong>나의 주말농장</strong></h4>
-	     	  <div class="cctvbox" style=" width: 700px; height: 500px; margin-left: 350px"></div>
-				<input type="button" class="button" value="CCTV" >
 	      	<table class="table">
 	      		<thead>
 	      			<tr>
@@ -40,6 +37,7 @@
 	      				<th>분양받은 땅</th>
 	      				<th>주소</th>
 	      				<th>신청일</th>
+	      				<th></th>
 	      			</tr>
 	      		</thead>
 <%
@@ -57,6 +55,7 @@
 						<td><%=dto.getMf_area() %>번</td>
 						<td><%=dto.getWfarm_addr() %></td>
 						<td><f:formatDate value="<%=dto.getMf_regDate() %>" pattern="yyyy.MM.dd"/></td>
+						<td><input type="button" class="button" value="CCTV" onclick="showCCTV();"></td>
 					</tr>
 <%
 				}
@@ -69,5 +68,15 @@
    </div>
     <br><br><br><br>
      <%@ include file="../home/footer.jsp" %>
+<script type="text/javascript">
+	function showCCTV(){
+		window.open("http://172.30.1.27:8081","","width=410, height=450, left=500, top=100");
+	}
+	if(${empty sessionScope.dto.mem_id}){
+		alert("로그인이 필요합니다");
+		location.href="../login/loginform.jsp";
+	}
+</script>
+
 </body>
 </html>

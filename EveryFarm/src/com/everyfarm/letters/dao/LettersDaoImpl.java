@@ -14,12 +14,16 @@ public class LettersDaoImpl extends SqlMapConfig implements LettersDao{
 	private String namespace="letters.";
 	
 	@Override
-	public List<LettersDto> inboxLetters(String mem_id) {
+	public List<LettersDto> inboxLetters(int startseq, int endseq, String mem_id) {
 		SqlSession session = null;
+		LettersDto dto = new LettersDto();
 		List<LettersDto> list = new ArrayList<LettersDto>();
+		dto.setStartseq(startseq);
+		dto.setEndseq(endseq);
+		dto.setMem_id(mem_id);
 		try {
 			session = getSqlSessionFactory().openSession();
-			list = session.selectList(namespace+"inboxLetters", mem_id);
+			list = session.selectList(namespace+"inboxLetters", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -29,12 +33,16 @@ public class LettersDaoImpl extends SqlMapConfig implements LettersDao{
 	}
 
 	@Override
-	public List<LettersDto> sentLetters(String mem_id) {
+	public List<LettersDto> sentLetters(int startseq, int endseq, String mem_id) {
 		SqlSession session = null;
+		LettersDto dto = new LettersDto();
 		List<LettersDto> list = new ArrayList<LettersDto>();
+		dto.setStartseq(startseq);
+		dto.setEndseq(endseq);
+		dto.setMem_id(mem_id);
 		try {
 			session = getSqlSessionFactory().openSession();
-			list = session.selectList(namespace+"sentLetters", mem_id);
+			list = session.selectList(namespace+"sentLetters", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -113,6 +121,42 @@ public class LettersDaoImpl extends SqlMapConfig implements LettersDao{
 			session.close();
 		}
 		return res;
+	}
+
+	@Override
+	public int inboxTotalPage(int column, String mem_id) {
+		int res = 0;
+		SqlSession session = null;
+		int totalpage = 0;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			res = session.selectOne(namespace + "inboxTotalPage",mem_id);   
+			totalpage = (int)Math.ceil((double)res/column);   
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return totalpage;
+	}
+
+	@Override
+	public int sentTotalPage(int column, String mem_id) {
+		int res = 0;
+		SqlSession session = null;
+		int totalpage = 0;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			res = session.selectOne(namespace + "sentTotalPage",mem_id);   
+			totalpage = (int)Math.ceil((double)res/column);   
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return totalpage;
 	}
 
 	
