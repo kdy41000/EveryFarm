@@ -51,10 +51,7 @@ public class BoardBizImpl implements BoardBiz {
 
 	@Override
 	public int boardDelete(int board_id) {
-		int deleteReplyAll = 0;
-		do {
-			deleteReplyAll = dao.deleteReplyAll(board_id);			
-		}while(deleteReplyAll ==0);			
+		int deleteReplyAll = dao.deleteReplyAll(board_id);			
 		int boardDelete = dao.boardDelete(board_id);
 		
 		return boardDelete + deleteReplyAll;

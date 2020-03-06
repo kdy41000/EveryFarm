@@ -87,10 +87,10 @@
 									<td>${dto.mem_regdate }</td>
 									<td>
 										<c:choose>
-											<c:when test="${dto.mem_drop eq 'Y'}">
+											<c:when test="${dto.mem_drop eq 'n'}">
 												<c:out value="탈퇴"></c:out>
 											</c:when>
-											<c:when test="${dto.mem_drop eq 'N'}">
+											<c:when test="${dto.mem_drop eq 'y'}">
 												<c:out value="가입"></c:out>
 											</c:when>	
 											<c:otherwise>
@@ -111,11 +111,11 @@
 					if(pagegroup!=1){
 				%>							
 						<li><a href="../admin.do?command=userlist&pageNumber=<%=startpage-1%>">
-						<span class="glyphicon glyphicon-chevron-left">&lt;</span></a></li>
+						<span>&lt;&lt;</span></a></li>
 				<%
 					} else if(pagegroup==1){
 				%>
-						<li><span style="color: gray;">&lt;</span></li>
+						<li><span style="color: gray;">&lt;&lt;</span></li>
 				<%	
 					}
 					for(int pagenum = startpage; pagenum <= ((endpage<totalpage)?endpage:totalpage); pagenum++){
@@ -132,11 +132,11 @@
 					if(endpage < paging.getTotalpage()){				
 				%>
 						<li><a href="../admin.do?command=userlist&pageNumber=<%=endpage+1%>">
-						<span class="glyphicon glyphicon-chevron-right">&gt;</span></a></li>
+						<span>&gt;&gt;</span></a></li>
 				<%
 					} else {
 				%>
-						<li><span style="color: gray;">&gt;</span></li>
+						<li><span style="color: gray;">&gt;&gt;</span></li>
 				<%
 					}
 				%>

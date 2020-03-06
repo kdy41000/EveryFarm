@@ -74,7 +74,7 @@
 			<div class="body_box"><%=boardDetail.getBoard_content()%></div>
 
 			<div class="btns">
-			<input type="button" value="취소"
+			<input type="button" value="목록"
 				onclick="location.href='../board.do?command=boardList&page=1'">
 
 			<%

@@ -46,7 +46,7 @@ table {
 		<%@ include file="../home/sidemenu_fm.jsp" %>
 		<div class="col" >
 			<div class="panel" data-ng-controller="validationCtrl" style="text-align: center; margin-top:5%; margin-bottom:3%;">
-			 <h2 style="color:#a2783f; font-weight:bold;">경매완료내역</h2>
+			 <h2 style="color:#a2783f; font-weight:bold;">배송내역</h2>
 			 
 			  <div class="panel-body">
 			      <table class="table table-bordered bordered table-striped table-condensed datatable" ui-jq="dataTable" ui-options="dataTableOpt">
@@ -69,7 +69,7 @@ table {
    if(list.size()==0){
 %>
    <tr>
-         <td colspan="10" style="text-align: center;">-----경매현황이 존재하지 않습니다.----- </td>
+         <td colspan="10" style="text-align: center;">-----배송내역이 존재하지 않습니다.----- </td>
      </tr>
         
 <%

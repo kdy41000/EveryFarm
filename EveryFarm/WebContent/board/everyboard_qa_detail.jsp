@@ -75,8 +75,8 @@
 			<div class="body_box"><%=boardDetail.getBoard_content()%></div>
 
 			<div class="btns">
-			<input type="button" value="취소"
-				onclick="history.back();">
+			<input type="button" value="목록"
+				onclick="location.href='../board.do?command=qaList&page=1'">
 
 			<%
 				System.out.println(boardDetail.getMem_id());
