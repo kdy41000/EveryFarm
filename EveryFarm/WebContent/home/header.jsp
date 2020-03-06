@@ -138,7 +138,7 @@
                 <li class="nav-item active"><a href="#" class="nav-link" onclick="location.href='../memberMyPage.do?command=mypage&mem_id=${dto.mem_id}';">마이페이지</a></li>
                 <img src="../resources/images/home/header/member.png" alt="" style="border-radius:50px; width:40px; height:40px; margin: 1% 0% 0% -1%;"/> 
                <!-- 쪽지알람 -->
-               <img class="alramtoggle" src="../resources/images/home/header/alram.png" alt="" style="width:30px; height:30px; margin-top:1.5%; margin-left:1%; cursor:pointer;" onclick="location.href='../letters.do?command=letters&mem_id=${sessionScope.dto.mem_id}';"/>&nbsp;
+               <img class="alramtoggle" src="../resources/images/home/header/alram.png" alt="" style="width:30px; height:30px; margin-top:1.5%; margin-left:1%; cursor:pointer;" onclick="location.href='../letters.do?command=letters&currentpage=1&mem_id=${sessionScope.dto.mem_id}';"/>&nbsp;
                <span style="color:red; font-weight:bold; margin-top:1.8%;">[<span class="ajaxCount"></span>]</span>
                <!-- 쪽지알람 -->
             </ul>
@@ -182,7 +182,7 @@
                        
 
              
-               <img class="alramtoggle" src="../resources/images/home/header/alram.png" alt="" style="width:30px; height:30px; margin-top:1.5%; cursor:pointer;" onclick="location.href='../letters.do?command=letters&mem_id=${sessionScope.dto.mem_id}';"/>&nbsp;
+               <img class="alramtoggle" src="../resources/images/home/header/alram.png" alt="" style="width:30px; height:30px; margin-top:1.5%; cursor:pointer;" onclick="location.href='../letters.do?command=letters&currentpage=1&mem_id=${sessionScope.dto.mem_id}';"/>&nbsp;
                <span style="color:red; font-weight:bold; margin-top:1.5%;">[<span class="ajaxCount"></span>]</span>
             
                <!-- 쪽지알람 -->

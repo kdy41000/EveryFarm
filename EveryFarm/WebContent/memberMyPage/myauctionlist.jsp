@@ -103,5 +103,12 @@
   <!-- 페이징 끝 -->
    <br><br><br><br>
      <%@ include file="../home/footer.jsp" %>
+<script type="text/javascript">
+	if(${empty sessionScope.dto.mem_id}){
+		alert("로그인이 필요합니다");
+		location.href="../login/loginform.jsp";
+	}
+</script>
+
 </body>
 </html>

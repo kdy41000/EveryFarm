@@ -12,9 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.everyfarm.letters.biz.LettersBiz;
+import com.everyfarm.letters.biz.LettersBizImpl;
 import com.everyfarm.letters.dao.LettersDao;
 import com.everyfarm.letters.dao.LettersDaoImpl;
 import com.everyfarm.letters.dto.LettersDto;
+import com.everyfarm.memberMyPage.dto.PagingDto;
 
 @WebServlet("/letters.do")
 public class LettersController extends HttpServlet {
@@ -29,13 +32,25 @@ public class LettersController extends HttpServlet {
 		
 		String command= request.getParameter("command");
 		LettersDao dao = new LettersDaoImpl();
+		LettersBiz biz = new LettersBizImpl();
+		HttpSession session = request.getSession();
 		
 		if(command.equals("letters")) {	  //받은 쪽지함
+			int currentpage = Integer.parseInt(request.getParameter("currentpage"));
 			String mem_id = request.getParameter("mem_id");
+			PagingDto pagingdto = new PagingDto();
+			pagingdto.setCurrentpage(currentpage);   //현재페이지 (초기값 1)
+	        pagingdto.setColumn(10);   //게시글은 10개씩
+	        pagingdto.setUnderpagescale(5);    //아래 페이지 수의 크기는 5개씩
+	        pagingdto.setTotalpage(dao.inboxTotalPage(pagingdto.getColumn(),mem_id));  //마지막 페이지 번호
+			System.out.println(pagingdto.getTotalpage());
+	        
 			List<LettersDto> list = new ArrayList<LettersDto>();
-			list = dao.inboxLetters(mem_id);
-			HttpSession session = request.getSession();
+			list = biz.inboxLetters(pagingdto,mem_id);
+			session = request.getSession();
 			session.setAttribute("inbox", list);
+			session.setAttribute("pagingdto", pagingdto);
+			
 			response.sendRedirect("letters/inboxletters.jsp");
 			
 		} else if(command.equals("write")) {	//쪽지 쓰기
@@ -63,11 +78,19 @@ public class LettersController extends HttpServlet {
 				jsResponse("선택한 쪽지들을 삭제 성공했습니다", "letters.do?command=letters&mem_id="+mem_id, response);
 			}
 		} else if(command.equals("sent")) {		//보낸 쪽지함
+			int currentpage = Integer.parseInt(request.getParameter("currentpage"));
 			String mem_id = request.getParameter("mem_id");
+			PagingDto pagingdto = new PagingDto();
+			pagingdto.setCurrentpage(currentpage);   //현재페이지 (초기값 1)
+	        pagingdto.setColumn(10);   //게시글은 10개씩
+	        pagingdto.setUnderpagescale(5);    //아래 페이지 수의 크기는 5개씩
+	        pagingdto.setTotalpage(dao.sentTotalPage(pagingdto.getColumn(),mem_id));  //마지막 페이지 번호
+			
 			List<LettersDto> list = new ArrayList<LettersDto>();
-			list = dao.sentLetters(mem_id);
-			HttpSession session = request.getSession();
+			list = biz.sentLetters(pagingdto ,mem_id);
+			session = request.getSession();
 			session.setAttribute("sent", list);
+			session.setAttribute("pagingdto", pagingdto);
 			response.sendRedirect("letters/sentletters.jsp");
 			
 		} else if(command.equals("detail")) {	//쪽지 상세
@@ -75,7 +98,7 @@ public class LettersController extends HttpServlet {
 			String mem_id = request.getParameter("mem_id");
 			int res = dao.updateStatus(letter_id);
 			LettersDto dto = dao.LettersDetail(letter_id);
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			session.setAttribute("lettersdetail", dto);
 			session.setAttribute("mem_id_letter", mem_id);
 			openPopup(response);

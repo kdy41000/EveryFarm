@@ -1,3 +1,4 @@
+<%@page import="com.everyfarm.memberMyPage.dto.PagingDto"%>
 <%@page import="com.everyfarm.letters.dto.LettersDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,7 +11,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%
+	PagingDto currentpage = (PagingDto)session.getAttribute("pagingdto");
+	int pagegroup = (int)Math.ceil((double)currentpage.getCurrentpage()/currentpage.getUnderpagescale());
+	int startseq = currentpage.getUnderpagescale() * (pagegroup - 1) + 1;
+	int endseq = currentpage.getUnderpagescale() * pagegroup;
+	int totalpage = currentpage.getTotalpage();
+	int cPage =currentpage.getCurrentpage(); //상품 페이징
+	
+	List<LettersDto> list = (List<LettersDto>)session.getAttribute("inbox");
+%>
 <meta charset="UTF-8">
+<link href="../resources/css/auction/auctionlist.css"    
+     rel="stylesheet"    
+     type="text/css" /> 
 <link rel="stylesheet" href="../resources/css/membermypage/buttonstyle.css">
 <title>받은쪽지함</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -19,13 +33,11 @@
 	.button{font-weight: bold; font-size: large; margin-bottom: 15px;}
 	#inbox{background-color: #2EE59D;}
 	.title:hover{text-decoration: underline; cursor: pointer;}
-	
+	td,th{background: white;}
+	td{font-weight: normal;}
 </style>
 </head>
 <body>
-<%
-	List<LettersDto> list = (List<LettersDto>)session.getAttribute("inbox");
-%>
 	<%@ include file="../home/header.jsp" %>
 	<div class="container-fluid">
 	  <div class="row">
@@ -33,7 +45,7 @@
 	    <div class="col" >
 	    	<fieldset class="box">
 	      <input type="button" id="inbox" class="button" value="받은 쪽지함" >
-	      <input type="button" class="button" value="보낸 쪽지함" onclick="location.href='../letters.do?command=sent&mem_id=${dto.mem_id}'">
+	      <input type="button" class="button" value="보낸 쪽지함" onclick="location.href='../letters.do?command=sent&currentpage=1&mem_id=${dto.mem_id}'">
 	       <form action="../letters.do?command=muldel" method="post">
 	       <input type="hidden" name="mem_id" value=${dto.mem_id }>
 	      	<table class="table">
@@ -87,6 +99,28 @@
 	     </div>
 	    </div>
 	   </div>
+<!-- 페이징 시작 -->            
+    <div class="pagination">
+<%
+   if(pagegroup > 1){
+%>   
+   <a href="../letters.do?command=letters&currentpage=<%=startseq-1 %>&mem_id=${sessionScope.dto.mem_id }" class="prev str">Prev</a>
+<%
+   }
+   for(int pagenum = startseq; pagenum <= ((endseq < totalpage)?endseq:totalpage); pagenum++){
+%>
+   <a href="../letters.do?command=letters&currentpage=<%=pagenum %>&mem_id=${sessionScope.dto.mem_id }" class="pager"><%=pagenum %></a>   
+<%
+   }
+   
+   if(endseq < currentpage.getTotalpage()){
+%>
+   <a href="../letters.do?command=letters&currentpage=<%=endseq+1 %>&mem_id=${sessionScope.dto.mem_id }" class="next str">Next</a>
+<%      
+   }
+%>
+</div>   
+  <!-- 페이징 끝 -->
 	   <%@ include file="../home/footer.jsp" %>
 </body>
 <script type="text/javascript">
@@ -95,6 +129,11 @@
 		for(var i=0; i<chks.length; i++){
 			chks[i].checked = bool;
 		}
+	}
+	
+	if(${empty sessionScope.dto.mem_id}){
+		alert("로그인이 필요합니다");
+		location.href="../login/loginform.jsp";
 	}
 	
 	$(function(){

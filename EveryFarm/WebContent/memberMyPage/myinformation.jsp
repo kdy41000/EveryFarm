@@ -100,5 +100,12 @@ function openDaumZipAddress() {   //클릭시 실행되는 함수
      </form>
 </div>
 <%@ include file="../home/footer.jsp" %>
+<script type="text/javascript">
+	if(${empty sessionScope.dto.mem_id}){
+		alert("로그인이 필요합니다");
+		location.href="../login/loginform.jsp";
+	}
+</script>
+
 </body>
 </html>

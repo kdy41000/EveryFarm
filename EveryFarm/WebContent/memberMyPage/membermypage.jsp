@@ -31,10 +31,10 @@
 	    <div class="col" >
 	    	<fieldset class="box">
 	      <h4><strong>나의 프로필</strong></h4>
-	      <img alt="프로필이미지" src="../resources/images/home/header/member.png" style="border-radius:50px; width:100px; height:100px; margin-left: 15px;">
-	      <div style="font-size: 20pt; font-weight: bold; margin-left: 15px;">${sessionScope.dto.mem_id }님</div>
+	      <img alt="프로필이미지" src="../resources/images/home/header/member.png" style="border-radius:50px; width:100px; height:100px; margin: 15px; margin-right:30px; float: left;">
+	      <div style="font-size: 20pt; font-weight: bold; margin-left: 35px;">${sessionScope.dto.mem_id }님</div>
 	        <div class="wrap">
-	        <a href="#" class="button" onclick="location.href='../letters.do?command=letters&mem_id=${sessionScope.dto.mem_id}';">쪽 지</a><br/>
+	        <a href="#" class="button" onclick="location.href='../letters.do?command=letters&currentpage=1&mem_id=${sessionScope.dto.mem_id}';">쪽 지</a><br/>
 	      	<a href="#" class="button" onclick="location.href='../memberMyPage.do?command=myinfo&mem_id=${sessionScope.dto.mem_id}';">내정보 보기</a><br/>
 	      	<a href="#" class="button" onclick="location.href='../memberMyPage.do?command=memberdelete';">회원탈퇴</a>
 	        </div>
@@ -149,7 +149,7 @@
 <script type="text/javascript">
 	if(${empty sessionScope.dto.mem_id}){
 		alert("로그인이 필요합니다");
-		location.href="../home/section.jsp";
+		location.href="../login/loginform.jsp";
 	}
 </script>
 </html>

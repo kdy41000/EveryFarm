@@ -11,6 +11,10 @@ public class LettersDto {
    private Date letter_regdate;
    private int letter_status;
    
+   //페이징
+ 	private int startseq;
+ 	private int endseq;
+   
    public LettersDto() {
       
    }
@@ -82,5 +86,22 @@ public class LettersDto {
    public void setLetter_status(int letter_status) {
       this.letter_status = letter_status;
    }
+
+	public int getStartseq() {
+		return startseq;
+	}
+	
+	public void setStartseq(int startseq) {
+		this.startseq = startseq;
+	}
+	
+	public int getEndseq() {
+		return endseq;
+	}
+	
+	public void setEndseq(int endseq) {
+		this.endseq = endseq;
+	}
+   
    
 }
