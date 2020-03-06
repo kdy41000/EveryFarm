@@ -42,7 +42,7 @@ public class BoardController extends HttpServlet {
 		
 		
 		/////////////////////////////////notice % free board//////////////////////////////////////
-		if(command.equals("boardList")) {
+		if(command.equals("boardList")) {	// 모든글 보기
 			// All List paging
 			int currentpage = Integer.parseInt(request.getParameter("page"));
 			System.out.println("페이지"+currentpage);
@@ -61,7 +61,7 @@ public class BoardController extends HttpServlet {
 			session.setAttribute("boardPaging", boardPaging);
 			response.sendRedirect("board/everyboard.jsp");
 
-		}else if(command.equals("boardDetail")) {
+		}else if(command.equals("boardDetail")) {	//게시판 글 detail
 			if(session.getAttribute("dto") == null) {
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
@@ -79,7 +79,7 @@ public class BoardController extends HttpServlet {
 				response.sendRedirect("board/everyboardDetail.jsp");
 			}
 		
-		}else if(command.contentEquals("boardReplyUpdatePage")) {
+		}else if(command.contentEquals("boardReplyUpdatePage")) {	//게시판 리플 수정 form
 			int reply_board_id = Integer.parseInt(request.getParameter("board_id"));
 			int reply_comment_no = Integer.parseInt(request.getParameter("comment_no"));
 			System.out.println(reply_comment_no);
@@ -91,7 +91,7 @@ public class BoardController extends HttpServlet {
 			response.sendRedirect("board/BoardReplyUpdate.jsp");
 			
 			
-		}else if(command.equals("boardReplyUpdate")) {
+		}else if(command.equals("boardReplyUpdate")) {	//게시판 리플수정 작업
 			int comment_no = Integer.parseInt(request.getParameter("comment_no"));
 			String comment_content_update = request.getParameter("comment_content_update");
 			int board_id = Integer.parseInt(request.getParameter("board_id"));
@@ -108,15 +108,18 @@ public class BoardController extends HttpServlet {
 			}
 			
 			
-		}else if(command.equals("boardReplyDelete")) {
-			int reply_board_id = Integer.parseInt(request.getParameter("board_id"));
-			int reply_comment_no = Integer.parseInt(request.getParameter("comment_no"));
-			
+		}else if(command.equals("boardReplyDelete")) {	//게시판 리플 삭제
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("if(confirm('삭제하시겠습니까?')){");
+				int reply_board_id = Integer.parseInt(request.getParameter("board_id"));
+				int reply_comment_no = Integer.parseInt(request.getParameter("comment_no"));
+			out.println("}");
+			out.println("</script>");
 			int boardReplyDelete = biz.boardReplyDelete(reply_board_id, reply_comment_no);
 			if(boardReplyDelete>0) {
 				jsResponse("댓글삭제성공", "board.do?command=boardDetail&board_id="+reply_board_id, response);
 			}else {
-				PrintWriter out = response.getWriter();
 				out.println("<script>");
 				out.println("alert('실패')");
 				out.println("history.back()");
@@ -131,13 +134,13 @@ public class BoardController extends HttpServlet {
 				response.sendRedirect("board/everyboardInsert.jsp");				
 			}
 			
-		}else if(command.equals("boardUpdate")) {
+		}else if(command.equals("boardUpdate")) {	//팝업으로 대체
 			int board_id = Integer.parseInt(request.getParameter("board_id"));
 			BoardDto boardDetail = biz.boardDetail(board_id);
 			session.setAttribute("boardDetail", boardDetail);
 			response.sendRedirect("board/everyboardUpdate.jsp");
 		
-		}else if(command.equals("boardUpdateDb")) {
+		}else if(command.equals("boardUpdateDb")) {	//게시판 게시글 업데이트 작업
 			int board_id = Integer.parseInt(request.getParameter("board_id"));
 			int board_category = Integer.parseInt(request.getParameter("board_category"));
 			String board_title = request.getParameter("board_title");
@@ -151,10 +154,15 @@ public class BoardController extends HttpServlet {
 			
 			int updateRes = biz.boardUpdate(boardDto);
 			if(updateRes>0) {
-				jsResponse("수정 성공", "board.do?command=boardList&page=1", response);
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('글 수정 성공')");
+				out.println("window.opener.location='board.do?command=boardDetail&board_id="+board_id+"';");
+				out.println("self.close();");
+				out.println("</script>");
 			}
 		
-		}else if(command.equals("boardDelete")) {	
+		}else if(command.equals("boardDelete")) {	//게시판 게시글 삭제
 			int board_id = Integer.parseInt(request.getParameter("board_id"));
 			int deleteRes = biz.boardDelete(board_id);
 			
@@ -214,7 +222,7 @@ public class BoardController extends HttpServlet {
 			}
 			
 			/////////////////////////////////Q&A board//////////////////////////////////////
-		}else if(command.equals("qaList")) {
+		}else if(command.equals("qaList")) {	//문의게시판 list
 				MemberDto memDto = (MemberDto)session.getAttribute("dto");
 				if(memDto==null) {
 					jsResponse("로그인이 필요합니다.", "login/loginform.jsp", response);
@@ -241,7 +249,7 @@ public class BoardController extends HttpServlet {
 				response.sendRedirect("board/everyboard_qa_list.jsp");
 				}
 		
-		}else if(command.equals("qaDetail")) {
+		}else if(command.equals("qaDetail")) {	//문의게시판 detail 뿌리기
 			if(session.getAttribute("dto") == null) {
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
@@ -259,7 +267,7 @@ public class BoardController extends HttpServlet {
 				response.sendRedirect("board/everyboard_qa_detail.jsp");
 			}
 			
-		}else if(command.equals("qaUpdateDb")) {
+		}else if(command.equals("qaUpdateDb")) {	//문의게시판 게시글 업데이트 작업
 			int board_id = Integer.parseInt(request.getParameter("board_id"));
 			int board_category = Integer.parseInt(request.getParameter("board_category"));
 			String board_title = request.getParameter("board_title");
@@ -273,9 +281,14 @@ public class BoardController extends HttpServlet {
 			
 			int updateRes = biz.boardUpdate(boardDto);
 			if(updateRes>0) {
-				jsResponse("수정 성공", "board.do?command=qaList&page=1", response);
-			}
-		}else if(command.equals("qaDelete")) {
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('글 수정 성공')");
+				out.println("window.opener.location='board.do?command=qaDetail&board_id="+board_id+"'");
+				out.println("self.close();");
+				out.println("</script>");
+				}
+		}else if(command.equals("qaDelete")) {	//문의게시판 게시글 삭제
 			int board_id = Integer.parseInt(request.getParameter("board_id"));
 			int deleteRes = biz.boardDelete(board_id);
 			
@@ -288,7 +301,7 @@ public class BoardController extends HttpServlet {
 				out.println("history.back()");
 				out.println("</script>");
 			}
-		}else if(command.equals("qaReply")) {
+		}else if(command.equals("qaReply")) {	//문의 게시판 리플 등록 
 			String mem_id_reply = request.getParameter("mem_id_reply");
 			int board_id_reply = Integer.parseInt(request.getParameter("board_id_reply"));
 			String comment_content = request.getParameter("comment_content");
@@ -302,7 +315,7 @@ public class BoardController extends HttpServlet {
 			if(replyInsertRes>0) {
 				jsResponse("댓글등록 성공", "board.do?command=qaDetail&board_id="+board_id_reply, response);
 			}
-		}else if(command.equals("qaReplyUpdate")) {
+		}else if(command.equals("qaReplyUpdate")) {		//문의게시판 리플 update form 페이지
 			int reply_board_id = Integer.parseInt(request.getParameter("board_id"));
 			int reply_comment_no = Integer.parseInt(request.getParameter("comment_no"));
 			System.out.println(reply_comment_no);
@@ -313,14 +326,14 @@ public class BoardController extends HttpServlet {
 			session.setAttribute("replyUpdate", replyUpdate);
 			response.sendRedirect("board/qaReplyUpdate.jsp");
 			
-		}else if(command.equals("qaReplyUpdateDb")) {
+		}else if(command.equals("qaReplyUpdateDb")) {	//문의게시판 리플 업데이트 
 			int comment_no = Integer.parseInt(request.getParameter("comment_no"));
 			String comment_content_update = request.getParameter("comment_content_update");
 			int board_id = Integer.parseInt(request.getParameter("board_id"));
 			
 			int boardReplyUpdate = biz.boardReplyUpdate(comment_no, comment_content_update);
 			if(boardReplyUpdate>0) {
-				jsResponse("댓글수정 성공", "board.do?command=boardDetail&board_id="+board_id, response);
+				jsResponse("댓글수정 성공", "board.do?command=qaDetail&board_id="+board_id, response);
 			}else {
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
@@ -328,23 +341,38 @@ public class BoardController extends HttpServlet {
 				out.println("history.back()");
 				out.println("</script>");
 			}
-		}else if(command.equals("qaReplyDelete")) {
-			int reply_board_id = Integer.parseInt(request.getParameter("board_id"));
-			int reply_comment_no = Integer.parseInt(request.getParameter("comment_no"));
-			
+		}else if(command.equals("qaReplyDelete")) {		//문의게시판 리플 삭제
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("if(confirm('삭제하시겠습니까?')){");
+				int reply_board_id = Integer.parseInt(request.getParameter("board_id"));
+				int reply_comment_no = Integer.parseInt(request.getParameter("comment_no"));
+			out.println("}");
+			out.println("</script>");
+			System.out.println("받은 게시번호 : "+reply_board_id+ "받은 댓글 번호:"+reply_comment_no);
 			int boardReplyDelete = biz.boardReplyDelete(reply_board_id, reply_comment_no);
 			if(boardReplyDelete>0) {
 				jsResponse("댓글삭제성공", "board.do?command=qaDetail&board_id="+reply_board_id, response);
 			}else {
-				PrintWriter out = response.getWriter();
 				out.println("<script>");
 				out.println("alert('실패')");
 				out.println("history.back()");
 				out.println("</script>");
 				
 			}
-		}else if(command.equals("qaCate3")) {	//회원 문의사항
+		}else if(command.equals("qaCate3")) {	//회원 문의사항 (회원과 관리자만 이용가능)
 			int currentpage = Integer.parseInt(request.getParameter("page"));
+			
+			MemberDto memDto = (MemberDto)session.getAttribute("dto");
+			if(memDto==null) {
+				jsResponse("로그인이 필요합니다.", "login/loginform.jsp", response);
+			}else if(memDto.getMem_grade()==2) {
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('"+"조회권한이 없습니다"+"')");
+				out.println("history.back();");
+				out.println("</script>");
+			}else {
 			
 			BoardPagingDto boardPaging = new BoardPagingDto();
 			boardPaging.setCurrentpage(currentpage);
@@ -357,10 +385,22 @@ public class BoardController extends HttpServlet {
 			session.setAttribute("userQa", userQa);
 			session.setAttribute("boardPaging", boardPaging);
 			response.sendRedirect("board/qaCate3.jsp");
+			}
 			
-		}else if(command.equals("qaCate4")) {	//농부 문의사항
+		}else if(command.equals("qaCate4")) {	//농부 문의사항 (농부와 관리자만 이용가능)
 			int currentpage = Integer.parseInt(request.getParameter("page"));
 			
+			MemberDto memDto = (MemberDto)session.getAttribute("dto");
+			if(memDto==null) {
+				jsResponse("로그인이 필요합니다.", "login/loginform.jsp", response);
+			}else if(memDto.getMem_grade()==1) {
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('"+"조회권한이 없습니다"+"')");
+				out.println("history.back();");
+				out.println("</script>");	
+			}else {
+				
 			BoardPagingDto boardPaging = new BoardPagingDto();
 			boardPaging.setCurrentpage(currentpage);
 			boardPaging.setTotalrows(10);
@@ -372,6 +412,7 @@ public class BoardController extends HttpServlet {
 			session.setAttribute("farmerQa", farmerQa);
 			session.setAttribute("boardPaging", boardPaging);
 			response.sendRedirect("board/qaCate4.jsp");
+			}
 		}
 	
 	}
@@ -387,7 +428,7 @@ public class BoardController extends HttpServlet {
 		BoardBiz biz = new BoardBizImpl();
 		HttpSession session = request.getSession();
 		
-		if(command.equals("boardInsertDb")) {
+		if(command.equals("boardInsertDb")) {	//게시판 글 작성
 			MemberDto mem_dto = (MemberDto)session.getAttribute("dto");
 			int board_category = Integer.parseInt(request.getParameter("board_category"));
 			String board_title =(String)request.getParameter("board_title");
@@ -401,7 +442,12 @@ public class BoardController extends HttpServlet {
 			
 			int boardInsertDbRes = biz.boardInsert(boardDto);
 			if(boardInsertDbRes >0) {
-				jsResponse("글작성 성공", "board.do?command=boardList&page=1", response);
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('글 작성 성공')");
+					out.println("window.opener.location='board.do?command=boardList&page=1';");
+					out.println("self.close();");
+					out.println("</script>");
 			}else {
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
@@ -413,7 +459,7 @@ public class BoardController extends HttpServlet {
 		}else if(command.equals("imageUpload")) {
 			System.out.println("이미지 컨트롤러 진입");
 		
-		}else if(command.equals("qaInsertDb")) {
+		}else if(command.equals("qaInsertDb")) {	//문의게시판 글 작성
 			MemberDto mem_dto = (MemberDto)session.getAttribute("dto");
 			int board_category = Integer.parseInt(request.getParameter("board_category"));
 			String board_title =(String)request.getParameter("board_title");
@@ -427,7 +473,22 @@ public class BoardController extends HttpServlet {
 			
 			int boardInsertDbRes = biz.boardInsert(boardDto);
 			if(boardInsertDbRes >0) {
-				jsResponse("글작성 성공", "board.do?command=qaList&page=1", response);
+				if(mem_dto.getMem_grade() ==1) {
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('글 작성 성공')");
+					out.println("window.opener.location='board.do?command=qaCate3&page=1';");
+					out.println("self.close();");
+					out.println("</script>");
+				}else if(mem_dto.getMem_grade() ==2) {
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('글 작성 성공')");
+					out.println("window.opener.location='board.do?command=qaCate4&page=1';");
+					out.println("self.close();");
+					out.println("</script>");
+				}
+			
 			}else {
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
@@ -436,7 +497,7 @@ public class BoardController extends HttpServlet {
 				out.println("</script>");
 			}
 	
-		}else if(command.equals("multiDelete")) {
+		}else if(command.equals("multiDelete")) {	//공지사항, 자유게시판 다중삭제(관리자용)
 			String [] board_id = request.getParameterValues("chk");
 			int multiDelRes = biz.multiDelete(board_id);
 			if(multiDelRes>0) {
@@ -449,7 +510,7 @@ public class BoardController extends HttpServlet {
 				out.println("</script>");				
 			}
 		
-		}else if(command.equals("multiDelete2")) {
+		}else if(command.equals("multiDelete2")) {	//문의게시판 다중삭제(관리자용)
 			String [] board_id = request.getParameterValues("chk");
 			int multiDelRes = biz.multiDelete(board_id);
 			if(multiDelRes>0) {
@@ -474,5 +535,15 @@ public class BoardController extends HttpServlet {
 		out.println("location.href='"+url+"'");
 		out.println("</script>");
 	}
+	
+	private void closePopup(String msg, HttpServletResponse response) throws IOException {
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('"+msg+"')");
+		out.println("window.opener.location.reload();");
+		out.println("self.close();");
+		out.println("</script>");
+	}
+
 
 }

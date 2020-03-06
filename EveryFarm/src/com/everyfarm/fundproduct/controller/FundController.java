@@ -73,14 +73,6 @@ public class FundController extends HttpServlet {
 			session.setAttribute("detailDto", detailDto); //stock, fund 정보 담음
 			response.sendRedirect("fund/fundDetail.jsp");
 			
-		}else if(command.equals("deadLineFund")) {
-			int fund_no = Integer.parseInt(request.getParameter("fund_no"));
-			FundDto deadDto = biz.deadLineAjax(fund_no);
-			System.out.println("ajax...");
-			session.setAttribute("deadLineAjax", deadDto);
-			
-			response.sendRedirect("fund/fundDeadLineAjax.jsp");
-			
 		}else if(command.equals("fundPay")) {
 			System.out.println("결제 들어옴");
 			if(session.getAttribute("dto")==null) {
@@ -132,6 +124,27 @@ public class FundController extends HttpServlet {
 					System.out.println("insert실패");
 				}
 
+			}else if(command.equals("fundFinish")) {	//종료
+				int currentpage = Integer.parseInt(request.getParameter("page"));
+
+				FundPagingDto finishPaging = new FundPagingDto();
+				finishPaging.setCurrentpage(currentpage);	//현재페이지
+				finishPaging.setTotalrows(16); 		//페이지당 16개씩 출력
+				finishPaging.setPagescale(5); 		//5개의 페이지씩 출력
+				finishPaging.setTotalpage(biz.finish_totalpage(finishPaging.getTotalrows())); 	
+				//리스트
+				List<FundDto> finishList = biz.finishList(finishPaging);	//위의 값을 담은 dto를 biz로
+				
+				session.setAttribute("finishList", finishList);	//받은 list를 allList로 jsp로 보내줌
+				session.setAttribute("finishPaging", finishPaging);	//위의 fundPaging을  jsp로 보내줌
+				
+				List<FundDto> fundBestList = new ArrayList<FundDto>();
+				fundBestList = biz.fundBestList();
+				session.setAttribute("fundBestList", fundBestList);	//받은 list를 bestList로 jsp보내줌
+				System.out.println("컨트롤러"+fundBestList.size());
+				System.out.println("컨트롤러 리스트"+finishList.size());
+				response.sendRedirect("fund/fundListFinish.jsp");
+				
 			}
 		}
 		
@@ -141,10 +154,46 @@ public class FundController extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}
-
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		
+		String command = request.getParameter("command");
+		System.out.println("<"+command+">");
+		
+		FundBiz biz = new FundBizImpl();
+		HttpSession session = request.getSession();
+		
+		if(command.equals("deadLineFund")) {
+			int fund_no = Integer.parseInt(request.getParameter("fund_no"));
+			FundDto deadDto = biz.deadLineAjax(fund_no);
+			System.out.println("ajax...");
+			session.setAttribute("deadLineAjax", deadDto);
+			
+			response.sendRedirect("fund/fundDeadLineAjax.jsp");
+			
+		}else if(command.equals("fundJoinNum")) {
+			int fund_no = Integer.parseInt(request.getParameter("fund_no"));
+			FundDto fundJoin = biz.fundJoinAjax(fund_no);
+			
+			session.setAttribute("fundJoinAjax", fundJoin);
+			response.sendRedirect("fund/fundJoinAjax.jsp");
+		
+		}else if(command.equals("fundPriceUpdate")) {
+			int fund_no = Integer.parseInt(request.getParameter("fund_no"));
+			FundDto priceUpdate = biz.priceUpdate(fund_no);
+			
+			session.setAttribute("fundPriceAjax", priceUpdate);
+			response.sendRedirect("fund/fundPriceAjax.jsp");
+		}else if(command.equals("fundJoinName")) {
+			int fund_no = Integer.parseInt(request.getParameter("fund_no"));
+			List<FundDto> joinMemName = biz.joinMemName(fund_no);
+			
+			session.setAttribute("joinMemName", joinMemName);
+			response.sendRedirect("fund/fundJoinNameAjax.jsp");
+		}
 		
 		// TODO Auto-generated method stub
 		doGet(request, response);

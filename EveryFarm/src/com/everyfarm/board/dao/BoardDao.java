@@ -82,6 +82,9 @@ public interface BoardDao {
 
 	//농부 문의글 뽑기
 	public List<BoardDto> farmerQa(int to, int from);
+
+	//다중 글 삭제시 댓글 삭제
+	public int multiDeleteReply(String[] board_id);
 	
 	
 	

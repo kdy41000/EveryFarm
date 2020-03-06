@@ -47,7 +47,7 @@
     				<div class="featured">
     					<div class="row">
     						<div class="col-md-3">
-    							<div class="featured-menus ftco-animate"><a href="">
+    							<div class="featured-menus ftco-animate"><a href="#" onclick="location.href='../weather/weatherMain.jsp'">
 			              <div class="menu-img img" style="background-image: url(../resources/images/home/section/weather.png);"></div>
 			              <div class="text text-center">
 		                  <h3>날씨</h3>

@@ -250,7 +250,6 @@ public class FundDaoImpl extends SqlMapConfig implements FundDao {
 			System.out.println(deadDto.getDay()+"result----");
 			System.out.println(deadDto.getHours());
 			System.out.println(deadDto.getMinutes());
-			System.out.println(deadDto.getSeconds());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -261,5 +260,104 @@ public class FundDaoImpl extends SqlMapConfig implements FundDao {
 		
 		return deadDto;
 	}
+
+	@Override
+	public double finish_totalpage() {
+		System.out.println("dao들어옴");
+		int finish_totalpage = 0;
+		SqlSession session = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			finish_totalpage = session.selectOne(namespace+"finishPage");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			session.close();
+			System.out.println("totalpage dao 끝");
+		}
+				
+		return finish_totalpage;
+	}
+
+	@Override
+	public List<FundDto> finishList(int to, int from) {
+		List<FundDto> finishList = null;
+		SqlSession session = null;	
+		
+		FundPagingDto finishDto = new FundPagingDto();
+			finishDto.setTo(to);
+			finishDto.setFrom(from);
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			finishList = session.selectList(namespace+"finishList",finishDto);		
+			
+		} catch (Exception e) {
+			System.out.println("session");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			session.close();
+			System.out.println("List dao 통과");
+		}
+		
+		return finishList;
+	}
+
+	@Override
+	public FundDto fundJoinAjax(int fund_no) {
+		FundDto joinAjax = null;
+		SqlSession session = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			joinAjax = session.selectOne(namespace+"joinAjax",fund_no);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		return joinAjax;
+	}
+
+	@Override
+	public FundDto priceUpdate(int fund_no) {
+		FundDto priceAjax = null;
+		SqlSession session = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			priceAjax = session.selectOne(namespace+"priceAjax",fund_no);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return priceAjax;
+	}
+
+	@Override
+	public List<FundDto> joinMemName(int fund_no) {
+		List<FundDto> memName = null;
+		SqlSession session = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			memName = session.selectList(namespace+"joinMemName",fund_no);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			System.out.println("dao name result:"+memName.size());
+			session.close();
+		}
+		
+		return memName;
+}
 
 }

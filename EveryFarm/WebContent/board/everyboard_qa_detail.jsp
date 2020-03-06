@@ -68,7 +68,8 @@
 				| 조회수 :
 				<%=boardDetail.getBoard_readcnt()%></p>
 
-			<br>
+			
+			<hr>
 			<!-- body 영역 -->
 
 			<div class="body_box"><%=boardDetail.getBoard_content()%></div>
@@ -125,14 +126,7 @@
 					</tr>
 				</table>
 				
-				<script type="text/javascript">
-			
-			function replyDeleteConfirm() {
-				if(confirm("삭제하시겠습니까?")){
-					location.href='../board.do?command=qaReplyDelete&board_id=<%=boardDetail.getBoard_id()%>&comment_no=<%=boardReplyAll.get(i).getComment_no()%>';
-				}
-			}
-				</script>
+		
 				
 				<%
 				// 내 댓글 수정하기 
@@ -140,11 +134,11 @@
 				%>
 				<input type="button" value="수정"
 					onclick="location.href='../board.do?command=qaReplyUpdate&board_id=<%=boardDetail.getBoard_id()%>&comment_no=<%=boardReplyAll.get(i).getComment_no()%>'">
-				<input type="button" value="삭제" onclick="replyDeleteConfirm();">
+				<input type="button" value="삭제" onclick="location.href='../board.do?command=qaReplyDelete&board_id=<%=boardDetail.getBoard_id()%>&comment_no=<%=boardReplyAll.get(i).getComment_no()%>'" >
 				<%
 					} else if (memDto.getMem_grade() == 3) {
 				%>
-				<input type="button" value="삭제" onclick="replyDeleteConfirm();">
+				<input type="button" value="삭제" onclick="location.href='../board.do?command=qaReplyDelete&board_id=<%=boardDetail.getBoard_id()%>&comment_no=<%=boardReplyAll.get(i).getComment_no()%>'">
 				
 
 				<%

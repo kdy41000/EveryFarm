@@ -33,6 +33,21 @@ public interface FundDao {
 
 	//남은시간 ajax
 	public FundDto deadLineAjax(int fund_no);
+
+	//종료된 리스트 총 게시물 수 
+	public double finish_totalpage();
+
+	// 종료된 리스트 
+	public List<FundDto> finishList(int to, int from);
+
+	//펀드 참여인원 ajax
+	public FundDto fundJoinAjax(int fund_no);
+
+	//펀딩 금액 ajax
+	public FundDto priceUpdate(int fund_no);
+
+	//펀드 참여자 ajax
+	public List<FundDto> joinMemName(int fund_no);
 	
 
 	

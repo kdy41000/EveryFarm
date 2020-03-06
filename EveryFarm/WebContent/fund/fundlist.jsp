@@ -15,9 +15,19 @@
 <link href="../resources/css/fund/fundlist.css" rel="stylesheet"
 	type="text/css">
 	
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	
+<script type="text/javascript"	src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+function fundStatus() {
+	var status = document.getElementById("status").value;
+	if(status == "2"){
+		location.href ='../fund.do?command=fundlist&page=1';
+	}else if(status == "3"){
+		location.href = '../fund.do?command=fundFinish&page=1';
+	}
+}
+
+</script>
 
 
 </head>
@@ -41,17 +51,15 @@
 		</div>
 		<br>
 
-		<!-- 펀드 검색 
+	
 		<div class="fundSearch">
-			<span id = "titleone" onchange="fundStatus();">펀드 상태 :</span> 
-			<select>
-				<option>모두</option>
-				<option value = "2" selected="selected">진행중</option>
-				<option value = "3">종료</option>
+			<span> 상태 :</span> 
+			<select  id = "status" onchange="fundStatus();">
+				<option value = "2" selected="selected">진행중인 상품</option>
+				<option value = "3">종료된 상품</option>
 			</select>
-			<input type = "button" class="btn" value ="검색">
 		</div> 
-		-->
+		
 		<br> <br>
 
 		<!-- best 펀드 상품  -->

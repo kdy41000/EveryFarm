@@ -66,5 +66,43 @@ public class FundBizImpl implements FundBiz {
 		return dao.deadLineAjax(fund_no);
 	}
 
+	@Override
+	public int finish_totalpage(int totalrows) {
+		int totalpage = (int)Math.ceil((double)dao.finish_totalpage()/totalrows);
+		System.out.println("biz 통과");
+		return totalpage;
+	}
+
+	@Override
+	public List<FundDto> finishList(FundPagingDto finishPaging) {
+		int currentpage = finishPaging.getCurrentpage();	//현재페이지
+		int totalrows = finishPaging.getTotalrows();		//한페이지에 표현할 게시글 수 16
+		
+		int from = totalrows * (currentpage -1) +1;	// 한페이지에 출력할 갯수가 되지 않더라도 한페이지 모두 출력해야하기 때문에 마지막에 +1을 해준다
+													// ex) 한 페이지에 출력할 게시글이 10이라고 가정한다면 출력될 총 게시글이 6개이더라도 한 페이지를 출력해야한다.
+													// 16 *(1-1)+1 => 1번부터
+		int to = totalrows * currentpage;			// 16*1 => 16번까지
+		System.out.println("biz 통과 ");
+		return dao.finishList(to, from);
+	}
+
+	@Override
+	public FundDto fundJoinAjax(int fund_no) {
+		// TODO Auto-generated method stub
+		return dao.fundJoinAjax(fund_no);
+	}
+
+	@Override
+	public FundDto priceUpdate(int fund_no) {
+		// TODO Auto-generated method stub
+		return dao.priceUpdate(fund_no);
+	}
+
+	@Override
+	public List<FundDto> joinMemName(int fund_no) {
+		// TODO Auto-generated method stub
+		return dao.joinMemName(fund_no);
+	}
+
 
 }

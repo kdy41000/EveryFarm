@@ -119,9 +119,14 @@ onload=function dtoConfirm(){
 					}
 					%>							
 				</select>
-
+				<%
+					if(memDto.getMem_grade()==1 || memDto.getMem_grade()==2){
+				%>
 				<input type="button" value="글쓰기"
 					onclick="insertPopup();" class="btn">
+				<%
+					}
+				%>
 			
 			</div>
 

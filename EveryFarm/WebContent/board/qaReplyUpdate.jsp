@@ -49,7 +49,7 @@
 			<span class="title"><%=boardReplyUpdate.getBoard_title()%> <span
 				class="subtitle"> | <%=category%></span></span>
 
-			<p class="bsub_info">
+			<p class="sub_info">
 				<%=boardReplyUpdate.getMem_id()%>
 				|
 				<%=boardReplyUpdate.getBoard_regdate()%>
@@ -73,10 +73,10 @@
 			<hr>
 
 			<!-- 댓글 입력 영역 -->
+			<div class="replyList">
 			<%
 				for (int i = 0; i < replyUpdate.size(); i++) {
 			%>
-			<div class="replyList">
 				<%
 					if (replyUpdate.get(i).getMem_id().equals(memDto.getMem_id())
 								&& (reply_comment_no == replyUpdate.get(i).getComment_no())) {
@@ -112,11 +112,11 @@
 				
 
 				<hr>
-			</div>
 			<%
 				}
 			}
 			%>
+			</div>
 
 		</div>
 	</div>
