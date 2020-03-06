@@ -109,7 +109,10 @@
 				<tbody>
 					<tr>
 						<td><input id="" name="" value="" type="checkbox"></td>
-						<td><a href="../fund.do?command=fundDetail&stock_no=<%=detailDto.getStock_no()%>"><img src="<%=detailDto.getStock_image() %>" width="100px" height="100px"></a></td>
+						<%
+						System.out.print("pay"+detailDto.getStock_image().split("/")[0]);
+						%>
+						<td><a href="../fund.do?command=fundDetail&stock_no=<%=detailDto.getStock_no()%>"><img src="../<%=detailDto.getStock_image().split("/")[0] %>" width="100px" height="100px"></a></td>
 						<td><a href="../fund.do?command=fundDetail&stock_no=<%=detailDto.getStock_no()%>"><%=detailDto.getStock_name() %></a>
 						<td>
 							<div class="">

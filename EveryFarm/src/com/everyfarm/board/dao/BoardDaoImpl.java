@@ -301,6 +301,7 @@ public class BoardDaoImpl extends SqlMapConfig implements BoardDao {
 		BoardDto replyDeleteDto = new BoardDto();
 		replyDeleteDto.setBoard_id(reply_board_id);
 		replyDeleteDto.setComment_no(reply_comment_no);
+		System.out.println("게시물 번호 : "+reply_board_id+"댓글 번호:"+reply_comment_no);
 		
 		try {
 			session = getSqlSessionFactory().openSession();
@@ -452,32 +453,6 @@ public class BoardDaoImpl extends SqlMapConfig implements BoardDao {
 	
 	}
 
-	@Override
-	public int multiDelete(String[] board_id) {
-
-		int multiDelRes = 0;
-		SqlSession session = null;
-		HashMap<String, String[]> map = new HashMap<String, String[]>();
-		map.put("board_ids", board_id);
-		
-		
-		try {
-			session = getSqlSessionFactory().openSession();
-			multiDelRes = session.delete(namespace+"multiDelete",map);
-			
-			if(multiDelRes == board_id.length) {
-				session.commit();
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			session.close();
-		}
-		
-		
-		return multiDelRes;
-	}
 
 	@Override
 	public double cate3_totalpage() {
@@ -567,6 +542,59 @@ public class BoardDaoImpl extends SqlMapConfig implements BoardDao {
 		System.out.println(farmerQa.size());
 		
 		return farmerQa;
+	}
+
+	@Override
+	public int multiDelete(String[] board_id) {
+		
+		int multiDelRes = 0;
+		SqlSession session = null;
+		HashMap<String, String[]> map = new HashMap<String, String[]>();
+		map.put("board_ids", board_id);
+		
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			multiDelRes = session.delete(namespace+"multiDelete",map);
+			
+			if(multiDelRes == board_id.length) {
+				session.commit();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		
+		
+		return multiDelRes;
+	}
+	
+	
+	@Override
+	public int multiDeleteReply(String[] board_id) {
+		System.out.println("리플 삭제 daoimpl 들어옴");
+		int multiDelReply = 0;
+		SqlSession session = null;
+		HashMap<String, String[]> map = new HashMap<String, String[]>();
+		map.put("board_ids", board_id);
+		
+		try {
+			session = getSqlSessionFactory().openSession();
+			multiDelReply = session.delete(namespace+"multiDeleteReply",map);
+			
+			System.out.println("리플 모두 삭제 dao:"+multiDelReply);
+
+			session.commit();
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return multiDelReply;
 	}
 
 	

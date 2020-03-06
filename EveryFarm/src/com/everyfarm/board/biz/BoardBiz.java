@@ -55,9 +55,9 @@ public interface BoardBiz {
 	//조회수 조회
 	public int replyCnt(int board_id);
 
-	// 여러 글 삭제
+	// 다중 삭제
 	public int multiDelete(String[] board_id);
-	
+
 ////////////////////////////////////Q&A board///////////////////////////////
 	
 	//모든 글 조회
@@ -77,6 +77,7 @@ public interface BoardBiz {
 
 	//농부 문의 게시글 뽑기
 	public List<BoardDto> farmerQa(BoardPagingDto boardPaging);
+
 
 
 	

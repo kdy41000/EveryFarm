@@ -75,14 +75,7 @@
 		})
 	}
 </script>
-	<script type="text/javascript">
-			
-			function okay() {
-				window.opner.location.reload();
-				window.close();
-			}
-			
-			</script>
+
 <%
 	MemberDto mem_dto = (MemberDto)session.getAttribute("dto");
 %>
@@ -118,7 +111,7 @@
 			<input type="text" name="board_title" placeholder="제목을 입력해주세요" class="titleInput" required="required">
 			<!-- 글내용 -->
 			<textarea id="summernote" name="board_content" required="required" placeholder="내용을 작성해주세요"></textarea>
-			<input type ="submit" value="확인" class="btn_ok" onclick="okay();">
+			<input type ="submit" value="확인" class="btn_ok">
 		
 			
 			<input type ="button" value="취소" onclick="self.close();">

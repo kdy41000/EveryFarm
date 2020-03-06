@@ -66,7 +66,6 @@ $(function () {
 </head>
 
 <%
-	MemberDto memDto = (MemberDto)session.getAttribute("dto");
 	List<BoardDto> boardAllList = (List<BoardDto>) session.getAttribute("boardAllList");
 	List<BoardDto> bestNotice = (List<BoardDto>) session.getAttribute("bestNotice");
 	BoardPagingDto boardPaging = (BoardPagingDto) session.getAttribute("boardPaging");
@@ -93,29 +92,26 @@ $(function () {
 					<option value="1">공지사항</option>
 					<option value="2">자유게시판</option>
 				</select>
-				<%
-					if(memDto == null){
-						System.out.print(memDto);
-					}else{
-				%>	
+				
+				<c:if test="${not empty dto}">
+				
 				<input type="button" value="글쓰기"
 					onclick="insertPopup();" class="btn">
-				<%	
-					}					
-				%>				
+				
+				</c:if>
+							
 			</div>
 
 			<div class="allList">
 			<form action="../board.do?" method="post" id="multiDeleteList">
 			<input type="hidden" name="command" value="multiDelete">
 				<table class="board_list">
-			<%
-							if(memDto != null && memDto.getMem_grade()==3){
-			%>
+			<c:choose>
+				<c:when test="${dto.mem_grade == 3}">				
 					<colgroup>
 						<col style="width: 3%">
 						<col style="width: 8%">
-						<col style="width: 12%">
+						<col style="width: 14%">
 						<col style="width: 40%">
 						<col style="width: 12%">
 						<col style="width: 8%">
@@ -132,9 +128,9 @@ $(function () {
 							<th>작성일</th>
 						</tr>
 					</thead>
-			<%
-							}else{
-			%>
+				</c:when>
+				
+				<c:otherwise>
 					<colgroup>
 						<col style="width: 8%">
 						<col style="width: 12%">
@@ -152,25 +148,19 @@ $(function () {
 							<th>조회수</th>
 							<th>작성일</th>
 						</tr>
-					</thead>
-					
-			<%
-							}
-			%>
-					
+					</thead>				
+				</c:otherwise>
+			</c:choose>
+						
 						<%
 							BoardBiz biz = new BoardBizImpl();
 							for (int i = 0; i < bestNotice.size(); i++) {
 						%>
 						<tbody>
 						<tr class="notice">
-			<%
-							if(memDto != null && memDto.getMem_grade()==3){
-			%>
+					<c:if test="${dto.mem_grade == 3 }">
 							<td><input type="checkbox" value="<%=bestNotice.get(i).getBoard_id()%>"></td>
-			<%
-							}
-			%>						
+					</c:if>			
 							<td><%=bestNotice.get(i).getBoard_id()%></td>
 							<td>공지사항</td>
 							<td class="tLeft"><a
@@ -190,13 +180,9 @@ $(function () {
 							for (int i = 0; i < boardAllList.size(); i++) {
 						%>
 						<tr>
-			<%
-							if(memDto != null && memDto.getMem_grade()==3){
-			%>
+						<c:if test="${dto.mem_grade == 3}">
 							<td><input type="checkbox" name="chk" value="<%=boardAllList.get(i).getBoard_id()%>"></td>
-			<%
-							}
-			%>
+						</c:if>
 							<td><%=boardAllList.get(i).getBoard_id()%></td>
 							<%
 								String category = null;
@@ -228,14 +214,10 @@ $(function () {
 						%>
 					</tbody>
 				</table>
-			<%
-							if(memDto != null && memDto.getMem_grade()==3){
-			%>
-			<input type="submit" value="삭제하기" class="btn" style="float:left;">
-			</form>
-			<%
-							}
-			%>
+				<c:if test="${dto.mem_grade == 3}">
+				<input type="submit" value="삭제하기" class="btn" style="float:left;">
+				</c:if>
+				</form>
 			
 			</div>
 

@@ -79,3 +79,10 @@ table > tr> td{
 .bottom{
 	margin: 0% 0% 0% 20%;
 }
+#joinName{
+	font-size: 13pt;
+	
+}
+.detailBody{
+	margin: 0% 20% 0% 20%;
+}

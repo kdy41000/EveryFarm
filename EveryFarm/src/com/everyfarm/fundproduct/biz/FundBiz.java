@@ -28,5 +28,20 @@ public interface FundBiz {
 
 	//펀드 남은시간 ajax
 	public FundDto deadLineAjax(int fund_no);
+
+	//종료된 펀드 
+	public int finish_totalpage(int totalrows);
+
+	//종료된 펀드 리스트 
+	public List<FundDto> finishList(FundPagingDto finishPaging);
+
+	//펀드 참여인원 ajax
+	public FundDto fundJoinAjax(int fund_no);
+
+	//펀드 참여 금액 ajax
+	public FundDto priceUpdate(int fund_no);
+
+	//펀드 참여자 ajax
+	public List<FundDto> joinMemName(int fund_no);
 	
 }

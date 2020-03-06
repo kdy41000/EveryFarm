@@ -60,12 +60,13 @@ SELECT * FROM BOARD WHERE BOARD_ID = #{board_id}
 
 <insert id="boardInsert" parameterType="boardDto">
 INSERT INTO BOARD
-VALUES(BOARDSEQ.NEXTVAL, #{mem_id}, #{board_title},0 ,SYSDATE, '',#{board_category},#{board_content})
+VALUES(BOARDSEQ.NEXTVAL, #{mem_id}, #{board_title}, 0, SYSDATE, '', #{board_category}, #{board_content})
+
 </insert>
 
 <update id="boardUpdate" parameterType="boardDto">
 UPDATE BOARD
-SET BOARD_CATEGORY = #{board_category}, BOARD_TITLE =#{board_title}, BOARD_CONTENT =#{board_content}
+SET BOARD_CATEGORY = #{board_category}, BOARD_TITLE = #{board_title}, BOARD_CONTENT= #{board_content}
 WHERE BOARD_ID = #{board_id}
 </update>
 
@@ -127,6 +128,15 @@ WHERE BOARD_ID IN
 	#{board_id}
 </foreach>
 </delete>
+
+<delete id="multiDeleteReply">
+DELETE FROM REPLY
+WHERE BOARD_ID IN
+<foreach collection="board_ids" item="board_id" open="(" separator="," close=")">
+	#{board_id}
+</foreach>
+</delete>
+
 
 <select id="cate3_totalpage" resultType="int">
 SELECT COUNT(*) FROM BOARD WHERE BOARD_CATEGORY=3

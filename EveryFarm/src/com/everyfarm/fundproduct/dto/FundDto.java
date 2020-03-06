@@ -60,20 +60,11 @@ public class FundDto {
 	}
 
 
-	public int getSeconds() {
-		return seconds;
-	}
-
-
-	public void setSeconds(int seconds) {
-		this.seconds = seconds;
-	}
 
 
 	public FundDto(int fund_no, int stock_no, int fund_currentprice, int fund_price, int fund_status, Date fund_regdate,
 			Date fund_enddate, int fund_join, String mem_id, String stock_name, String stock_detail, int stock_price,
-			String stock_image, String stock_location, int stock_kind, int stock_kg, int day, int hours, int minutes,
-			int seconds) {
+			String stock_image, String stock_location, int stock_kind, int stock_kg, int day, int hours, int minutes) {
 		super();
 		this.fund_no = fund_no;
 		this.stock_no = stock_no;
@@ -94,11 +85,9 @@ public class FundDto {
 		this.day = day;
 		this.hours = hours;
 		this.minutes = minutes;
-		this.seconds = seconds;
 	}
 
 
-	private int seconds;
 	
 	
 	public FundDto() {

@@ -51,8 +51,11 @@ public class BoardBizImpl implements BoardBiz {
 
 	@Override
 	public int boardDelete(int board_id) {
+		int deleteReplyAll = 0;
+		do {
+			deleteReplyAll = dao.deleteReplyAll(board_id);			
+		}while(deleteReplyAll ==0);			
 		int boardDelete = dao.boardDelete(board_id);
-		int deleteReplyAll = dao.deleteReplyAll(board_id);
 		
 		return boardDelete + deleteReplyAll;
 	}
@@ -157,9 +160,17 @@ public class BoardBizImpl implements BoardBiz {
 
 	@Override
 	public int multiDelete(String[] board_id) {
+		int multiDelReply =0;
+		do {
+			multiDelReply = dao.multiDeleteReply(board_id);			
+		}while(multiDelReply != 0);	//삭제할 댓글이 없으면 계속 반복
+		
+		int multiDelete = dao.multiDelete(board_id);			
+		
 		// TODO Auto-generated method stub
-		return dao.multiDelete(board_id);
+		return  multiDelete + multiDelReply;
 	}
+	
 
 	@Override
 	public int cate3_totalpage(int totalrows) {
@@ -200,6 +211,7 @@ public class BoardBizImpl implements BoardBiz {
 		System.out.println("biz통과");
 		return dao.farmerQa(to, from);
 	}
+
 
 
 	

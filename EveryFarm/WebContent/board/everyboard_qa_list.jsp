@@ -105,8 +105,7 @@ $(function () {
 					<option value="4">농부문의</option>						
 				</select>
 
-				<input type="button" value="글쓰기"
-					onclick="insertPopup();" class="btn">
+
 			
 			</div>
 

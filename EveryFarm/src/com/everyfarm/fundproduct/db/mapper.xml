@@ -94,4 +94,39 @@ UPDATE FUND
 SET FUND_STATUS = 3
 WHERE FUND_STATUS=2 AND FUND_ENDDATE <![CDATA[ < ]]> SYSDATE
 </update>
+
+<select id="finishPage" resultType="int">
+SELECT count(*) 
+FROM FUND INNER JOIN STOCK
+ON FUND.STOCK_NO = STOCK.STOCK_NO WHERE FUND_STATUS=3
+</select>
+
+<select id="finishList" parameterType="fundPagingDto" resultType="fundDto">
+SELECT B.*
+FROM(SELECT A.* , ROWNUM AS RNUM
+	FROM (SELECT * 
+		FROM STOCK S FULL OUTER JOIN FUND F
+		ON S.STOCK_NO = F.STOCK_NO
+		WHERE S.STOCK_NO = F.STOCK_NO AND FUND_STATUS = 3
+		ORDER BY FUND_REGDATE DESC)A )B
+WHERE RNUM BETWEEN #{from} AND #{to}
+</select>
+
+<select id="joinAjax" parameterType="int" resultType="fundDto">
+SELECT FUND_JOIN
+FROM FUND
+WHERE FUND_NO = #{fund_no}
+</select>
+
+<select id="priceAjax" parameterType="int" resultType="fundDto">
+SELECT FUND_CURRENTPRICE
+FROM FUND
+WHERE FUND_NO = #{fund_no}
+</select>
+
+<select id="joinMemName" parameterType="int" resultType="fundDto">
+SELECT MEM_ID
+FROM MEMJOIN 
+WHERE FUND_NO = #{fund_no}
+</select>
 </mapper>

@@ -17,25 +17,15 @@
 <link href="../resources/css/board/boardInput.css" rel="stylesheet"
 	type="text/css">
 
-<!-- include libraries(jQuery, bootstrap, fontawesome) -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<link
-	href="http://netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
-<!-- include summernote css/js-->
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.0/summernote.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.0/summernote.js"></script>
-<!-- 썸머노트 소스 끝-->
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
 
 
 <!-- 썸머노트 실행 -->
@@ -43,7 +33,7 @@
 	$(document).ready(function() {
 		$('#summernote').summernote({
 			height :400,
-			width:500,
+			width:700,
 			focus: true,
 			
 			callbacks:{
@@ -126,7 +116,7 @@ onload=function keepSelect(){
 				value="<%=boardDetail.getBoard_title()%>">
 
 			<!-- 글내용 -->
-			<textarea id="summernote" name="board_content"><%=boardDetail.getBoard_content()%></textarea>
+			<textarea id="summernote" name="board_content"><%=boardDetail.getBoard_content() %></textarea>
 			<input type="submit" value="확인"> 
 			<input type="button" value="취소" onclick="self.close();">
 		</form>
