@@ -449,4 +449,5 @@ ORDER BY B.order_no DESC;
 	SELECT * FROM MEMBER;
 	DELETE FROM MEMBER WHERE MEM_NAME='서채원';
 	
-	
+	select * from weekendfarm
+	order by wfarm_regDate desc;

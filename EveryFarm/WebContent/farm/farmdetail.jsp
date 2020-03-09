@@ -152,7 +152,7 @@
 			alert("권한이 없습니다.");
 		}else{
 		  var url="selectfarm.jsp";
-          window.open(url,"","width=500,height=500,left=500,top=100");
+          window.open(url,"","width=800,height=600,left=500,top=100");
 		}
 	}
 </script>
@@ -165,7 +165,7 @@ function message(){               //쪽지 보내기 함수
 		alert("권한이 없습니다.");
 	}else {
 
-		window.open("message.jsp","","width=400,height=600,left=500,top=100");
+		window.open("message.jsp","","width=470,height=680,left=500,top=100");
 	}
 }
 

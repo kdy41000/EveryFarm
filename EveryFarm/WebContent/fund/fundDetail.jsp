@@ -153,7 +153,7 @@ function letter() {
 		alert("권한이 없습니다.");
 	}else {
 
-		window.open("fund_writeletters.jsp","","width=500,height=600,left=500,top=100");
+		window.open("fund_writeletters.jsp","","width=470,height=680,left=500,top=100");
 	}
 }			
 </script>

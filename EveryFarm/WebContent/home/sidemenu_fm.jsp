@@ -37,7 +37,7 @@
    <li class="list-group-item"><a href="#" onclick="location.href='../farmerauctiondetail.do?command=end_auclist&currentpage=1';">경매완료내역</a></li>
      <li class="list-group-item"><a href="#" onclick="location.href='../farmerauctiondetail.do?command=send_history&currentpage=1';">배송내역</a></li>
        <li class="list-group-item"><a href="#" onclick="location.href='../supervisefarm.do?command=farmdetaillist&currentpage=1'">주말농장 관리</a></li>
-         <li class="list-group-item"><a href="#" onclick="location.href='../letters.do?command=letters&mem_id=${sessionScope.dto.mem_id}'">쪽지</a></li>
+         <li class="list-group-item"><a href="#" onclick="location.href='../letters.do?command=letters&mem_id=${sessionScope.dto.mem_id}&currentpage=1'">쪽지</a></li>
   </ul>
 </div>
 </div>

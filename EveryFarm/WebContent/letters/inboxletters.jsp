@@ -138,7 +138,7 @@
 	
 	$(function(){
 		$("#write").click(function(){
-			var option = "width=450, height=600,top = 100, left = 500, location = no"
+			var option = "width=470, height=680,top = 100, left = 500, location = no"
 			window.open("../letters/writeletters.jsp?mem_id=${dto.mem_id}","쪽지쓰기",option);
 		})
 		

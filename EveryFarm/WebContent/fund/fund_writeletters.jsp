@@ -35,7 +35,7 @@ span{margin:0 5px 0 15px}
 	
 	%>
 
-<form class="form" action="../letters.do?command=write" method="post">
+<form class="form" action="../letters.do?command=write" method="post" style="margin-top: 5%;">
   <h2>쪽지쓰기</h2>
   <input type="hidden" name="letter_sender" value="<%=memDto.getMem_id() %>"/>
 	  <p type="받는사람:"><input name="mem_id" value="<%=detail.getMem_id() %>" style="width:155px;"></p>

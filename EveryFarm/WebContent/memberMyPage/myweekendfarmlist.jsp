@@ -70,7 +70,7 @@
      <%@ include file="../home/footer.jsp" %>
 <script type="text/javascript">
 	function showCCTV(){
-		window.open("http://172.30.1.27:8081","","width=410, height=450, left=500, top=100");
+		window.open("http://192.168.110.2:8081","","width=410, height=450, left=500, top=100");
 	}
 	if(${empty sessionScope.dto.mem_id}){
 		alert("로그인이 필요합니다");

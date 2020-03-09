@@ -33,7 +33,7 @@ span{margin:0 5px 0 15px}
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <body>
-<form class="form" >
+<form class="form" style="margin-top:5%">
   <h2>쪽지상세</h2>
 	  <p type="보낸사람:"><input id="sender" name="letter_sender" value="${lettersdetail.letter_sender }" readonly="readonly" style="width:155px;"></p>
 	  <p type="제목:"><input id="title" name="letter_title" value="${lettersdetail.letter_title }" readonly="readonly"></input></p>
@@ -42,7 +42,7 @@ span{margin:0 5px 0 15px}
 </form>
 <script type="text/javascript">
 $(document).ready(function(){
-	window.opener.location.href = "../letters.do?command=letters&mem_id=<%=mem_id_letter %>";
+	window.opener.location.href = "../letters.do?command=letters&mem_id=<%=mem_id_letter %>&currentpage=1";
 })
 	
 </script>

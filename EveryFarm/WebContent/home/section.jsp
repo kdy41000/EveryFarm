@@ -105,7 +105,7 @@
   		if(${empty sessionScope.dto.mem_grade}){
   			alert("로그인이 필요합니다.");
   		}else{
-  			window.open("../chatting/gochat.jsp","","width=410,height=450,left=500,top=100");
+  			window.open("../chatting/gochat.jsp","","width=700,height=650,left=500,top=100");
   		}
   	}
   </script>

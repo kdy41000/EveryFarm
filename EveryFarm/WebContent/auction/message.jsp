@@ -49,7 +49,7 @@ span{margin:0 5px 0 15px}
    </script>
 
 <body>
-<form class="form" action="../product.do" method="post">
+<form class="form" action="../product.do" method="post" style="margin-top: 5%;">
   <h2>SendBox</h2>
   <input type="hidden" name="command" value="sendmessage"/>
 

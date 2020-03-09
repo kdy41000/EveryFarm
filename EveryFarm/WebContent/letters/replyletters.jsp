@@ -31,7 +31,7 @@ input,textarea{font-size:16px;}
 	LettersDto lettersdetail = (LettersDto)session.getAttribute("lettersdetail");
 	String mem_id_letter = (String)session.getAttribute("mem_id_letter");
 %>
-<form class="form" action="../letters.do?command=write" method="post">
+<form class="form" action="../letters.do?command=write" method="post" style="margin-top:5%;">
   <h2>답장하기</h2>
   <input type="hidden" name="letter_id" value=""/>
   <input type="hidden" name="letter_sender" value="<%=mem_id_letter %>"/>

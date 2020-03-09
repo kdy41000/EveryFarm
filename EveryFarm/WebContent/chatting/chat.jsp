@@ -74,7 +74,7 @@
   /*******************************************/
         var textarea = document.getElementById("messageWindow");
   		//ipv4 주소 변경해야함
-        var webSocket = new WebSocket('ws://172.30.1.50:8787/EveryFarm/broadcasting');  //localhost를 상대방ip주소로 변경
+        var webSocket = new WebSocket('ws://192.168.110.21:8787/EveryFarm/broadcasting');  //localhost를 상대방ip주소로 변경
         var inputMessage = document.getElementById('inputMessage');
         var id = document.getElementById("id").value;
        
