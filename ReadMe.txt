@@ -46,3 +46,5 @@
   
   👍URL: 
     http://qclass.iptime.org:8686/EveryFarm
+    
+    계정: 관리자(ADMIN/1234), 농부(FARMER/1234), 회원(GUEST/1234)
