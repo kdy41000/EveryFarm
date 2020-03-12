@@ -44,6 +44,9 @@
               또한 유통비를 제외한 합리적인 가격으로 신선한 농산물을 소비할 수 있다. 
   2-3) 노인 : 비교적 여유시간이 많아진 노인들에게는 본인의 시간을 활용하여 무엇인가를 기르고 얻을 수 있다는 성취감을 가질 수 있도록 도와준다.
   
+  👍시연영상:
+  https://www.youtube.com/watch?v=TcGOqXV7dL8&feature=youtu.be
+  
   👍URL: 
     http://qclass.iptime.org:8686/EveryFarm
     
